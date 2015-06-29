@@ -4,7 +4,7 @@
 
 #include "RessourceManager.h"
 #define RS nsRessourceManager::RessourceManager
-using namespace sf;
+//using namespace sf;
 
 
 RS::RessourceManager ()
