@@ -12,14 +12,11 @@ namespace nsRessourceManager
     class RessourceManager
     {
     private:
-        static sf::RenderWindow *window = 0;
+        static sf::RenderWindow window;
+        static std::vector<sf::Texture> textures;
 
     public:
         RessourceManager ();
-        void SetRenderWindow (sf::RenderWindow & window) noexcept;
-
-        //Le sprite connaît sa position donc peut s'afficher
-        void drawSomething (const sf::Sprite & sprite) noexcept;
     };
 
 }

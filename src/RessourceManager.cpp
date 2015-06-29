@@ -12,16 +12,4 @@ RS::RessourceManager ()
 
 }
 
-
-void RS::SetRenderWindow(sf::RenderWindow & window) noexcept
-{
-    if (this->window) this->window = &window;
-}
-
-void RS::drawSomething (const sf::Sprite & sprite) noexcept
-{
-    this->window->draw(sprite);
-}
-
-
 #undef  RS

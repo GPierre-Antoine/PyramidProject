@@ -12,8 +12,13 @@ namespace nsRessourceManager
     class Animator
     {
     private:
-        static nsRessourceManager::RessourceManager textures;
+        static sf::RenderWindow window;
+
     public:
+        void setWindow (sf::RenderWindow & window) noexcept
+        {
+
+        }
         Animator ();
     };
 
