@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 
-//#include "main.h"
+#include "main.h"
 
 int main()
 {
