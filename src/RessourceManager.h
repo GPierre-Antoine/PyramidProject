@@ -30,10 +30,15 @@ namespace nsRessourceManager
         void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
         std::vector<const sf::Texture>* getTabPointer (int line);
 
-        RessourceManager ();
-        void setWindow(sf::RenderWindow) ;
+        RessourceManager();
     };
-    
+
+    enum CharacterTextures
+    {
+        MARTINE = RessourceManager.getTabPointer (0),
+        MOMIE = RessourceManager.getTabPointer(1)
+    };
 
 }
+
 #endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H
