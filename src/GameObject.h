@@ -10,6 +10,10 @@ namespace nsGameObject
     class GameObject
     {
 
+
+    public:
+        virtual void render() = 0;
+        virtual ~GameObject () {}
     };
 
 }
