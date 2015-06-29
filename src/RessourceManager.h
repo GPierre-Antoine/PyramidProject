@@ -12,7 +12,11 @@ namespace nsRessourceManager
     class RessourceManager
     {
     private:
-        sf::RenderWindow window;
+        static sf::RenderWindow *window = 0;
+
+    public:
+        RessourceManager ();
+        void SetRenderWindow (sf::RenderWindow & window) noexcept;
     };
 
 }
