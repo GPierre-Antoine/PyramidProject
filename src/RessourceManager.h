@@ -17,6 +17,9 @@ namespace nsRessourceManager
     public:
         RessourceManager ();
         void SetRenderWindow (sf::RenderWindow & window) noexcept;
+
+        //Le sprite connaît sa position donc peut s'afficher
+        void drawSomething (const sf::Sprite & sprite) noexcept;
     };
 
 }

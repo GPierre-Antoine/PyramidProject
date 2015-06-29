@@ -9,18 +9,20 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "GameObject.h"
+#include "RessourceManager.h"
 
 namespace nsGameObject
 {
     class Character : public GameObject
     {
     private:
+        static nsRessourceManager::RessourceManager* ressourceManager = 0;
         sf::Vector2f position;
         sf::Sprite charSprite;
         sf::Texture currentTexture;
 
     public:
-        virtual void render() const;
+        virtual void render();
 
     };
 }
