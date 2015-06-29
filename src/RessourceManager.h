@@ -17,6 +17,7 @@ namespace nsRessourceManager
 
     public:
         RessourceManager ();
+        void setWindow(sf::RenderWindow) ;
     };
 
 }

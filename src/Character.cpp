@@ -6,10 +6,8 @@
 
 #define GO nsGameObject::Character
 
-virtual void GO::render()
+void GO::render() noexcept
 {
-    charSprite.setPosition(position);
-    ressourceManager->drawSomething(charSprite);
 }
 
 
