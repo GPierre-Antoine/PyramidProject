@@ -4,12 +4,13 @@
 
 #ifndef SFMLTEST_GAMEOBJECT_H
 #define SFMLTEST_GAMEOBJECT_H
-
-
-class GameObject
+namespace nsGameObject
 {
 
-};
+    class GameObject
+    {
 
+    };
 
+}
 #endif //SFMLTEST_GAMEOBJECT_H
