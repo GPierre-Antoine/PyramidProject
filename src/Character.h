@@ -16,13 +16,11 @@ namespace nsGameObject
     class Character : public GameObject
     {
     private:
-        static nsRessourceManager::RessourceManager* ressourceManager = 0;
+
         sf::Vector2f position;
-        sf::Sprite charSprite;
-        sf::Texture currentTexture;
 
     public:
-        virtual void render();
+        virtual void render() noexcept;
 
     };
 }

@@ -18,7 +18,7 @@ void RS::update () noexcept
 
 }
 
-void RS::setWindow (sf::RenderWindow & window)
+void RS::setWindow (sf::RenderWindow & window) noexcept
 {
 
 }
