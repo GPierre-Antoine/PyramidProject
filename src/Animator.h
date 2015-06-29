@@ -12,7 +12,7 @@ namespace nsRessourceManager
     class Animator
     {
     private:
-        nsRessourceManager::RessourceManager textures;
+        static nsRessourceManager::RessourceManager textures;
     public:
         Animator ();
     };
