@@ -4,6 +4,7 @@
 
 #ifndef PYRAMIDPROJECT_GAMEOBJECT_H
 #define PYRAMIDPROJECT_GAMEOBJECT_H
+
 namespace nsGameObject
 {
 
@@ -17,4 +18,5 @@ namespace nsGameObject
     };
 
 }
-#endif //SFMLTEST_GAMEOBJECT_H
+
+#endif //PYRAMIDPROJECT_GAMEOBJECT_H
