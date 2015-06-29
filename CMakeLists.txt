@@ -6,7 +6,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(SOURCE_FILES src/main.cpp)
 
 set(EXECUTABLE_NAME Pyramid_Project)
-add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES} src/main.h src/main.cpp src/GameObject.cpp src/GameObject.h)
+add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES} src/main.h src/main.cpp src/GameObject.cpp src/GameObject.h src/RessourceManager.cpp src/RessourceManager.h)
 
 
 include(configSFMLMakefileHelper.txt)
