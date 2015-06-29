@@ -15,10 +15,10 @@ namespace nsRessourceManager
         static sf::RenderWindow window;
 
     public:
-        void setWindow (sf::RenderWindow & window) noexcept
-        {
+        void setWindow (sf::RenderWindow & window) noexcept;
 
-        }
+        void update () noexcept;
+        void render () const noexcept;
         Animator ();
     };
 

@@ -8,8 +8,20 @@
 RS::Animator ()
 { }
 
+void RS::render () const noexcept
+{
 
+}
 
+void RS::update () noexcept
+{
+
+}
+
+void RS::setWindow (sf::RenderWindow & window)
+{
+
+}
 
 
 #undef RS

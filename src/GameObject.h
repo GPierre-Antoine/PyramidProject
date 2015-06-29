@@ -5,15 +5,19 @@
 #ifndef PYRAMIDPROJECT_GAMEOBJECT_H
 #define PYRAMIDPROJECT_GAMEOBJECT_H
 
+#include "Animator.h"
+
 namespace nsGameObject
 {
 
     class GameObject
     {
-
+    private:
+        nsRessourceManager::Animator anim;
 
     public:
-        virtual void render () = 0;
+        virtual void update () noexcept = 0;
+        virtual void render () noexcept = 0;
         virtual ~GameObject () {}
     };
 
