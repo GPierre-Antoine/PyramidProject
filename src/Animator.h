@@ -5,10 +5,14 @@
 #ifndef PYRAMIDPROJECT_ANIMATOR_H
 #define PYRAMIDPROJECT_ANIMATOR_H
 
+#include "RessourceManager.h"
+
 namespace nsRessourceManager
 {
     class Animator
     {
+    private:
+        nsRessourceManager::RessourceManager textures;
     public:
         Animator ();
     };
