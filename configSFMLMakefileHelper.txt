@@ -1,0 +1,93 @@
+#########################################################################################################
+#  @author   : GUILLAUME Pierre-Antoine                                                                 #
+#  @version  : 0.9                                                                                     #
+#  @document : SFML Configuration Helper                                                                #
+#                                                                                                       #
+#  @SFML Ver : 2.3 (Shouldn't change much though, but i'm not part of the SFML dev team.)               #
+#                                                                                                       #
+#   License  : This file cannot be sold, this file can be modified, but you have no right               #
+#              to remove any author from the author list.                                               #
+#              The user is allowed to use freely this file, and share it.                               #
+#                                                                                                       #
+#   Usage    : This file's goal is to provide help to anyone needs it configuring cmake options         #
+#              with SFML for windows.                                                                   #
+#                                                                                                       #
+#   How to   : 1) Place this file in the same folder as your "CMakeLists.txt"                           #
+#                                                                                                       #
+#              2) Get and place FindSFML.cmake in your cmake/cmake_modules                              #
+#                 you can add the line "message(WARNING "${CMAKE_ROOT}")" to find out                   #
+#                 where it is if you have no idea.                                                      #
+#                 Get the source for FindSFML right here :                                              #
+#                     https://github.com/SFML/SFML/blob/master/cmake/Modules/FindSFML.cmake             #
+#                                                                                                       #
+#                                                                                                       #
+#              3) Add "include(configcmakefile.txt)" to your CMakeLists file                            #
+#                                                                                                       #
+#              4) Change the dir of the                                                                 #
+#                                                                                                       #
+#              5) Modify this file to your convenience though i recommend commenting and                #
+#                 un-commenting directives to easily maintain functionnality                            #
+#                                                                                                       #
+#              6) If you need a clean version of the file, you can get one in my git repository :       #
+#                 https://github.com/GPierre-Antoine/ConfigSFMLMakefileHelper                           #
+#                                                                                                       #
+#              7) If still does not work, compile sfml by yourself, it worked better for me.            #
+#                                                                                                       #
+#########################################################################################################
+
+
+
+#########################################################################################################
+#        PART ONE : INDICATE WHERE THE SFML FOLDER IS TO THE COMPILER                                   #
+#########################################################################################################
+
+# FINDING SFML : PUT HERE THE PATH TO THE SFML FOLDER
+# this is an exemple.
+
+set(SFML_ROOT C:/lib/Mingw/32/SFML-2.3)
+
+
+
+#########################################################################################################
+# In CLion, the built product is put i don't know where. uncomment next line if you want to make it
+# appear in your project/bin folder.
+
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+
+
+#########################################################################################################
+#           name of the final .exe
+# try uncommenting these if you have "unknown target debug" or something like that
+
+#set(EXECUTABLE_NAME SFMLtest)
+#add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
+
+
+#########################################################################################################
+#         PART TWO : uncomment the next line if you want static linking                                 #
+#             still needs work to include needed lib if using static build                              #
+#                                                                                                       #
+#                                                                                                       #
+#########################################################################################################
+
+#set(SFML_STATIC_LIBRARIES)
+
+#########################################################################################################
+#         PART THREE : remove the dependencies you don't need.                                          #
+#         Watch out, the order matters :                                                                #
+#         "graphics" needs "window"                                                                     #
+#         everything needs "system"                                                                     #
+#                                                                                                       #
+#         Clean line :                                                                                  #
+#             find_package(SFML 2 REQUIRED audio graphics network window system)                        #
+#                                                                                                       #
+#########################################################################################################
+
+find_package(SFML 2 REQUIRED audio graphics network window system)
+
+if(SFML_FOUND)
+
+    include_directories(${SFML_INCLUDE_DIR})
+    target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+
+endif()
