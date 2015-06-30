@@ -5,7 +5,7 @@
 #ifndef PYRAMIDPROJECT_GAMEOBJECT_H
 #define PYRAMIDPROJECT_GAMEOBJECT_H
 
-#include "Animator.h"
+#include "../nsRessourceManager/Animator.h"
 
 namespace nsGameObject
 {
