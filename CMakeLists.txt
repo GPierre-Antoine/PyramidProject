@@ -9,14 +9,20 @@ set(SOURCE_FILES src/main.cpp)
 set(EXECUTABLE_NAME Pyramid_Project)
 
 add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES}
-src/nsGameObject/GameObject.cpp src/nsGameObject/GameObject.h
-src/nsGameObject/Character.cpp src/nsGameObject/Character.h
-src/nsRessourceManager/Animator.cpp src/nsRessourceManager/Animator.h
-src/nsRessourceManager/RessourceManager.cpp src/nsRessourceManager/RessourceManager.h
+src/nsGameObject/GameObject.cpp
+src/nsGameObject/GameObject.h
+src/nsGameObject/Character.cpp
+src/nsGameObject/Character.h
+src/nsRessourceManager/Animator.cpp
+src/nsRessourceManager/Animator.h
+#src/nsRessourceManager/RessourceManager.cpp
+#src/nsRessourceManager/RessourceManager.h
 src/nsRessourceManager/const.h
-#src/nsGameEngine/Game.cpp src/nsGameEngine/Game.h
-#src/nsGameEngine/QuadTree.cpp src/nsGameEngine/QuadTree.h
-)
+src/nsGameObject/Interface.h
+src/nsGameEngine/Game.cpp
+src/nsGameEngine/Game.h
+src/nsGameEngine/QuadTree.cpp
+src/nsGameEngine/QuadTree.h src/nsGameObject/Player.cpp src/nsGameObject/Player.h src/nsGameObject/Entity.cpp src/nsGameObject/Entity.h src/nsGameEngine/Fabric.h src/nsGameEngine/Fabric.cpp src/nsGameEngine/Fabric.cpp src/nsGameEngine/Fabric.h)
 
 #pour l'executable Pyramid_Project
 find_package(SFML 2 REQUIRED audio graphics network window system)

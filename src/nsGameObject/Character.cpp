@@ -6,9 +6,4 @@
 
 #define GO nsGameObject::Character
 
-void GO::render() noexcept
-{
-}
-
-
 #undef GO

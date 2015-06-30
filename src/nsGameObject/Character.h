@@ -8,19 +8,19 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "GameObject.h"
 #include "../nsRessourceManager/RessourceManager.h"
+#include "Entity.h"
 
 namespace nsGameObject
 {
-    class Character : public GameObject
+    class Character : public Entity
     {
     private:
 
         sf::Vector2f position;
 
     public:
-        virtual void render() noexcept;
+        virtual void render() const noexcept = 0;
 
     };
 }

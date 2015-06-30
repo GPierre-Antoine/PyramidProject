@@ -17,13 +17,14 @@ namespace nsGameEngine
     {
     private:
         UInt16 level;
-        static UInt16 maxLevel = 12; //le quadtree aura 12 noeuds au plus.
-        static UInt16 maxCapacity = 5;
+        static UInt16 maxLevel {12}; //le quadtree aura 12 noeuds au plus.
+        static UInt16 maxCapacity  {5};
 
         UInt16 x;
         UInt16 y;
         UInt16 width;
         UInt16 height;
+        bool splited {false};
 
         QuadTree *NW;
         QuadTree *NE;
