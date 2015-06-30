@@ -9,7 +9,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "GameObject.h"
-#include "RessourceManager.h"
+#include "../nsRessourceManager/RessourceManager.h"
 
 namespace nsGameObject
 {

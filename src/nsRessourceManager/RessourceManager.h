@@ -1,41 +1,37 @@
-//
-// Created by Pierre-Antoine on 29/06/2015.
-//
+    //
+    // Created by Pierre-Antoine on 29/06/2015.
+    //
 
-#ifndef PYRAMIDPROJECT_RESSOURCEMANAGER_H
-#define PYRAMIDPROJECT_RESSOURCEMANAGER_H
+    #ifndef PYRAMIDPROJECT_RESSOURCEMANAGER_H
+    #define PYRAMIDPROJECT_RESSOURCEMANAGER_H
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include "const.h"
+    #include <SFML/Graphics/RenderWindow.hpp>
+    #include "const.h"
 
-namespace nsRessourceManager
-{
-
-    class RessourceManager
+    namespace nsRessourceManager
     {
-    private:
 
-        static sf::RenderWindow* window;
+        class RessourceManager
+        {
+        private:
 
-        //static const sf::Texture textures[nsGameConstants::CHARACTER_NUMBER][12]; Autre solution
+            static sf::RenderWindow* window;
 
-        static const std::vector<std::vector<sf::Texture,nsRessourceManager::CHARACTER_SPRITES_COUNT>,CharTexturesIndex::SIZE> text;
-                //text[CharTexturesIndex::SIZE][];
+            static const std::vector<sf::Texture*> tablePointers [CharTexturesIndex::SIZE];
 
-    public:
-        //A partir d'une image, charge les 12 sprites dans leur tableau respectif. Verifie en même temps si non deja chargé
-        void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
+            //static const std::vector<std::vector<sf::Texture>>
+            //        textures[nsGameConstants::CHARACTER_SPRITES_COUNT][CharTexturesIndex::SIZE];
 
-        //Renvoit le tableau de textures correspondant
-        const std::vector<sf::Texture> & getTextureVec(int characterLine);
+        public:
+            //Verifie aussi si la texture n'a pas deja ete chargee
+            void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
 
-        //Renvoit la texture correspondante
-        //sf::Texture* getTexture(int characterLine, int textureInd);
+            const sf::Texture* getTextureTablePointer(int characterLine);
 
-        RessourceManager();
+            RessourceManager();
 
-    };
+        };
 
-}
+    }
 
-#endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H
+    #endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H

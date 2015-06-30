@@ -3,6 +3,8 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include "nsRessourceManager/const.h"
 
 int main()
 {
@@ -23,6 +25,7 @@ int main()
         window.draw(shape);
         window.display();
     }
+    std::cout << nsGameConstants::CHARACTER_SPRITES_COUNT << "coucou";
 
     return 0;
 }
