@@ -5,12 +5,9 @@
 #include "RessourceManager.h"
 
 #define RS nsRessourceManager::RessourceManager
-//using namespace sf;
-
 
 RS::RessourceManager()
 {
-
 }
 
 void RS::loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe)
