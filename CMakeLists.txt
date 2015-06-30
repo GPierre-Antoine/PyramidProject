@@ -9,15 +9,15 @@ set(SOURCE_FILES src/main.cpp)
 set(EXECUTABLE_NAME Pyramid_Project)
 
 add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES}
-src/GameObject.cpp
-src/GameObject.h
-src/Character.cpp
-src/Character.h
-src/Animator.cpp
-src/Animator.h
-#src/RessourceManager.cpp
-#src/RessourceManager.h
-src/const.h
+src/nsGameObject/GameObject.cpp
+src/nsGameObject/GameObject.h
+src/nsGameObject/Character.cpp
+src/nsGameObject/Character.h
+src/nsRessourceManager/Animator.cpp
+src/nsRessourceManager/Animator.h
+#src/nsRessourceManager/RessourceManager.cpp
+#src/nsRessourceManager/RessourceManager.h
+src/nsRessourceManager/const.h
 )
 
 #pour l'executable Pyramid_Project
