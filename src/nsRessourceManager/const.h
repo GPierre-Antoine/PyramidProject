@@ -10,7 +10,7 @@
 namespace nsGameConstants
 {
     //Pour la taille du tableau de textures, actuellement on a Martine, Momie donc 2
-    const int CHARACTER_NUMBER = 2;
+
     const int CHARACTER_SPRITES_COUNT = 12;
 
 } // nsGameConstants
@@ -21,7 +21,10 @@ namespace nsRessourceManager
     enum CharTexturesIndex : unsigned
     {
         MARTINE = 0,
-        MOMIE = 1
+        MOMIE = 1,
+
+
+        SIZE = 2   //Size = le dernier + 1. ne pas oublier d'update à chaque ajout
     };
 
 }

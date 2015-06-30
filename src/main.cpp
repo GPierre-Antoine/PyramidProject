@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "const.h"
+#include "nsRessourceManager/const.h"
 
 int main()
 {

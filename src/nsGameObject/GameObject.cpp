@@ -3,9 +3,11 @@
 //
 
 #include "GameObject.h"
+
 typedef unsigned short int UInt16;
 
 #define GO nsGameObject::GameObject
+
 UInt16 GO::X() const
 {
     return x;
@@ -17,4 +19,4 @@ UInt16 GO::Y() const
 }
 
 
-#undef
+#undef GO
