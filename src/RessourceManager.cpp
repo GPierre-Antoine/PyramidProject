@@ -18,8 +18,8 @@ const std::vector<sf::Texture> & RS::getTabPointer(int characterLine)
 {
     /*//std::vector<const sf::Texture> tab;
     //tab = textures;
-    const std::vector<const sf::Texture> a = RIEN NE MARCHE JE SAIPAFAIR
-    return &textures[line];*/
+    const std::vector<const sf::Texture> a = RIEN NE MARCHE JE SAIPAFAIR*/
+    return &textures[0][];
     return nullptr;
 }
 

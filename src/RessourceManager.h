@@ -19,7 +19,7 @@ namespace nsRessourceManager
 
         //contient des tableaux de textures de personnages, 0 car tableau vide au debut,
         //on ajoutera les 12 textures par l'utilisation d'un push_back
-        static std::vector<std::vector<const sf::Texture>> textures[nsGameConstants::CHARACTER_NUMBER][0];
+        static std::vector<std::vector<sf::Texture>> textures[nsGameConstants::CHARACTER_NUMBER][0];
 
     public:
         //A partir d'une image, charge les 12 sprites dans leur tableau respectif. Verifie
