@@ -17,7 +17,7 @@ void RS::loadCharacterTextures(std::string imageFileName, const sf::Vector2i & t
 {
 }
 
-const std::vector<const sf::Texture> & RS::getTabPointer(int characterLine)
+const std::vector<sf::Texture> & RS::getTabPointer(int characterLine)
 {
     /*//std::vector<const sf::Texture> tab;
     //tab = textures;

@@ -27,7 +27,7 @@ namespace nsRessourceManager
         void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
 
         //renvoit l'iterateur du tableau de textures, pour le personnagecorrespondant
-        const std::vector<const sf::Texture>& getTabPointer(int characterLine);
+        const std::vector<sf::Texture>& getTabPointer(int characterLine);
 
         RessourceManager();
 

@@ -52,15 +52,15 @@ set(SFML_ROOT C:/lib/SFML-2.3)
 # In CLion, the built product is put i don't know where. uncomment next line if you want to make it
 # appear in your project/bin folder.
 
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 
 
 #########################################################################################################
 #           name of the final .exe
 # try uncommenting these if you have "unknown target debug" or something like that
 
-#set(EXECUTABLE_NAME SFMLtest)
-#add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
+set(EXECUTABLE_NAME SFMLtest)
+add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 
 
 #########################################################################################################
