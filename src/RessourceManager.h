@@ -14,25 +14,28 @@ namespace nsRessourceManager
     class RessourceManager
     {
     private:
-        //Un pointeur vers la fenetre de jeu pour dessiner
+
         static sf::RenderWindow* window;
 
-        //contient des tableaux de textures de personnages, 0 car tableau vide au debut,
-        //on ajoutera les 12 textures par l'utilisation d'un push_back
-        static std::vector<std::vector<sf::Texture>> textures[nsGameConstants::CHARACTER_NUMBER][0];
+        //static const sf::Texture textures[nsGameConstants::CHARACTER_NUMBER][12]; Autre solution
+
+        static const std::vector<std::vector<sf::Texture>>
+                text[nsGameConstants::CHARACTER_NUMBER][nsGameConstants::CHARACTER_SPRITES_COUNT];
 
     public:
-        //A partir d'une image, charge les 12 sprites dans leur tableau respectif. Verifie
-        //a l'occasion si non deja chargé
+        //A partir d'une image, charge les 12 sprites dans leur tableau respectif. Verifie en même temps si non deja chargé
         void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
 
-        //renvoit l'iterateur du tableau de textures, pour le personnagecorrespondant
-        const std::vector<sf::Texture>& getTabPointer(int characterLine);
+        //Renvoit le tableau de textures correspondant
+        const std::vector<sf::Texture> & getTextureVec(int characterLine);
+
+        //Renvoit la texture correspondante
+        //sf::Texture* getTexture(int characterLine, int textureInd);
 
         RessourceManager();
 
-    }; // class RessourceManager
+    };
 
-} // namespace nsRessourceManager
+}
 
 #endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H

@@ -11,6 +11,7 @@ namespace nsGameConstants
 {
     //Pour la taille du tableau de textures, actuellement on a Martine, Momie donc 2
     const int CHARACTER_NUMBER = 2;
+    const int CHARACTER_SPRITES_COUNT = 12;
 
 } // nsGameConstants
 

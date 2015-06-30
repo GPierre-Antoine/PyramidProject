@@ -3,6 +3,7 @@
 //
 
 #include "Animator.h"
+
 #define RS nsRessourceManager::Animator
 
 RS::Animator ()
