@@ -5,11 +5,12 @@
 #ifndef PYRAMIDPROJECT_GAME_H
 #define PYRAMIDPROJECT_GAME_H
 
-
-class Game
+namespace nsGameEngine
 {
+    class Game
+    {
 
-};
-
+    };
+}
 
 #endif //PYRAMIDPROJECT_GAME_H
