@@ -19,8 +19,8 @@ namespace nsRessourceManager
 
         //static const sf::Texture textures[nsGameConstants::CHARACTER_NUMBER][12]; Autre solution
 
-        static const std::vector<std::vector<sf::Texture>>
-                text[nsGameConstants::CHARACTER_NUMBER][nsGameConstants::CHARACTER_SPRITES_COUNT];
+        static const std::vector<std::vector<sf::Texture,nsRessourceManager::CHARACTER_SPRITES_COUNT>,CharTexturesIndex::SIZE> text;
+                //text[CharTexturesIndex::SIZE][];
 
     public:
         //A partir d'une image, charge les 12 sprites dans leur tableau respectif. Verifie en même temps si non deja chargé

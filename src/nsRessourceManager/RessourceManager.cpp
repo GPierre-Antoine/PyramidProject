@@ -19,6 +19,7 @@ const std::vector<sf::Texture> & RS::getTextureVec(int characterLine)
 {
     //Pointe le debut de la matrice (premier tableau)
     const std::vector<std::vector<sf::Texture>>* matrixPtr = *text;
+
     //renvoit le tableau à l'indice characterLine
     return matrixPtr->at(characterLine);
 }
