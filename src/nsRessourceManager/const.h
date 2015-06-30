@@ -1,5 +1,5 @@
 //
-// Created by Theo on 30/06/2015.
+// Created by Theo on 30/06/2015
 //
 
 #ifndef PYRAMIDPROJECT_CONST_H

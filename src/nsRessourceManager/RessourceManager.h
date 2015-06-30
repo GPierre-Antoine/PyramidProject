@@ -1,5 +1,5 @@
 //
-// Created by Pierre-Antoine on 29/06/2015.
+// Created by Pierre-Antoine on 29/06/2015
 //
 
 #ifndef PYRAMIDPROJECT_RESSOURCEMANAGER_H
