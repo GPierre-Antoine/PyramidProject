@@ -7,7 +7,18 @@ set(SOURCE_FILES src/main.cpp)
 
 set(EXECUTABLE_NAME Pyramid_Project)
 
-add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES} src/main.cpp src/GameObject.cpp src/GameObject.h src/Character.h src/Character.cpp src/Character.h src/Animator.cpp src/Animator.h src/RessourceManager.cpp src/RessourceManager.h src/const.h)
+add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES}
+src/main.cpp
+src/GameObject.cpp
+src/GameObject.h
+src/Character.h
+src/Character.cpp
+src/Character.h
+src/Animator.cpp
+src/Animator.h
+src/RessourceManager.cpp
+src/RessourceManager.h
+src/const.h)
 
 
 include(configSFMLMakefileHelper.txt)
