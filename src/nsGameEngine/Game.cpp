@@ -3,7 +3,5 @@
 //
 
 #include "Game.h"
-
-
 #define GE nsGameEngine::Game
-#undef  GE
+#undef GE
