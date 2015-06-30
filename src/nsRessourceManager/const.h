@@ -9,24 +9,43 @@
 
 namespace nsGameConstants
 {
-    //Pour la taille du tableau de textures, actuellement on a Martine, Momie donc 2
 
-    const int CHARACTER_SPRITES_COUNT = 12;
+    const unsigned CHARACTER_SPRITES_COUNT = 12;
+    const unsigned TILESET_SPRITES_PER_ROW = 3;
 
 } // nsGameConstants
 
 namespace nsRessourceManager
 {
-    //Notre enumeration contenant tous les personnages
-    enum CharTexturesIndex : unsigned
-    {
-        MARTINE = 0,
-        MOMIE = 1,
 
-
-        SIZE = 2   //Size = le dernier + 1. ne pas oublier d'update à chaque ajout
-    };
+    //Ce sont les noms de personnages, qui classent la map de RsManager
+    const std::string MARTINE = "../images/Martine.png";
+    const std::string MOMIE = "../images/Momie.png";
 
 }
 
 #endif //PYRAMIDPROJECT_CONST_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//vieux truc
+//Notre enumeration contenant tous les personnages
+/*enum CharTexturesIndex : unsigned
+{
+    MARTINE = 0,
+    MOMIE = 1,
+
+
+    SIZE = 2   //Size = le dernier + 1. ne pas oublier d'update à chaque ajout
+};*/

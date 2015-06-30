@@ -1,37 +1,60 @@
-    //
-    // Created by Pierre-Antoine on 29/06/2015.
-    //
+//
+// Created by Pierre-Antoine on 29/06/2015.
+//
 
-    #ifndef PYRAMIDPROJECT_RESSOURCEMANAGER_H
-    #define PYRAMIDPROJECT_RESSOURCEMANAGER_H
+#ifndef PYRAMIDPROJECT_RESSOURCEMANAGER_H
+#define PYRAMIDPROJECT_RESSOURCEMANAGER_H
 
-    #include <SFML/Graphics/RenderWindow.hpp>
-    #include "const.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <map>
+#include "const.h"
 
-    namespace nsRessourceManager
+namespace nsRessourceManager
+{
+
+    class RessourceManager
     {
+    private:
 
-        class RessourceManager
-        {
-        private:
+        static sf::RenderWindow* window;
 
-            static sf::RenderWindow* window;
+        static std::map<const std::string, const std::vector<sf::Texture>> textures;
 
-            static const std::vector<sf::Texture*> tablePointers [CharTexturesIndex::SIZE];
+    public:
+        ////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                //
+        //   Charge la texture de personnage correspondante dans la map,                  //
+        //   verifie par ailleurs sila texture n'est pas deja chargee.                    //
+        //                                                                                //
+        ////////////////////////////////////////////////////////////////////////////////////
+        void loadCharacterTextures(std::string imageFileName,
+                                   const sf::Vector2i & tailleDecoupe, unsigned spriteCount);
 
-            //static const std::vector<std::vector<sf::Texture>>
-            //        textures[nsGameConstants::CHARACTER_SPRITES_COUNT][CharTexturesIndex::SIZE];
+        ////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                //
+        //   Renvoit le tableau de textures contenu dans la map, a l'aide de la cle       //
+        //   characterName.                                                               //
+        //                                                                                //
+        ////////////////////////////////////////////////////////////////////////////////////
+        const std::vector<sf::Texture> & getTexture(const std::string & characterName);
 
-        public:
-            //Verifie aussi si la texture n'a pas deja ete chargee
-            void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
+        RessourceManager();
 
-            const sf::Texture* getTextureTablePointer(int characterLine);
+    };
 
-            RessourceManager();
+}
 
-        };
+#endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H
 
-    }
 
-    #endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H
+
+
+
+
+
+
+
+//vieux
+//static const std::vector<std::vector<sf::Texture>>
+//        textures[nsGameConstants::CHARACTER_SPRITES_COUNT][CharTexturesIndex::SIZE];
+//static const std::vector<sf::Texture*> tablePointers [CharTexturesIndex::SIZE];
