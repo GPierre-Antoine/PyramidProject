@@ -23,7 +23,6 @@ namespace nsGameObject
         UInt16 X() const noexcept;
         UInt16 Y() const noexcept;
 
-        virtual void update () noexcept = 0;
         virtual void render () noexcept = 0;
         virtual ~GameObject () {}
     };
