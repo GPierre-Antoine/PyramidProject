@@ -1,10 +1,8 @@
 //
 // Created by Pierre-Antoine on 29/06/2015.
 //
+
 #include <SFML/Graphics.hpp>
-
-
-#include "main.h"
 
 int main()
 {

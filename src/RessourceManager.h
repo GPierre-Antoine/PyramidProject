@@ -6,12 +6,10 @@
 #define PYRAMIDPROJECT_RESSOURCEMANAGER_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <c++/bits/stl_map.h>
+#include "const.h"
 
 namespace nsRessourceManager
 {
-    //Pour la taille du tableau de textures, actuellement on a Martine, Momie donc 2
-    const int CHARACTER_NUMBER = 2;
 
     class RessourceManager
     {
@@ -19,26 +17,22 @@ namespace nsRessourceManager
         //Un pointeur vers la fenetre de jeu pour dessiner
         static sf::RenderWindow* window;
 
-        //Old one
-        //static std::vector<const sf::Texture> textures;
-
         //contient des tableaux de textures de personnages, 0 car tableau vide au debut,
         //on ajoutera les 12 textures par l'utilisation d'un push_back
-        static std::vector<std::vector<const sf::Texture>> textures[CHARACTER_NUMBER][12];
+        static std::vector<std::vector<const sf::Texture>> textures[nsGameConstants::CHARACTER_NUMBER][0];
 
     public:
+        //A partir d'une image, charge les 12 sprites dans leur tableau respectif. Verifie
+        //a l'occasion si non deja chargé
         void loadCharacterTextures(std::string imageFileName, const sf::Vector2i & tailleDecoupe);
-        std::vector<const sf::Texture>* getTabPointer (int line);
+
+        //renvoit l'iterateur du tableau de textures, pour le personnagecorrespondant
+        const std::vector<const sf::Texture>& getTabPointer(int characterLine);
 
         RessourceManager();
-    };
 
-    enum CharacterTextures
-    {
-        MARTINE = RessourceManager.getTabPointer (0),
-        MOMIE = RessourceManager.getTabPointer(1)
-    };
+    }; // class RessourceManager
 
-}
+} // namespace nsRessourceManager
 
 #endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H
