@@ -43,6 +43,13 @@ namespace nsGameEngine
     public:
         QuadTree (UInt16 pWidth, UInt16 pHeight) noexcept;
         void add (sGameObject & go) noexcept;
+        unsigned long long int size ()
+        {
+            if (splited)
+                return goList.size () + NE->size () + NW->size () + SE->size () + SW->size ();
+            return goList.size();
+        }
+
         ~QuadTree ();
     };
 }
