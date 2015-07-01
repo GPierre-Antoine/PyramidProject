@@ -6,11 +6,10 @@
 #define PYRAMIDPROJECT_GAMEOBJECT_H
 
 #include "../nsRessourceManager/Animator.h"
+#include "../nsGameEngine/Defines/typedef.hpp"
 
 namespace nsGameObject
 {
-    typedef unsigned short int UInt16;
-
     class GameObject
     {
     private:

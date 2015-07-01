@@ -3,11 +3,8 @@
 //
 
 #include "QuadTree.h"
+
 #define GE nsGameEngine::QuadTree
-
-typedef std::shared_ptr<nsGameObject::GameObject> sGameObject;
-typedef unsigned short int UInt16;
-
 
 
 GE::QuadTree (UInt16 pWidth,UInt16 pHeight) noexcept : level (0u), x (0u), y (0u), width (pWidth), height (pHeight)
@@ -25,7 +22,7 @@ GE::~QuadTree()
     delete NW, NE, SW, SE;
 }
 
-bool GE::fits (nsGameEngine::QuadTree *Child, sGameObject & go) const
+bool GE::fits (nsGameEngine::QuadTree *Child, sICollidable & go) const noexcept
 {
     return (go->X() < 0) || (width < go->X()) || (go->Y() < 0) || (height < go->Y());
 }
@@ -37,22 +34,24 @@ bool GE::fits (nsGameEngine::QuadTree *Child, sGameObject & go) const
  * appelle ensuite la fonction private add, qui effectue la même chose sans vérifier
  * (contrôle entrée utilisateur)
  */
-void GE::add(sGameObject& go) noexcept
+void GE::add(sICollidable & go) noexcept
 {
     if (fits(this,go))
         prAdd (go);
 }
 
-void GE::prAdd(sGameObject& go) noexcept
+void GE::prAdd(sICollidable & go) noexcept
 {
-
+    bool temp = false;
+    if ((go->getWidth () > this->width/2) || (go->getHeight () > this->height))
+        return;
 }
 
-unsigned long long int GE::size ()
+size_t GE::size ()
 {
     if (splited)
         return goList.size () + NE->size () + NW->size () + SE->size () + SW->size ();
-    return goList.size();
+    return goList.size() + bigGoList.size ();
 }
 
 

@@ -9,18 +9,19 @@
 #include "../nsGameObject/GameObject.h"
 #include "../nsGameObject/Interface.h"
 
+#include "Defines/typedef.hpp"
+
 namespace nsGameEngine
 {
-    typedef std::shared_ptr<nsGameObject::GameObject> sGameObject;
+    typedef std::shared_ptr<nsGameObject::ICollidable> sICollidable;
 
-    typedef unsigned short int UInt16;
 
     class QuadTree
     {
     private:
         UInt16 level;
-        static UInt16 maxLevel {12}; //le quadtree aura 12 noeuds au plus.
-        static UInt16 maxCapacity  {5};
+        static unsigned short maxLevel {12}; //le quadtree aura 12 noeuds au plus.
+        static unsigned short maxCapacity  {5};
 
         UInt16 x;
         UInt16 y;
@@ -33,18 +34,19 @@ namespace nsGameEngine
         QuadTree *SW;
         QuadTree *SE;
 
-        std::vector<sGameObject> goList;
+        std::vector<sICollidable> goList;
+        std::vector<sICollidable> bigGoList;
 
 
-        QuadTree (UInt16 level,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight) noexcept;
+        QuadTree (unsigned short level,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight) noexcept;
 
-        bool fits (QuadTree *Child, sGameObject & go) const noexcept;
+        bool fits (QuadTree *Child, sICollidable & go) const noexcept;
 
-        void prAdd(sGameObject & go) noexcept;
+        void prAdd(sICollidable & go) noexcept;
 
     public:
         QuadTree (UInt16 pWidth, UInt16 pHeight) noexcept;
-        void add (sGameObject & go) noexcept;
+        void add (sICollidable & go) noexcept;
         unsigned long long int size ();
 
         ~QuadTree ();

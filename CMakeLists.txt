@@ -22,7 +22,22 @@ src/nsGameObject/Interface.h
 src/nsGameEngine/Game.cpp
 src/nsGameEngine/Game.h
 src/nsGameEngine/QuadTree.cpp
-src/nsGameEngine/QuadTree.h src/nsGameObject/Player.cpp src/nsGameObject/Player.h src/nsGameObject/Entity.cpp src/nsGameObject/Entity.h src/nsGameEngine/Fabric.h src/nsGameEngine/Fabric.cpp src/nsGameEngine/Fabric.cpp src/nsGameEngine/Fabric.h src/nsGameObject/Foreground.cpp src/nsGameObject/Foreground.h src/nsGameObject/Decoration.cpp src/nsGameObject/Decoration.h)
+src/nsGameEngine/QuadTree.h
+src/nsGameObject/Player.cpp
+src/nsGameObject/Player.h
+src/nsGameObject/Entity.cpp
+src/nsGameObject/Entity.h
+src/nsGameEngine/Fabric.h
+src/nsGameEngine/Fabric.cpp
+src/nsGameEngine/Fabric.cpp
+src/nsGameEngine/Fabric.h
+src/nsGameObject/Foreground.cpp
+src/nsGameObject/Foreground.h
+src/nsGameObject/Decoration.cpp
+src/nsGameObject/Decoration.h
+src/nsGameEngine/Collision/Collider.cpp
+src/nsGameEngine/Collision/Collider.h
+src/nsGameEngine/Defines/typedef.hpp)
 
 #pour l'executable Pyramid_Project
 find_package(SFML 2 REQUIRED audio graphics network window system)
