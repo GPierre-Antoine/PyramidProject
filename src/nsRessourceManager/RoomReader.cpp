@@ -11,11 +11,11 @@
 
 
 
-RoomReader::RoomReader (TSprite tabSprite) noexcept
+nsRessourceManager::RoomReader::RoomReader (TSprite tabSprite) noexcept
 	: m_tabSprite(tabSprite)
 {} // RoomReader ()
 
-void const RoomReader::Display (sf::RenderWindow & win) noexcept
+void const nsRessourceManager::RoomReader::Display (sf::RenderWindow & win) noexcept
 {
 	for (unsigned i (0) ; i < m_tabSprite.size() ; ++i)
 	{

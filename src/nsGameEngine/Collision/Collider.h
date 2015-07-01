@@ -43,9 +43,11 @@ namespace nsGameEngine
         class Rectangle : public Collider
         {
         protected:
+            EType type = RECTANGLE;
         private:
             T                           width;
             T                           height;
+
 
 
 
@@ -60,6 +62,7 @@ namespace nsGameEngine
         class Circle : public Collider
         {
         protected:
+            EType type = CIRCLE;
         private:
             T                           radius;
 

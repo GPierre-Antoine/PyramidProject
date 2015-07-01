@@ -15,6 +15,8 @@ src/nsGameObject/Character.cpp
 src/nsGameObject/Character.h
 src/nsRessourceManager/Animator.cpp
 src/nsRessourceManager/Animator.h
+src/nsRessourceManager/RoomReader.cpp
+src/nsRessourceManager/RoomReader.h
 #src/nsRessourceManager/RessourceManager.cpp
 #src/nsRessourceManager/RessourceManager.h
 src/nsRessourceManager/const.h
