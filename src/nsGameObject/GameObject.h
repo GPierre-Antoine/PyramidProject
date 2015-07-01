@@ -20,9 +20,6 @@ namespace nsGameObject
 
     public:
 
-        UInt16 X() const noexcept;
-        UInt16 Y() const noexcept;
-
         virtual void render () noexcept = 0;
         virtual ~GameObject () {}
     };

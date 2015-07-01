@@ -48,5 +48,12 @@ void GE::prAdd(sGameObject& go) noexcept
 
 }
 
+unsigned long long int GE::size ()
+{
+    if (splited)
+        return goList.size () + NE->size () + NW->size () + SE->size () + SW->size ();
+    return goList.size();
+}
+
 
 #undef  GE

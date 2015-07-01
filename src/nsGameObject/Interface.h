@@ -12,11 +12,15 @@ namespace nsGameObject
     {
         virtual UInt16 getWidth () const noexcept = 0;
         virtual UInt16 getHeight () const noexcept = 0;
+        virtual void X() const noexcept = 0;
+        virtual void Y() const noexcept = 0;
         virtual ~ICollidable () {}
     };
     class IMovable
     {
         virtual void move(Int16 Up,Int16 Right) noexcept = 0;
+        virtual void X() const noexcept = 0;
+        virtual void Y() const noexcept = 0;
         virtual ~IMovable () {}
     };
 }
