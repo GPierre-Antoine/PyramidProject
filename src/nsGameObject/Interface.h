@@ -15,7 +15,7 @@ namespace nsGameObject
     public:
         virtual bool collides (const nsGameEngine::nsCollider::Collider & other ) const noexcept = 0;
         virtual bool fitsInto (const nsGameEngine::nsCollider::Collider & other ) const noexcept = 0;
-        virtual bool getCollider() const noexcept = 0;
+        virtual nsGameEngine::nsCollider::Collider & getCollider() const noexcept = 0;
         virtual ~ICollidable () {}
     };
     class IMovable
