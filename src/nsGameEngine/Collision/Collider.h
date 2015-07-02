@@ -12,6 +12,7 @@ namespace nsGameEngine
 {
     namespace nsCollider
     {
+        class Collider;
         class Rectangle;
         class Circle;
 
