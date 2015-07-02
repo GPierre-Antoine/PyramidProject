@@ -92,6 +92,7 @@ bool COLL::Circle::otherFitsInto (const Circle & other) const noexcept
                    other.origin.y - this->origin.y : this->origin.y - other.origin.y;
     auto sqRadius = this->radius * this->radius; // keep radius² to avoid useless calcs
 
+
     return false;
 }
 #undef COLL

@@ -36,7 +36,7 @@ namespace nsGameEngine
         };
 
         template <typename T>
-        class Rectangle : public Collider<T>
+        class Rectangle : public Collider
         {
         private:
             friend class Circle;
@@ -62,7 +62,7 @@ namespace nsGameEngine
 
 
         template <typename T>
-        class Circle : public Collider<T>
+        class Circle : public Collider
         {
         private:
             friend class Rectangle;
