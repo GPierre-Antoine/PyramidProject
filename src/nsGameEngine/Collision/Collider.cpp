@@ -95,4 +95,36 @@ bool COLL::Circle::otherFitsInto (const Circle & other) const noexcept
 
     return false;
 }
+bool COLL::Rectangle::collidesV(const nsGameEngine::nsCollider::Rectangle & other) const{
+    return false;
+}
+
+bool COLL::Rectangle::collidesV (const nsGameEngine::nsCollider::Circle & other) const
+{
+    return false;
+}
+
+bool COLL::Circle::collidesV (const nsGameEngine::nsCollider::Rectangle & other) const
+{
+    return false;
+}
+
+bool COLL::Circle::collidesV (const nsGameEngine::nsCollider::Circle & other) const
+{
+    return false;
+}
+
+template <typename T>
+COLL::Circle<T>::Circle (const T & x, const T & y, const T & radius) :
+        origin (sf::Vector2(x,y)), radius (radius)
+{
+
+}
+template <typename T>
+COLL::Circle<T>::Circle (const sf::Vector2<T> & origin, const T & radius) :
+        origin (origin), radius (radius)
+{
+
+}
+
 #undef COLL

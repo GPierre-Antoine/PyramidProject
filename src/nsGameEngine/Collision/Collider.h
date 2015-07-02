@@ -36,7 +36,7 @@ namespace nsGameEngine
         };
 
         template <typename T>
-        class Rectangle : public Collider
+        class Rectangle<T> : public Collider<T>
         {
         private:
             friend class Circle;
@@ -44,11 +44,11 @@ namespace nsGameEngine
             T                           height;
             sf::Vector2<T>              origin;
 
-            bool                        otherFitsInto (const Rectangle & other) const noexcept;
-            bool                        collidesV     (const Rectangle & other) const noexcept;
+            bool                        otherFitsInto (const Rectangle<T> & other) const noexcept;
+            bool                        collidesV     (const Rectangle<T> & other) const noexcept;
 
-            bool                        otherFitsInto (const Circle    & other) const noexcept;
-            bool                        collidesV     (const Circle    & other) const noexcept;
+            bool                        otherFitsInto (const Circle<T>    & other) const noexcept;
+            bool                        collidesV     (const Circle<T>    & other) const noexcept;
 
         public:
             //Constructor
@@ -62,7 +62,7 @@ namespace nsGameEngine
 
 
         template <typename T>
-        class Circle : public Collider
+        class Circle<T> : public Collider<T>
         {
         private:
             friend class Rectangle;
