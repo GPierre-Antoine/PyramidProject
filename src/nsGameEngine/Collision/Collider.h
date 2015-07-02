@@ -76,6 +76,7 @@ namespace nsGameEngine
             bool collidesV (const Circle    & other) const noexcept;
 
         public:
+            //Constructor
             Circle (const T & x, const T & y,      const T & radius) noexcept;
             Circle (const sf::Vector2<T> & origin, const T & radius) noexcept;
 
