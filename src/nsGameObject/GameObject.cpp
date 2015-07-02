@@ -8,7 +8,7 @@ typedef unsigned short int UInt16;
 
 #define GO nsGameObject::GameObject
 
-void GO::setAnimator(nsRessourceManager::Animator & anim)
+void GO::setAnimator(nsRessourceManager::Animator & anim) noexcept
 {
     anim = anim;
 }
