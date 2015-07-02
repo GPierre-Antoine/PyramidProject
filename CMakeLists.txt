@@ -42,16 +42,6 @@ src/nsGameEngine/Collision/Collider.cpp
 src/nsGameEngine/Collision/Collider.h
 src/nsGameEngine/Defines/typedef.hpp)
 
-#pour l'executable Pyramid_Project
-find_package(SFML 2 REQUIRED audio graphics network window system)
-
-if(SFML_FOUND)
-
-    include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
-
-endif()
-
 
 include(configSFMLMakefileHelper.txt)
 
