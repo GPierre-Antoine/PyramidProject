@@ -6,35 +6,31 @@
 #define PYRAMIDPROJECT_COLLIDER_H
 
 #include <utility>
+#include <SFML/System/Vector2.hpp>
 #include "../Defines/typedef.hpp"
 
 namespace nsGameEngine
 {
     namespace nsCollider
     {
-
-        namespace
-        {
-            bool isBetween (UInt16 Middler, UInt16 First, UInt16 Second);
-
-            enum EType
-            {
-                RECTANGLE,
-                CIRCLE
-            };
-        }
-
         template <typename T>
 
         class Collider
         {
+        private:
+            virtual bool                collidesV     (const Rectangle & other) const noexcept = 0;
+            virtual bool                OtherfitsInto (const Rectangle & other) const noexcept = 0;
+
+            virtual bool                collidesV     (const Circle    & other) const noexcept = 0;
+            virtual bool                otherFitsInto (const Circle    & other) const noexcept = 0;
         protected:
-            EType type;
-            std::pair<T,T> origin;
         public:
-            virtual bool                collides (const Collider & other) const noexcept = 0;
-            virtual bool                fitsInto (const Collider & other) const noexcept = 0;
-            virtual bool                contains (T x, T y) const noexcept = 0;
+            bool                        collides (const Collider & other) const noexcept;
+            bool                        fitsInto (const Collider & other) const noexcept;
+
+            virtual void move (const sf::Vector2<T> & mvt) noexcept = 0;
+            virtual void move (const T & pX, const T & pY) noexcept = 0;
+
 
             virtual ~Collider (){}
         };
@@ -42,43 +38,57 @@ namespace nsGameEngine
         template <typename T>
         class Rectangle : public Collider
         {
-        protected:
-            EType type = RECTANGLE;
         private:
+            friend class Circle;
             T                           width;
             T                           height;
+            sf::Vector2<T>              origin;
 
+            bool                        otherFitsInto (const Rectangle & other) const noexcept;
+            bool                        collidesV     (const Rectangle & other) const noexcept;
 
-
+            bool                        otherFitsInto (const Circle    & other) const noexcept;
+            bool                        collidesV     (const Circle    & other) const noexcept;
 
         public:
-            virtual bool                collides (const Collider & other) const noexcept;
-            virtual bool                fitsInto (const Collider & other) const noexcept;
-            virtual bool                contains (const std::pair<T,T> & point) const noexcept;
+            //Constructor
+            Rectangle (const T & x, const T & y,     const T & width, const T & height) noexcept;
+            Rectangle (const sf::Vector2<T>& origin, const T & width, const T & height) noexcept;
 
+            virtual ~Rectangle () {}
         };
+
+
+
 
         template <typename T>
         class Circle : public Collider
         {
         protected:
-            EType type = CIRCLE;
         private:
+            friend class Rectangle;
             T                           radius;
+            sf::Vector2<T>              origin;
+
+            bool otherFitsInto (const Rectangle & other) const noexcept;
+            bool collidesV (const Rectangle & other) const noexcept;
+
+            bool otherFitsInto (const Circle    & other) const noexcept;
+            bool collidesV (const Circle    & other) const noexcept;
 
         public:
-            virtual bool                collides (const Collider & other) const noexcept;
-            virtual bool                fitsInto (const Collider & other) const noexcept;
-            virtual bool                contains (T x, T y) const noexcept;
+            Circle (const T & x, const T & y,      const T & radius) noexcept;
+            Circle (const sf::Vector2<T> & origin, const T & radius) noexcept;
 
+            virtual ~Circle () {}
         };
 
-        typedef Collider    <UInt16>    Collider;
-        typedef Circle      <UInt16>    Circle;
-        typedef Rectangle   <UInt16>    Rectangle;
+        typedef Collider    <UInt16>    ColliderUi;
+        typedef Circle      <UInt16>    CircleUi;
+        typedef Rectangle   <UInt16>    RectangleUi;
 
 
-    }
-}
+    }//nsCollider
+}//nsGameEngine
 
 #endif //PYRAMIDPROJECT_COLLIDER_H
