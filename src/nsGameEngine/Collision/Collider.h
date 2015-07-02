@@ -5,7 +5,6 @@
 #ifndef PYRAMIDPROJECT_COLLIDER_H
 #define PYRAMIDPROJECT_COLLIDER_H
 
-#include <utility>
 #include <SFML/System/Vector2.hpp>
 #include "../Defines/typedef.hpp"
 
@@ -13,8 +12,10 @@ namespace nsGameEngine
 {
     namespace nsCollider
     {
-        template <typename T>
+        class Rectangle;
+        class Circle;
 
+        template <typename T>
         class Collider
         {
         private:
@@ -23,7 +24,6 @@ namespace nsGameEngine
 
             virtual bool                collidesV     (const Circle    & other) const noexcept = 0;
             virtual bool                otherFitsInto (const Circle    & other) const noexcept = 0;
-        protected:
         public:
             bool                        collides (const Collider & other) const noexcept;
             bool                        fitsInto (const Collider & other) const noexcept;
@@ -36,7 +36,7 @@ namespace nsGameEngine
         };
 
         template <typename T>
-        class Rectangle : public Collider
+        class Rectangle: public Collider<T>
         {
         private:
             friend class Circle;
@@ -62,9 +62,8 @@ namespace nsGameEngine
 
 
         template <typename T>
-        class Circle : public Collider
+        class Circle : public Collider<T>
         {
-        protected:
         private:
             friend class Rectangle;
             T                           radius;
@@ -86,8 +85,6 @@ namespace nsGameEngine
         typedef Collider    <UInt16>    ColliderUi;
         typedef Circle      <UInt16>    CircleUi;
         typedef Rectangle   <UInt16>    RectangleUi;
-
-
     }//nsCollider
 }//nsGameEngine
 
