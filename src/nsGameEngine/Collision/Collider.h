@@ -36,7 +36,7 @@ namespace nsGameEngine
         };
 
         template <typename T>
-        class Rectangle: public Collider<T>
+        class Rectangle : public Collider<T>
         {
         private:
             friend class Circle;
@@ -82,9 +82,9 @@ namespace nsGameEngine
             virtual ~Circle () {}
         };
 
-        typedef Collider    <UInt16>    ColliderUi;
-        typedef Circle      <UInt16>    CircleUi;
-        typedef Rectangle   <UInt16>    RectangleUi;
+        //typedef Collider    <UInt16>    ColliderUi;
+        //typedef Circle      <UInt16>    CircleUi;
+        //typedef Rectangle   <UInt16>    RectangleUi;
     }//nsCollider
 }//nsGameEngine
 
