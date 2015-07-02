@@ -17,7 +17,6 @@ namespace nsRessourceManager
     class RoomReader
     {
     private:
-        const unsigned KPixelSize = 60; // Taille de l'image (pixel)
         TSprite m_tabSprite;            // Vector contenant les sprites a afficher
 
     public:

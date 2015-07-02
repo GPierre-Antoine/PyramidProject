@@ -21,7 +21,6 @@ void const nsRessourceManager::RoomReader::Display (sf::RenderWindow & win) noex
 	{
 		for (unsigned j (0) ; j < m_tabSprite[i].size() ; ++j)
 		{
-			m_tabSprite[i][j].setPosition(i*KPixelSize,j*KPixelSize);	// Definit la position du sprite suivant sont emplacement dans le vector
 			win.draw(m_tabSprite[i][j]);
 		}
 	}
