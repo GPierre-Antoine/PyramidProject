@@ -36,7 +36,7 @@ namespace nsGameEngine
         };
 
         template <typename T>
-        class Rectangle: public Collider<T>
+        class Rectangle : public Collider
         {
         private:
             friend class Circle;
@@ -62,7 +62,7 @@ namespace nsGameEngine
 
 
         template <typename T>
-        class Circle : public Collider<T>
+        class Circle : public Collider
         {
         private:
             friend class Rectangle;
@@ -76,15 +76,16 @@ namespace nsGameEngine
             bool collidesV (const Circle    & other) const noexcept;
 
         public:
+            //Constructor
             Circle (const T & x, const T & y,      const T & radius) noexcept;
             Circle (const sf::Vector2<T> & origin, const T & radius) noexcept;
 
             virtual ~Circle () {}
         };
 
-        typedef Collider    <UInt16>    ColliderUi;
-        typedef Circle      <UInt16>    CircleUi;
-        typedef Rectangle   <UInt16>    RectangleUi;
+        //typedef Collider    <UInt16>    ColliderUi;
+        //typedef Circle      <UInt16>    CircleUi;
+        //typedef Rectangle   <UInt16>    RectangleUi;
     }//nsCollider
 }//nsGameEngine
 

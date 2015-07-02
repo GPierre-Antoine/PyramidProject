@@ -4,12 +4,28 @@
 
 #include "Collider.h"
 #define COLL nsGameEngine::nsCollider
+//Constructor
+template <typename T>
+COLL::Rectangle::Rectangle(const T & X, const T & Y, const T & width, const T & height) noexcept
+: origin (sf::Vector2<T>(X,Y)), width (width), height (height)
+{
+
+}
+
+template <typename T>
+COLL::Rectangle::Rectangle(const sf::Vector2<T> & orig, const T & width, const T & height) noexcept
+        : origin (orig), width (width), height (height)
+{
+
+}
+
 
 //visitor acceptation for collides
 bool  COLL::Collider::collides (const Collider & other) const noexcept
 {
     return other.collidesV (auto (*this));
 }
+
 //visitor acceptation for fitsInto
 bool  COLL::Collider::fitsInto      (const Collider & other) const noexcept
 {
@@ -75,6 +91,7 @@ bool COLL::Circle::otherFitsInto (const Circle & other) const noexcept
     auto middleY = (this->origin.y < other.origin.y) ?
                    other.origin.y - this->origin.y : this->origin.y - other.origin.y;
     auto sqRadius = this->radius * this->radius; // keep radius² to avoid useless calcs
+
 
     return false;
 }
