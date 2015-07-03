@@ -13,7 +13,7 @@ namespace nsGameObject
     class Entity : public GameObject, public IMovable, public ICollidable
     {
         virtual void update () noexcept = 0;
-        virtual void ~Entity () {}
+        virtual ~Entity () {}
     };
 }
 
