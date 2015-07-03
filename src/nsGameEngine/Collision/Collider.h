@@ -24,7 +24,7 @@
             {
             private:
                 virtual bool                collidesV       (const Rectangle<T> & other) const noexcept = 0;
-                virtual bool                OtherfitsInto   (const Rectangle<T> & other) const noexcept = 0;
+                virtual bool                otherfitsInto   (const Rectangle<T> & other) const noexcept = 0;
 
                 virtual bool                collidesV       (const Circle<T>    & other) const noexcept = 0;
                 virtual bool                otherFitsInto   (const Circle<T>    & other) const noexcept = 0;

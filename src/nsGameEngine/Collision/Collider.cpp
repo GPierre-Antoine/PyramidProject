@@ -117,7 +117,7 @@ bool COLL::Circle::collidesV (const nsGameEngine::nsCollider::Circle & other) co
 
 template <typename T>
 COLL::Circle<T>::Circle (const T & x, const T & y, const T & radius) :
-        origin (sf::Vector2(x,y)), radius (radius)
+        origin (sf::Vector2(x+radius,y+radius)), radius (radius)
 {
 
 }
@@ -125,7 +125,8 @@ template <typename T>
 COLL::Circle<T>::Circle (const sf::Vector2<T> & origin, const T & radius) :
         origin (origin), radius (radius)
 {
-
+    this->origin.x+=radius;
+    this->origin.y+=radius;
 }
 
 #undef COLL

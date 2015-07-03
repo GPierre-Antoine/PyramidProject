@@ -22,36 +22,48 @@ namespace nsGameEngine
         UInt16 level;
         static const unsigned short maxLevel {12}; //le quadtree aura 12 noeuds au plus.
         static const unsigned short maxCapacity  {5};
+        byte_t  numberOfUnfittingCollider {0};
 
-        /*
-        UInt16 x;
-        UInt16 y;
+
+        sf::Vector2<UInt16> origin;
         UInt16 width;
         UInt16 height;
-        */
+
 
         nsCollider::RectangleUI area;
         bool splited {false};
+        /*static enum
+        {
+            NW,
+            NE,
+            SW,
+            SE
+        };
 
+        QuadTree *childs; /**/
         QuadTree *NW;
         QuadTree *NE;
         QuadTree *SW;
         QuadTree *SE;
-
-        std::vector<sICollidable> goList;
-        std::vector<sICollidable> bigGoList;
+        QuadTree *parent;
 
 
-        QuadTree (unsigned short level,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight) noexcept;
+        //I have to rethink about the predefined size.
+        std::vector<sICollidable,15> goList;
+
+
+        QuadTree (unsigned short level,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept;
 
         bool fits (QuadTree *Child, sICollidable & go) const noexcept;
 
         void prAdd(sICollidable & go) noexcept;
 
+        void split () noexcept;
+
     public:
         QuadTree (UInt16 pWidth, UInt16 pHeight) noexcept;
         void add (sICollidable & go) noexcept;
-        unsigned long long int size ();
+        unsigned long long int size () const noexcept;
 
         ~QuadTree ();
     };

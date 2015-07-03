@@ -7,6 +7,7 @@
 
 typedef unsigned short int UInt16;
 typedef short int Int16;
+typedef unsigned char byte_t;
 
 
 #endif //PYRAMIDPROJECT_TYPEDEF_HPP
