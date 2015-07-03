@@ -25,7 +25,8 @@ namespace nsGameEngine
         byte_t  numberOfUnfittingCollider {0};
 
 
-        sf::Vector2<UInt16> origin;
+        UInt16 x;
+        UInt16 y;
         UInt16 width;
         UInt16 height;
 
@@ -52,13 +53,15 @@ namespace nsGameEngine
         std::vector<sICollidable,15> goList;
 
 
-        QuadTree (unsigned short level,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept;
+        QuadTree (unsigned short level, UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept;
 
         bool fits (QuadTree *Child, sICollidable & go) const noexcept;
 
         void prAdd(sICollidable & go) noexcept;
 
         void split () noexcept;
+
+        void update () noexcept;
 
     public:
         QuadTree (UInt16 pWidth, UInt16 pHeight) noexcept;

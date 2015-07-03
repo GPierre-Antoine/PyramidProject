@@ -2,6 +2,7 @@
 // Created by Pierre-Antoine on 30/06/2015.
 //
 
+#include <c++/4.8.3/iostream>
 #include "QuadTree.h"
 
 #define GE nsGameEngine::QuadTree
@@ -10,7 +11,7 @@
 GE::QuadTree (UInt16 pWidth,UInt16 pHeight) noexcept : level (0u), area (0,0,pWidth,pHeight), parent (nullptr) { }
 
 GE::QuadTree (UInt16 pLevel,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept :
-        level (pLevel),origin{sf::Vector2<UInt16>(pX,pY)},width{pWidth},height{pHeight}, area (pX,pY,pWidth,pHeight), parent (this)
+        level (pLevel),x(pX),y(pY),width{pWidth},height{pHeight}, area (pX,pY,pWidth,pHeight), parent (this)
 { }
 
 GE::~QuadTree()
@@ -21,7 +22,7 @@ GE::~QuadTree()
 
 bool GE::fits (nsGameEngine::QuadTree *Child, sICollidable & go) const noexcept
 {
-    return area.fitsInto (go->getCollider ());
+    return Child->area.fitsInto (go->getCollider ());
 }
 
 
@@ -72,10 +73,32 @@ void GE::prAdd(sICollidable & go) noexcept
     }
     else
     {
-
+        if (goList.size () - numberOfUnfittingCollider >= maxCapacity)
+        {
+            split ();
+            prAdd (go);
+            update ();
+            return;
+        }
+        else
+        {
+            goList.push_back (go);
+        }
     }
 
 }
+
+void GE::update () noexcept
+{
+ for (auto i {goList.begin};i < goList.end();)
+ {
+     if (!fits(this,*i))
+     {
+         goList.erase (i);
+     }
+ }
+}
+
 
 size_t GE::size () const noexcept
 {//a refaire
@@ -91,7 +114,19 @@ void GE::split () noexcept
     this->splited = true;
     try
     {
-        NE = new QuadTree(level +1,,,,,*this);
+        UInt16 __2 = 2; //to avoid comparison warning
+        UInt16 __1 = 1; //to avoid comparison warning
+        UInt16 ParityW = width  & __1; //to fix odd cases
+        UInt16 ParityH = height & __1; //to fix odd cases
+        NW = new QuadTree(level + __1,x+width/__2, y,width/ __2,  height/ __2,          *this);
+        NE = new QuadTree(level + __1,x+ParityW,y,            width/ __2,height/ __2,   *this);
+        SW = new QuadTree(level + __1,x,ParityH + y+height/ __2,width/ __2,height/ __2,*this);
+        SE = new QuadTree(level + __1,x+ParityW + width/ __2,ParityH + y+height/ __2,width/ __2,height/ __2,   *this);
+
+    }// creation of subQuadTree with fake empty row (change if float.)
+    catch (std::bad_alloc & e)
+    {
+        std::cerr << "bad_alloc caught: " << e.what() << std::endl;
     }
 
 }
