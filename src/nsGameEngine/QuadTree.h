@@ -5,7 +5,7 @@
 #ifndef PYRAMIDPROJECT_QUADTREE_H
 #define PYRAMIDPROJECT_QUADTREE_H
 
-#include <memory>
+#include <memory> //shared pointer
 #include "../nsGameObject/GameObject.h"
 #include "../nsGameObject/Interface.h"
 
@@ -50,7 +50,7 @@ namespace nsGameEngine
 
 
         //I have to rethink about the predefined size.
-        std::vector<sICollidable,15> goList;
+        std::vector<sICollidable> goList;
 
 
         QuadTree (unsigned short level, UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept;

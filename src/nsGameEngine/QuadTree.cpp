@@ -2,7 +2,7 @@
 // Created by Pierre-Antoine on 30/06/2015.
 //
 
-#include <c++/4.8.3/iostream>
+#include <iostream> //cerr
 #include "QuadTree.h"
 
 #define GE nsGameEngine::QuadTree
@@ -88,16 +88,18 @@ void GE::prAdd(sICollidable & go) noexcept
 
 }
 
+
 void GE::update () noexcept
 {
- for (auto i {goList.begin};i < goList.end();)
- {
-     if (!fits(this,*i))
-     {
-         goList.erase (i);
-     }
- }
+    for (std::vector<sICollidable>::reverse_iterator i {goList.rbegin ()} ; i != goList.rend () ; i = std::next (i))
+    {
+        if (!fits (this, *i))
+        {
+            goList.erase (i.base ());
+        }
+    }
 }
+
 
 
 size_t GE::size () const noexcept
