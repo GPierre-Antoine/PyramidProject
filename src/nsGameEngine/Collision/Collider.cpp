@@ -95,7 +95,8 @@ bool COLL::Circle::otherFitsInto (const Circle & other) const noexcept
 
     return false;
 }
-bool COLL::Rectangle::collidesV(const nsGameEngine::nsCollider::Rectangle & other) const{
+bool COLL::Rectangle::collidesV(const nsGameEngine::nsCollider::Rectangle & other) const
+{
     return false;
 }
 

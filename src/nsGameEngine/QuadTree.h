@@ -20,13 +20,17 @@ namespace nsGameEngine
     {
     private:
         UInt16 level;
-        static unsigned short maxLevel {12}; //le quadtree aura 12 noeuds au plus.
-        static unsigned short maxCapacity  {5};
+        static const unsigned short maxLevel {12}; //le quadtree aura 12 noeuds au plus.
+        static const unsigned short maxCapacity  {5};
 
+        /*
         UInt16 x;
         UInt16 y;
         UInt16 width;
         UInt16 height;
+        */
+
+        nsCollider::RectangleUI area;
         bool splited {false};
 
         QuadTree *NW;

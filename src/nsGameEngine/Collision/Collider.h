@@ -86,9 +86,9 @@
                 virtual ~Circle () {}
             };
 
-            //typedef Collider    <UInt16>    ColliderUi;
-            //typedef Circle      <UInt16>    CircleUi;
-            //typedef Rectangle   <UInt16>    RectangleUi;
+            typedef Collider    <UInt16>    ColliderUI;
+            typedef Circle      <UInt16>    CircleUI;
+            typedef Rectangle   <UInt16>    RectangleUI;
         }//nsCollider
     }//nsGameEngine
 
