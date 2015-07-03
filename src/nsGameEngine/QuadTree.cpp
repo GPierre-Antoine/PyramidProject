@@ -116,13 +116,13 @@ void GE::split () noexcept
     this->splited = true;
     try
     {
-        UInt16 __2 = 2; //to avoid comparison warning
-        UInt16 __1 = 1; //to avoid comparison warning
+        UInt16 __2 = 0x0002; //to avoid comparison warning
+        UInt16 __1 = 0x0001; //to avoid comparison warning
         UInt16 ParityW = width  & __1; //to fix odd cases
         UInt16 ParityH = height & __1; //to fix odd cases
         NW = new QuadTree(level + __1,x+width/__2, y,width/ __2,  height/ __2,          *this);
         NE = new QuadTree(level + __1,x+ParityW,y,            width/ __2,height/ __2,   *this);
-        SW = new QuadTree(level + __1,x,ParityH + y+height/ __2,width/ __2,height/ __2,*this);
+        SW = new QuadTree(level + __1,x,ParityH + y+height/ __2,width/ __2,height/ __2, *this);
         SE = new QuadTree(level + __1,x+ParityW + width/ __2,ParityH + y+height/ __2,width/ __2,height/ __2,   *this);
 
     }// creation of subQuadTree with fake empty row (change if float.)
