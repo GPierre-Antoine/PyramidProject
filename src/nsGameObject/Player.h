@@ -6,13 +6,33 @@
 #define PYRAMIDPROJECT_PLAYER_H
 
 #include "Character.h"
+#include "../nsRessourceManager/Animator.h"
+#include "../nsGameEngine/Defines/typedef.hpp"
 
 namespace nsGameObject
 {
     class Player : public Character
     {
+    private:
+        UInt16 health;
 
-    };
+    protected:
+        Player(UInt16 health) noexcept;
+
+    public:
+        virtual void render() noexcept;
+
+    }; //class Player
+
+
+
+
+
+    class Warrior : public Player
+    {
+    public:
+        Warrior(UInt16 x, UInt16 y) noexcept;
+    }; //class Warrior
 }
 
 

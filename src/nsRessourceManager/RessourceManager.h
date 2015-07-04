@@ -23,11 +23,11 @@ namespace nsRessourceManager
     public:
         ////////////////////////////////////////////////////////////////////////////////////
         //                                                                                //
-        //   Charge la texture de personnage correspondante dans la map,                  //
-        //   verifie par ailleurs sila texture n'est pas deja chargee.                    //
+        //   Charge la texture de personnage correspondante dans la std::map,             //
+        //   verifie par ailleurs si la texture n'est pas deja chargee.                   //
         //                                                                                //
         ////////////////////////////////////////////////////////////////////////////////////
-        void loadCharacterTextures(std::string imageFileName,
+        static void loadCharacterTextures(std::string imageFileName,
                                    const sf::Vector2i & tailleDecoupe, unsigned spriteCount);
 
         ////////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ namespace nsRessourceManager
         //   characterName.                                                               //
         //                                                                                //
         ////////////////////////////////////////////////////////////////////////////////////
-        const std::vector<sf::Texture> & getTexture(const std::string & characterName);
+        static const std::vector<sf::Texture> & getTexture(const std::string & characterName);
 
         RessourceManager();
 

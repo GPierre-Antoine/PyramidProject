@@ -18,14 +18,14 @@ src/nsRessourceManager/Animator.cpp
 src/nsRessourceManager/Animator.h
 src/nsRessourceManager/RoomReader.cpp
 src/nsRessourceManager/RoomReader.h
-#src/nsRessourceManager/RessourceManager.cpp
-#src/nsRessourceManager/RessourceManager.h
+src/nsRessourceManager/RessourceManager.cpp
+src/nsRessourceManager/RessourceManager.h
 src/nsRessourceManager/const.h
 src/nsGameObject/Interface.h
 src/nsGameEngine/Game.cpp
 src/nsGameEngine/Game.h
-src/nsGameEngine/QuadTree.cpp
-src/nsGameEngine/QuadTree.h
+#src/nsGameEngine/QuadTree.cpp
+#src/nsGameEngine/QuadTree.h
 src/nsGameObject/Player.cpp
 src/nsGameObject/Player.h
 src/nsGameObject/Entity.cpp
@@ -38,9 +38,10 @@ src/nsGameObject/Foreground.cpp
 src/nsGameObject/Foreground.h
 src/nsGameObject/Decoration.cpp
 src/nsGameObject/Decoration.h
-src/nsGameEngine/Collision/Collider.cpp
-src/nsGameEngine/Collision/Collider.h
-src/nsGameEngine/Defines/typedef.hpp)
+#src/nsGameEngine/Collision/Collider.cpp
+#src/nsGameEngine/Collision/Collider.h
+src/nsGameEngine/Defines/typedef.hpp
+)
 
 
 include(configSFMLMakefileHelper.txt)
