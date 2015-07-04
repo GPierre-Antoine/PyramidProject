@@ -83,18 +83,6 @@ bool COLL::Circle::otherFitsInto (const Rectangle & other) const noexcept
     //Appelant (Rectangle) est dans l'Appelé (Cercle).
 }
 
-bool COLL::Circle::otherFitsInto (const Circle & other) const noexcept
-{
-    auto middleX = (this->origin.x < other.origin.x) ?
-                   other.origin.x - this->origin.x : this->origin.x - other.origin.x;
-    // Just to give it an explicit type;
-    auto middleY = (this->origin.y < other.origin.y) ?
-                   other.origin.y - this->origin.y : this->origin.y - other.origin.y;
-    auto sqRadius = this->radius * this->radius; // keep radius² to avoid useless calcs
-
-
-    return false;
-}
 bool COLL::Rectangle::collidesV(const nsGameEngine::nsCollider::Rectangle & other) const
 {
     return false;
@@ -127,6 +115,10 @@ COLL::Circle<T>::Circle (const sf::Vector2<T> & origin, const T & radius) :
 {
     this->origin.x+=radius;
     this->origin.y+=radius;
+}
+
+bool COLL::Circle::otherFitsInto(const nsGameEngine::nsCollider::Circle & other) const{
+    return false;
 }
 
 #undef COLL

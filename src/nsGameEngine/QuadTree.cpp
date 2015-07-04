@@ -95,8 +95,11 @@ void GE::update () noexcept
     {
         if (!fits (this, *i))
         {
+            sICollidable t = *i;
             goList.erase (i.base ());
+            parent->add (*i);
         }
+
     }
 }
 
@@ -116,8 +119,8 @@ void GE::split () noexcept
     this->splited = true;
     try
     {
-        UInt16 __2 = 0x0002; //to avoid comparison warning
-        UInt16 __1 = 0x0001; //to avoid comparison warning
+        UInt16 __2 = 2; //to avoid comparison warning
+        UInt16 __1 = 1; //to avoid comparison warning
         UInt16 ParityW = width  & __1; //to fix odd cases
         UInt16 ParityH = height & __1; //to fix odd cases
         NW = new QuadTree(level + __1,x+width/__2, y,width/ __2,  height/ __2,          *this);
@@ -130,7 +133,6 @@ void GE::split () noexcept
     {
         std::cerr << "bad_alloc caught: " << e.what() << std::endl;
     }
-
 }
 
 #undef  GE
