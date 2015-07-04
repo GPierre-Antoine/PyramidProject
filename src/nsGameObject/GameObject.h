@@ -13,7 +13,7 @@ namespace nsGameObject
     class GameObject
     {
     protected:
-        nsRessourceManager::PlayerAnimator animator;
+        //nsRessourceManager::PlayerAnimator animator;
 
     public:
         virtual void render () noexcept = 0;
