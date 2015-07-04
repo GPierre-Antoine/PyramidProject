@@ -6,14 +6,13 @@
 #define COLL nsGameEngine::nsCollider
 //Constructor
 template <typename T>
-COLL::Rectangle::Rectangle(const T & X, const T & Y, const T & width, const T & height) noexcept
-: origin (sf::Vector2<T>(X,Y)), width (width), height (height)
+COLL::Rectangle<T>::Rectangle (const T & X, const T & Y, const T & width, const T & height) noexcept : origin (sf::Vector2<T>(X,Y)), width (width), height (height)
 {
 
 }
 
 template <typename T>
-COLL::Rectangle::Rectangle(const sf::Vector2<T> & orig, const T & width, const T & height) noexcept
+COLL::Rectangle<T>::Rectangle(const sf::Vector2<T> & orig, const T & width, const T & height) noexcept
         : origin (orig), width (width), height (height)
 {
 
@@ -21,19 +20,22 @@ COLL::Rectangle::Rectangle(const sf::Vector2<T> & orig, const T & width, const T
 
 
 //visitor acceptation for collides
-bool  COLL::Collider::collides (const Collider & other) const noexcept
+template <typename T>
+bool  COLL::Collider<T>::collides (const Collider<T> & other) const noexcept
 {
-    return other.collidesV (auto (*this));
+    return other.collidesV (*this);
 }
 
 //visitor acceptation for fitsInto
-bool  COLL::Collider::fitsInto      (const Collider & other) const noexcept
+template <typename T>
+bool  COLL::Collider<T>::fitsInto      (const Collider<T> & other) const noexcept
 {
-    return other.otherFitsInto (auto (*this));
+    return other.otherFitsInto (*this);
 }
 
 //rectangle vs rectangle
-bool COLL::Rectangle::otherFitsInto (const Rectangle & other) const noexcept
+template <typename T>
+bool COLL::Rectangle<T>::otherFitsInto (const Rectangle & other) const noexcept
 {
     //other = appelant
     //this = appelé
@@ -46,7 +48,8 @@ bool COLL::Rectangle::otherFitsInto (const Rectangle & other) const noexcept
 }
 
 //rectangle vs circle
-bool COLL::Rectangle::otherFitsInto (const Circle & other) const noexcept
+template <typename T>
+bool COLL::Rectangle<T>::otherFitsInto (const Circle<T> & other) const noexcept
 {
     //other = appelant
     //this = appelé
@@ -57,8 +60,8 @@ bool COLL::Rectangle::otherFitsInto (const Circle & other) const noexcept
             (this->origin.y + this->width - other.radius >= other.origin.y);
     //Appelant (Rond) est dans l'Appelé (Rectangle).
 }
-
-bool COLL::Circle::otherFitsInto (const Rectangle & other) const noexcept
+template <typename T>
+bool COLL::Circle<T>::otherFitsInto (const Rectangle<T> & other) const noexcept
 {
     //other = appelant
     //this = appelé
@@ -82,42 +85,47 @@ bool COLL::Circle::otherFitsInto (const Rectangle & other) const noexcept
 
     //Appelant (Rectangle) est dans l'Appelé (Cercle).
 }
-
-bool COLL::Rectangle::collidesV(const nsGameEngine::nsCollider::Rectangle & other) const
-{
-    return false;
-}
-
-bool COLL::Rectangle::collidesV (const nsGameEngine::nsCollider::Circle & other) const
-{
-    return false;
-}
-
-bool COLL::Circle::collidesV (const nsGameEngine::nsCollider::Rectangle & other) const
-{
-    return false;
-}
-
-bool COLL::Circle::collidesV (const nsGameEngine::nsCollider::Circle & other) const
+template <typename T>
+bool COLL::Rectangle<T>::collidesV(const nsGameEngine::nsCollider::Rectangle<T> & other) const noexcept
 {
     return false;
 }
 
 template <typename T>
-COLL::Circle<T>::Circle (const T & x, const T & y, const T & radius) :
-        origin (sf::Vector2(x+radius,y+radius)), radius (radius)
+bool COLL::Rectangle<T>::collidesV (const nsGameEngine::nsCollider::Circle<T> & other) const noexcept
+{
+    return false;
+}
+
+template <typename T>
+bool COLL::Circle<T>::collidesV (const nsGameEngine::nsCollider::Rectangle<T> & other) const noexcept
+{
+    return false;
+}
+
+template <typename T>
+bool COLL::Circle<T>::collidesV (const nsGameEngine::nsCollider::Circle<T> & other) const noexcept
+{
+    return false;
+}
+
+template <typename T>
+COLL::Circle<T>::Circle (const T & x, const T & y, const T & radius) noexcept :
+        origin (sf::Vector2<T>(x+radius,y+radius)), radius (radius)
 {
 
 }
 template <typename T>
-COLL::Circle<T>::Circle (const sf::Vector2<T> & origin, const T & radius) :
+COLL::Circle<T>::Circle (const sf::Vector2<T> & origin, const T & radius) noexcept :
         origin (origin), radius (radius)
 {
     this->origin.x+=radius;
     this->origin.y+=radius;
 }
 
-bool COLL::Circle::otherFitsInto(const nsGameEngine::nsCollider::Circle & other) const{
+template <typename T>
+bool COLL::Circle<T>::otherFitsInto(const nsGameEngine::nsCollider::Circle<T> & other) const noexcept
+{
     return false;
 }
 
