@@ -15,13 +15,16 @@ namespace nsGameObject
 {
     class Character : public Entity
     {
-    private:
-
-        sf::Vector2f position;
 
     public:
-        virtual void render() const noexcept = 0;
+        Character()
+        {
+            setY(0);
+            setX(0);
+        }
 
+        ~Character()
+        { }
     };
 }
 

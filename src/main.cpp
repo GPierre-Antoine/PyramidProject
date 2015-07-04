@@ -5,13 +5,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "nsRessourceManager/const.h"
+#include "nsRessourceManager/Animator.h"
 #include "nsGameEngine/Collision/Collider.h"
+#include <cassert>
 
-int main()
+
+/*void fctBizarrePoubelle ()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
+
+    //On n'aura plus à traiter le setWindow, qui est def pour tous les animator
+    nsRessourceManager::Animator::setWindow(window);
+
     nsGameEngine::nsCollider::RectangleUI rect(0,0,1,1);
     while (window.isOpen())
     {
@@ -27,6 +34,19 @@ int main()
         window.display();
     }
     std::cout << nsGameConstants::CHARACTER_SPRITES_COUNT << "coucou";
+}*/
 
+void testPlayerAnimation1 ()
+{
+
+
+}
+
+
+
+int main()
+{
+    //fctBizarrePoubelle();
+    testPlayerAnimation1();
     return 0;
 }

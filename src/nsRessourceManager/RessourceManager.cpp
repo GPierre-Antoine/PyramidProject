@@ -20,6 +20,7 @@ void RS::loadCharacterTextures(string characterName, const Vector2i & tailleDeco
     if (textures.find(characterName) == textures.end())
     {
         vector<Texture> textureVec;
+        textureVec.reserve(textureVec.size());
         Texture characterTexture;
 
         int left, top;
@@ -44,8 +45,8 @@ void RS::loadCharacterTextures(string characterName, const Vector2i & tailleDeco
         }
 
         //On ajoute le tableau de textures fraichement chargees
-        textures[characterName] = textureVec;
-
+        //textures[characterName] = textureVec;
+        textures.insert(pair<string, vector<Texture>>(characterName, textureVec));
     }
     else
     {

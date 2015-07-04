@@ -12,16 +12,12 @@ namespace nsGameObject
 {
     class GameObject
     {
-    private:
-        const nsRessourceManager::Animator anim;
-        UInt16 x;
-        UInt16 y;
+    protected:
+        nsRessourceManager::PlayerAnimator animator;
 
     public:
         virtual void render () noexcept = 0;
         virtual ~GameObject () {}
-
-        void setAnimator(nsRessourceManager::Animator & anim) noexcept;
 
     };
 

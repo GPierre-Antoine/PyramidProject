@@ -5,21 +5,50 @@
 #ifndef PYRAMIDPROJECT_ANIMATOR_H
 #define PYRAMIDPROJECT_ANIMATOR_H
 
+#include <SFML/Graphics/Sprite.hpp>
 #include "RessourceManager.h"
 
 namespace nsRessourceManager
 {
     class Animator
     {
-    private:
-        static sf::RenderWindow window;
+    protected:
+        static sf::RenderWindow* window;
 
     public:
-        void setWindow (sf::RenderWindow & window) noexcept;
+        static void setWindow(sf::RenderWindow & window) noexcept;
 
-        void update () noexcept;
-        void render () const noexcept;
-        Animator ();
+        virtual void update() noexcept;
+
+        virtual void render() noexcept = 0;
+
+        virtual ~Animator()
+        { }
+    };
+
+
+    class PlayerAnimator : public Animator
+    {
+    private:
+        const std::vector<sf::Texture>* textures;
+
+        //Si faux, affiche l'image du milieu de notre currentLoop(celle sans mouvement)
+        bool isMoving;
+
+        UInt16 currentFacing;
+
+        //Compteur de tours de boucle
+        UInt16 loopsCounter;
+
+    public:
+        PlayerAnimator(const std::string & characterName);
+
+        virtual void update() noexcept;
+
+        virtual void render() noexcept;
+
+        virtual ~PlayerAnimator()
+        { }
     };
 
 }
