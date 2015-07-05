@@ -32,8 +32,6 @@ src/nsGameObject/Entity.cpp
 src/nsGameObject/Entity.h
 src/nsGameEngine/Fabric.h
 src/nsGameEngine/Fabric.cpp
-src/nsGameEngine/Fabric.cpp
-src/nsGameEngine/Fabric.h
 src/nsGameObject/Foreground.cpp
 src/nsGameObject/Foreground.h
 src/nsGameObject/Decoration.cpp
