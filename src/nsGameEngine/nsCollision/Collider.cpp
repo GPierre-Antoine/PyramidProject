@@ -84,3 +84,4 @@ const T nsGameEngine::nsCollider::Circle<T>::getRad () const noexcept
 {
     return radius;
 }
+/**/

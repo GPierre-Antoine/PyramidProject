@@ -12,7 +12,8 @@
 
 void testCollider ();
 
-/*void fctBizarrePoubelle ()
+/** /
+void fctBizarrePoubelle ()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
@@ -36,7 +37,8 @@ void testCollider ();
         window.display();
     }
     std::cout << nsGameConstants::CHARACTER_SPRITES_COUNT << "coucou";
-}*/
+}
+ /**/
 
 void testPlayerAnimation1 ()
 {
@@ -44,8 +46,16 @@ void testPlayerAnimation1 ()
 
 }
 
+/**/
+void testCollider ()
+{
+    nsGameEngine::nsCollider::RectangleUI r1 (0,0,10,10);
+    nsGameEngine::nsCollider::RectangleUI r2 (5,5,1,1);
 
+    assert(r1.contains (r2));
+}
 
+/**/
 int main()
 {
     testCollider ();
@@ -53,12 +63,4 @@ int main()
     testPlayerAnimation1();
 
     return 0;
-}
-
-void testCollider ()
-{
-    nsGameEngine::nsCollider::RectangleUI r1 (0,0,10,10);
-    nsGameEngine::nsCollider::RectangleUI r2 (5,5,1,1);
-
-    assert(r1.contains (r2));
 }

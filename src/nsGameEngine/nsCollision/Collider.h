@@ -13,6 +13,7 @@ namespace nsGameEngine
 {
     namespace nsCollider
     {
+
         template <typename T>
         class Rectangle;
 
