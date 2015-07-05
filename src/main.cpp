@@ -6,9 +6,11 @@
 #include <iostream>
 #include "nsRessourceManager/const.h"
 #include "nsRessourceManager/Animator.h"
-#include "nsGameEngine/Collision/Collider.h"
+#include "nsGameEngine/nsCollision/Collider.h"
 #include <cassert>
 
+
+void testCollider ();
 
 /*void fctBizarrePoubelle ()
 {
@@ -46,7 +48,17 @@ void testPlayerAnimation1 ()
 
 int main()
 {
+    testCollider ();
     //fctBizarrePoubelle();
     testPlayerAnimation1();
+
     return 0;
+}
+
+void testCollider ()
+{
+    nsGameEngine::nsCollider::RectangleUI r1 (0,0,10,10);
+    nsGameEngine::nsCollider::RectangleUI r2 (5,5,1,1);
+
+    assert(r1.contains (r2));
 }

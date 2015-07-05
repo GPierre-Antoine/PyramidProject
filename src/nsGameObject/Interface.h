@@ -6,7 +6,7 @@
 #define PYRAMIDPROJECT_INTERFACE_H
 
 #include "../nsGameEngine/Defines/typedef.hpp"
-#include "../nsGameEngine/Collision/Collider.h"
+#include "../nsGameEngine/nsCollision/Collider.h"
 
 namespace nsGameObject
 {

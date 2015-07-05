@@ -38,8 +38,8 @@ src/nsGameObject/Foreground.cpp
 src/nsGameObject/Foreground.h
 src/nsGameObject/Decoration.cpp
 src/nsGameObject/Decoration.h
-src/nsGameEngine/Collision/Collider.cpp
-src/nsGameEngine/Collision/Collider.h
+src/nsGameEngine/nsCollision/Collider.cpp
+src/nsGameEngine/nsCollision/Collider.h
 src/nsGameEngine/Defines/typedef.hpp
 )
 

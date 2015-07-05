@@ -4,14 +4,14 @@
 
 #include "Collider.h"
 
-/****************************************** Mirrored Definition *********************************************/
+/* Mirrored Definition */
 template <typename T>
 bool nsGameEngine::nsCollider::Rectangle<T>::contains (const nsGameEngine::nsCollider::Collider<T> & col) const noexcept
 {
     return col.isContainedByRectangle (*this);
 }
 
-/****************************************** Do Object fit in QuadTree N *************************************/
+/* Do Object fit in QuadTree N */
 template <typename T>
 bool nsGameEngine::nsCollider::Circle<T>::isContainedByRectangle (const nsGameEngine::nsCollider::Rectangle<T> & rect) const noexcept
 {
@@ -27,9 +27,9 @@ bool nsGameEngine::nsCollider::Rectangle<T>::isContainedByRectangle (const nsGam
 }
 
 
-/****************************************** Constructors ***************************************************/
+/* Constructors */
 template <typename T>
-nsGameEngine::nsCollider::Rectangle<T>::Rectangle (const T X,const T Y,const T WIDTH,const T HEIGHT) noexcept:
+nsGameEngine::nsCollider::Rectangle<T>::Rectangle (const T X,const T Y,const T WIDTH,const T HEIGHT) noexcept :
         x (X), y (Y), width (WIDTH), height (HEIGHT)
 {
 
@@ -41,7 +41,7 @@ nsGameEngine::nsCollider::Circle<T>::Circle (T X, T Y, T RADIUS) noexcept:
 {
 
 }
-/***************************************** getters ********************************************************/
+/* getters */
 
 template <typename T>
 const T nsGameEngine::nsCollider::Rectangle<T>::getWidth () const noexcept
