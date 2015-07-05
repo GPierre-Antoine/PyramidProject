@@ -27,6 +27,7 @@ namespace nsRessourceManager
     };
 
 
+
     class PlayerAnimator : public Animator
     {
     private:

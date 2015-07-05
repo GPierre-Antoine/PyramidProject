@@ -13,6 +13,8 @@ using namespace sf;
 
 #define RS nsRessourceManager::Animator
 
+RenderWindow* RS::window;
+
 void RS::update() noexcept
 {
 
@@ -34,7 +36,7 @@ void RS::setWindow(sf::RenderWindow & window) noexcept
 
 
 RSP::PlayerAnimator(const std::string & characterName)
-        : currentFacing(PLAYER_DOWN), isMoving(false), loopsCounter(0)
+        : isMoving(false), currentFacing(PLAYER_DOWN), loopsCounter(0)
 {
     //S'occupe de charger la texture de notre joueur (ex guerrier)
     //Sera surement deja chargee
@@ -81,7 +83,6 @@ void RSP::render() noexcept
         //L'image du milieu est toujours celle sans mouvement d'ou le +1
         sprite.setTexture(textures->at(currentFacing * CHARACTER_SPRITES_COUNT + 1));
     }
-
     window->draw(sprite);
 }
 

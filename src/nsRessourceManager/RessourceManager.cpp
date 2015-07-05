@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include "RessourceManager.h"
+#include <iostream>
 
 using namespace std;
 using namespace sf;
@@ -13,6 +14,9 @@ using namespace sf;
 RS::RessourceManager()
 {
 }
+
+//Definition, necessaire en plus de la declaration
+map<const string, const vector<Texture>> RS::textures;
 
 void RS::loadCharacterTextures(string characterName, const Vector2i & tailleDecoupe, unsigned spriteCount)
 {
@@ -45,11 +49,11 @@ void RS::loadCharacterTextures(string characterName, const Vector2i & tailleDeco
         }
 
         //On ajoute le tableau de textures fraichement chargees
-        //textures[characterName] = textureVec;
         textures.insert(pair<string, vector<Texture>>(characterName, textureVec));
     }
     else
     {
+        cout << "\nRsManager::LoadTexture, texture deja chargee";
         //Si un jour on veut faire des exceptions
     }
 }

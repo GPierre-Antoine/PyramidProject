@@ -16,8 +16,6 @@ namespace nsRessourceManager
     {
     private:
 
-        static sf::RenderWindow* window;
-
         static std::map<const std::string, const std::vector<sf::Texture>> textures;
 
     public:
