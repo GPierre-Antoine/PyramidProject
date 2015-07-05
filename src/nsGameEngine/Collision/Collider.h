@@ -8,83 +8,69 @@
     #include <SFML/System/Vector2.hpp>
     #include "../Defines/typedef.hpp"
 
+    //
+// Created by Pierre-Antoine on 05/07/2015.
+//
+
+#ifndef COLLIDER_COLLIDER_H
+#define COLLIDER_COLLIDER_H
+
     namespace nsGameEngine
     {
         namespace nsCollider
         {
             template <typename T>
-            class Collider;
-            template <typename T>
             class Rectangle;
-            template <typename T>
-            class Circle;
+
+            template <typename B>
+            B add (const B & a, const B & b)
+            {
+                return a + b;
+            }
 
             template <typename T>
             class Collider
             {
-            private:
-                virtual bool                collidesV       (const Rectangle<T> & other) const noexcept = 0;
-                virtual bool                otherfitsInto   (const Rectangle<T> & other) const noexcept = 0;
-
-                virtual bool                collidesV       (const Circle<T>    & other) const noexcept = 0;
-                virtual bool                otherFitsInto   (const Circle<T>    & other) const noexcept = 0;
             public:
-                bool                        collides        (const Collider<T> & other) const noexcept;
-                bool                        fitsInto        (const Collider<T> & other) const noexcept;
-                virtual void move (const sf::Vector2<T> & mvt) noexcept = 0;
-                virtual void move (const T & pX, const T & pY) noexcept = 0;
-
-
-                virtual ~Collider (){}
+                //bool accept (const Visitor & vis) const noexcept;
+                virtual bool isContainedByRectangle (const Rectangle<T> & rect) const noexcept = 0;
             };
 
             template <typename T>
             class Rectangle : public Collider<T>
             {
             private:
-                friend class Circle<T>;
-                T                           width;
-                T                           height;
-                sf::Vector2<T>              origin;
-
-                virtual bool                otherFitsInto   (const Rectangle<T> & other) const noexcept;
-                virtual bool                collidesV       (const Rectangle<T> & other) const noexcept;
-
-                virtual bool                otherFitsInto   (const Circle<T>    & other) const noexcept;
-                virtual bool                collidesV       (const Circle<T>    & other) const noexcept;
-
+                T x;
+                T y;
+                T width;
+                T height;
             public:
-                //Constructor
-                Rectangle (const T & x, const T & y,        const T & width, const T & height) noexcept;
-                Rectangle (const sf::Vector2<T>& origin,    const T & width, const T & height) noexcept;
+                bool contains (const Collider<T> & col) const noexcept;
+                virtual bool isContainedByRectangle (const Rectangle<T> & rect) const noexcept;
+                Rectangle (const T X, const T Y, const T WIDTH, const T HEIGHT) noexcept;
 
-                virtual ~Rectangle () {}
+                const T getWidth  () const noexcept;
+                const T getHeight () const noexcept;
+                const T getX      () const noexcept;
+                const T getY      () const noexcept;
+
             };
-
-
-
 
             template <typename T>
             class Circle : public Collider<T>
             {
             private:
-                friend class Rectangle<T>;
-                T                                           radius;
-                sf::Vector2<T>                              origin;
-
-                virtual bool otherFitsInto                  (const Rectangle<T> & other) const noexcept;
-                virtual bool collidesV                      (const Rectangle<T> & other) const noexcept;
-
-                virtual bool otherFitsInto                  (const Circle<T>    & other) const noexcept;
-                virtual bool collidesV                      (const Circle<T>    & other) const noexcept;
-
+                T x;
+                T y;
+                T radius;
             public:
-                //Constructor
-                Circle (const T & x, const T & y,      const T & radius) noexcept;
-                Circle (const sf::Vector2<T> & origin, const T & radius) noexcept;
-
-                virtual ~Circle () {}
+                virtual bool isContainedByRectangle (const Rectangle<T> & rect) const noexcept;
+                Circle (T X, T Y, T RADIUS) noexcept;
+                const T getX    () const noexcept;
+                const T getY    () const noexcept;
+                const T getRad  () const noexcept;
             };
+
 
             typedef Collider    <UInt16>    ColliderUI;
             typedef Circle      <UInt16>    CircleUI;
@@ -92,4 +78,8 @@
         }//nsCollider
     }//nsGameEngine
 
-    #endif //PYRAMIDPROJECT_COLLIDER_H
+
+#endif //COLLIDER_COLLIDER_H
+
+
+#endif //PYRAMIDPROJECT_COLLIDER_H
