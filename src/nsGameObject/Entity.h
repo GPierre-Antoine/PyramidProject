@@ -10,7 +10,7 @@
 
 namespace nsGameObject
 {
-    class Entity : public GameObject, public IMovable, public ICollidable
+    class Entity : public GameObject, public IMovable//, public ICollidable
     {
     private:
         UInt16 x;

@@ -43,16 +43,3 @@ namespace nsRessourceManager
 }
 
 #endif //PYRAMIDPROJECT_RESSOURCEMANAGER_H
-
-
-
-
-
-
-
-
-
-//vieux
-//static const std::vector<std::vector<sf::Texture>>
-//        textures[nsGameConstants::CHARACTER_SPRITES_COUNT][CharTexturesIndex::SIZE];
-//static const std::vector<sf::Texture*> tablePointers [CharTexturesIndex::SIZE];

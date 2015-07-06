@@ -15,13 +15,12 @@ namespace nsGameObject
 {
     class Character : public Entity
     {
+    protected:
 
     public:
-        Character()
-        {
-            setY(0);
-            setX(0);
-        }
+        //Pour les tests, a refaire
+        virtual void update() noexcept { }
+        virtual void move(Int16 Up,Int16 Right) noexcept {}
 
         ~Character()
         { }

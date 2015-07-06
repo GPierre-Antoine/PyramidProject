@@ -12,6 +12,7 @@ namespace nsTest
     public:
         static void ColliderTest();
         static void QuadTreeTest();
+        static void PlayerAnimation1();
     };
 }
 

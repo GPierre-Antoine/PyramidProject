@@ -17,7 +17,7 @@ namespace nsGameObject
         UInt16 health;
 
     protected:
-        Player(UInt16 health) noexcept;
+        Player(UInt16 health = 100) noexcept;
 
     public:
         virtual void render() noexcept;

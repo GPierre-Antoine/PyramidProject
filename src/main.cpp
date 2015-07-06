@@ -4,25 +4,22 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "nsGameObject/Player.h"
 #include "nsRessourceManager/const.h"
 #include "nsRessourceManager/Animator.h"
 #include "nsGameEngine/nsCollision/Collider.h"
 #include "UnitTest.h"
 #include <cassert>
 
-using namespace nsTest;
-
-/** /
-void fctBizarrePoubelle ()
+void testPlayerAnimation1()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Test Personnage!");
+    window.setFramerateLimit(60);
     //On n'aura plus à traiter le setWindow, qui est def pour tous les animator
     nsRessourceManager::Animator::setWindow(window);
 
-    nsGameEngine::nsCollider::RectangleUI rect(0,0,1,1);
+    nsGameObject::Warrior guerrier = nsGameObject::Warrior(100, 100);
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -33,20 +30,21 @@ void fctBizarrePoubelle ()
         }
 
         window.clear();
-        window.draw(shape);
+        guerrier.render();
+
+        /*for (int i = 0; i < 12; ++i)
+        {
+            Sprite sprite;
+            sprite.setTexture(RessourceManager::getTexture(MARTINE).at(i));
+            window.clear();
+            window.draw(sprite);
+            window.display();
+            sleep(milliseconds(1000));
+
+        }*/
         window.display();
     }
-    std::cout << nsGameConstants::CHARACTER_SPRITES_COUNT << "coucou";
 }
- /**/
-
-void testPlayerAnimation1 ()
-{
-
-
-}
-
-/**/
 
 
 /**/
@@ -54,8 +52,7 @@ int main()
 {
     //fctBizarrePoubelle();
     testPlayerAnimation1();
-
-    UnitTest::ColliderTest ();
+    //UnitTest::ColliderTest();
 
     return 0;
 }

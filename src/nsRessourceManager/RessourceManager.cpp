@@ -6,6 +6,7 @@
 #include "RessourceManager.h"
 #include <iostream>
 
+using namespace nsGameConstants;
 using namespace std;
 using namespace sf;
 
@@ -31,15 +32,26 @@ void RS::loadCharacterTextures(string characterName, const Vector2i & tailleDeco
         //Rectangle avec taille decoupe ainsi que position
         IntRect rectangleDecoupe(0, 0, tailleDecoupe.x, tailleDecoupe.y);
 
+        //Pour trouver quelle ligne ainsi que colonne on est
+        unsigned ligne = 0;
+        unsigned colonne = 0;
+
         for (unsigned i = 0; i < spriteCount; ++i)
         {
+            if (i != 0 && i % TILESET_SPRITES_PER_ROW == 0)
+            {
+                ++ligne;
+                colonne = 0;
+            }
+
             /*** Calcul de la découpe, position du sprite ***/
-            //left = i / 3      (division euclidienne)
-            left = i / nsGameConstants::TILESET_SPRITES_PER_ROW;
-            //top = i % 3       (reste)
-            top = i % nsGameConstants::TILESET_SPRITES_PER_ROW;
+            left = colonne++ * PLAYER_SRITE_SIZE.x;
+            top = ligne * PLAYER_SRITE_SIZE.y;
+
             rectangleDecoupe.left = left;
             rectangleDecoupe.top = top;
+
+            //Ajustement colonne/ligne : si on est sur ligne suivante du tileset
 
             /*** Chargement texture i ***/
             characterTexture.loadFromFile(characterName, rectangleDecoupe);

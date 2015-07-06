@@ -6,4 +6,5 @@
 
 #define GO nsGameObject::GameObject
 
+
 #undef GO

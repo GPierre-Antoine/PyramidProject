@@ -15,8 +15,12 @@ namespace nsRessourceManager
     protected:
         static sf::RenderWindow* window;
 
+        sf::Vector2f position;
+
     public:
         static void setWindow(sf::RenderWindow & window) noexcept;
+
+        virtual void setPosition (UInt16 x, UInt16 y);
 
         virtual void update() noexcept;
 
@@ -42,7 +46,8 @@ namespace nsRessourceManager
         UInt16 loopsCounter;
 
     public:
-        PlayerAnimator(const std::string & characterName);
+        PlayerAnimator(const std::string & characterName = BASIC);
+        PlayerAnimator(const PlayerAnimator & animator);
 
         virtual void update() noexcept;
 

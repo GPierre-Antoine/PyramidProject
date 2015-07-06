@@ -37,6 +37,7 @@ namespace nsRessourceManager
     //Ce sont les noms de personnages, qui classent la map de RsManager
     const std::string MARTINE = "../images/Martine.png";
     const std::string MOMIE = "../images/Momie.png";
+    const std::string BASIC = "../images/Basic.png";//Perso pourri de base, si texture non trouvee
 
 }
 
