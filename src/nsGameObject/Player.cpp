@@ -41,7 +41,6 @@ WARRIOR::Warrior(UInt16 x, UInt16 y) noexcept
     animator.setPosition(x, y);
 }
 
-
 ///////////////////////////////////////////
 #undef WARRIOR                           //
 //#define bblblblb nsGameObject::blblblb    //

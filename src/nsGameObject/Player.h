@@ -33,6 +33,17 @@ namespace nsGameObject
     public:
         Warrior(UInt16 x, UInt16 y) noexcept;
 
+        void testChangementMouvement (UInt16 x, UInt16 y, bool moving)
+        {
+            animator.setPosition(x, y);
+            animator.setMoving(moving);
+        }
+
+        void testChangementLoop (UInt16 loop)
+        {
+            animator.changeLoop(loop);
+        }
+
     }; //class Warrior
 }
 

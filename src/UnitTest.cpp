@@ -15,24 +15,24 @@ using nsGameEngine::QuadTree;
 #define TEST nsTest::UnitTest
 
 
-void TEST::ColliderTest ()
+void TEST::ColliderTest()
 {
-    Rectangle r1 (0,0,10,10);
-    Rectangle r2 (1,1,1,1);
-    Rectangle r3 (11,3,4,6);
-    Rectangle r4 (0,0,11,11);
+    Rectangle r1(0, 0, 10, 10);
+    Rectangle r2(1, 1, 1, 1);
+    Rectangle r3(11, 3, 4, 6);
+    Rectangle r4(0, 0, 11, 11);
 
-    assert ( r1.contains (r1));
-    assert ( r1.contains (r2));
-    assert (!r1.contains (r3));
-    assert ( r4.contains (r1));
-    assert (!r1.contains (r4));
+    assert (r1.contains(r1));
+    assert (r1.contains(r2));
+    assert (!r1.contains(r3));
+    assert (r4.contains(r1));
+    assert (!r1.contains(r4));
 
 }
 
-void TEST::QuadTreeTest ()
+void TEST::QuadTreeTest()
 {
-    QuadTree q1(1920,1080);
+    QuadTree q1(1920, 1080);
 
 }
 
@@ -40,10 +40,13 @@ void TEST::PlayerAnimation1()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Test Personnage!");
     window.setFramerateLimit(60);
+
+    sf::Clock clock;
+
     //On n'aura plus à traiter le setWindow, qui est def pour tous les animator
     nsRessourceManager::Animator::setWindow(window);
 
-    nsGameObject::Warrior guerrier = nsGameObject::Warrior(0, 0);
+    nsGameObject::Warrior guerrier = nsGameObject::Warrior(200, 0);
 
     while (window.isOpen())
     {
@@ -56,6 +59,16 @@ void TEST::PlayerAnimation1()
 
         window.clear();
         guerrier.render();
+        window.display();
+
+        sf::Int32 millisecondes = clock.getElapsedTime().asMilliseconds();
+        if (millisecondes <= 4000)
+            guerrier.testChangementMouvement(200, millisecondes / 10, true);
+        else
+        {
+            clock.restart();
+            guerrier.testChangementLoop(nsGameConstants::PLAYER_LEFT);
+        }
 
         /*for (int i = 0; i < 12; ++i)
         {
@@ -67,7 +80,6 @@ void TEST::PlayerAnimation1()
             sleep(milliseconds(1000));
 
         }*/
-        window.display();
     }
 }
 

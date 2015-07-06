@@ -14,16 +14,19 @@ namespace nsRessourceManager
     {
     protected:
         static sf::RenderWindow* window;
-
         sf::Vector2f position;
+        bool moving;
 
     public:
-
         static void setWindow(sf::RenderWindow & window) noexcept;
 
-        virtual void setPosition (UInt16 x, UInt16 y);
+        void setPosition(UInt16 x, UInt16 y);
 
-        virtual void update() noexcept;
+        virtual bool isMoving() noexcept;
+
+        void setMoving(bool moving) noexcept;
+
+        virtual void update() noexcept = 0;
 
         virtual void render() noexcept = 0;
 
@@ -32,23 +35,20 @@ namespace nsRessourceManager
     };
 
 
-
     class PlayerAnimator : public Animator
     {
     private:
         const std::vector<sf::Texture>* textures;
-
-        //Si faux, affiche l'image du milieu de notre currentLoop(celle sans mouvement)
-        bool isMoving;
-
-        UInt16 currentFacing;
-
+        UInt16 currentLoop;
         //Compteur de tours de boucle
         UInt16 loopsCounter;
 
     public:
         PlayerAnimator(const std::string & characterName = BASIC);
+
         PlayerAnimator(const PlayerAnimator & animator);
+
+        void changeLoop(UInt16 loopConstant) noexcept;
 
         virtual void update() noexcept;
 
