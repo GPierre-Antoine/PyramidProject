@@ -14,64 +14,49 @@ namespace nsGameEngine
     namespace nsCollider
     {
 
-        template <typename T>
+
         class Rectangle;
 
-        template <typename B>
-        B add (const B & a, const B & b)
-        {
-            return a + b;
-        }
-
-        template <typename T>
         class Collider
         {
         public:
-            //bool accept (const Visitor & vis) const noexcept;
-            virtual bool isContainedByRectangle (const Rectangle<T> & rect) const noexcept = 0;
+            virtual bool isContainedByRectangle (const Rectangle & rect) const noexcept = 0;
             virtual ~Collider () { }
         };
 
-        template <typename T>
-        class Rectangle : public Collider<T>
+        class Rectangle : public Collider
         {
         private:
-            T x;
-            T y;
-            T width;
-            T height;
+            UInt16 x;
+            UInt16 y;
+            UInt16 width;
+            UInt16 height;
         public:
-            bool contains (const Collider<T> & col) const noexcept;
-            virtual bool isContainedByRectangle (const Rectangle<T> & rect) const noexcept;
-            Rectangle (const T X, const T Y, const T WIDTH, const T HEIGHT) noexcept;
+            bool contains (const Collider & col) const noexcept;
+            virtual bool isContainedByRectangle (const Rectangle & rect) const noexcept;
+            Rectangle (const UInt16 X, const UInt16 Y, const UInt16 WIDTH, const UInt16 HEIGHT) noexcept;
 
-            const T getWidth  () const noexcept;
-            const T getHeight () const noexcept;
-            const T getX      () const noexcept;
-            const T getY      () const noexcept;
+            const UInt16 getWidth  () const noexcept;
+            const UInt16 getHeight () const noexcept;
+            const UInt16 getX      () const noexcept;
+            const UInt16 getY      () const noexcept;
             virtual ~Rectangle () { }
         };
 
-        template <typename T>
-        class Circle : public Collider<T>
+        class Circle : public Collider
         {
         private:
-            T x;
-            T y;
-            T radius;
+            UInt16 x;
+            UInt16 y;
+            UInt16 radius;
         public:
-            virtual bool isContainedByRectangle (const Rectangle<T> & rect) const noexcept;
-            Circle (T X, T Y, T RADIUS) noexcept;
-            const T getX    () const noexcept;
-            const T getY    () const noexcept;
-            const T getRad  () const noexcept;
+            virtual bool isContainedByRectangle (const Rectangle & rect) const noexcept;
+            Circle (UInt16 X, UInt16 Y, UInt16 RADIUS) noexcept;
+            const UInt16 getX    () const noexcept;
+            const UInt16 getY    () const noexcept;
+            const UInt16 getRad  () const noexcept;
             virtual ~Circle () { }
         };
-
-
-        typedef Collider    <UInt16>    ColliderUI;
-        typedef Circle      <UInt16>    CircleUI;
-        typedef Rectangle   <UInt16>    RectangleUI;
     }//nsCollider
 }//nsGameEngine
 
