@@ -18,6 +18,7 @@ namespace nsRessourceManager
         sf::Vector2f position;
 
     public:
+
         static void setWindow(sf::RenderWindow & window) noexcept;
 
         virtual void setPosition (UInt16 x, UInt16 y);

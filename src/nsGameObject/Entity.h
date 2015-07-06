@@ -17,16 +17,18 @@ namespace nsGameObject
         UInt16 y;
 
     protected:
+        nsRessourceManager::PlayerAnimator animator;
+
         void setX(UInt16 x);
 
         void setY(UInt16 y);
 
     public:
+        UInt16 X() const noexcept;
+        //Pas besoin d'être virtual, est defini ici, et jamais redefini
+        UInt16 Y() const noexcept;
+
         virtual void update() noexcept = 0;
-
-        virtual UInt16 X() const noexcept;
-
-        virtual UInt16 Y() const noexcept;
 
         virtual ~Entity() {}
 

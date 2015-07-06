@@ -43,7 +43,7 @@ void TEST::PlayerAnimation1()
     //On n'aura plus à traiter le setWindow, qui est def pour tous les animator
     nsRessourceManager::Animator::setWindow(window);
 
-    nsGameObject::Warrior guerrier = nsGameObject::Warrior(100, 100);
+    nsGameObject::Warrior guerrier = nsGameObject::Warrior(0, 0);
 
     while (window.isOpen())
     {
@@ -70,3 +70,5 @@ void TEST::PlayerAnimation1()
         window.display();
     }
 }
+
+#undef TEST

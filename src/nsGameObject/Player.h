@@ -32,6 +32,7 @@ namespace nsGameObject
     {
     public:
         Warrior(UInt16 x, UInt16 y) noexcept;
+
     }; //class Warrior
 }
 

@@ -9,18 +9,20 @@
 
 using namespace nsRessourceManager;
 
-#define PLAYER nsGameObject::Player
+///////////////////////////////////////////
+#define PLAYER nsGameObject::Player      //
+///////////////////////////////////////////
 
-PLAYER::Player(UInt16 health) noexcept
+
+PLAYER::Player(UInt16 health /* = 100 */) noexcept
 {
     this->health = health;
-    this->setX(0);
-    this->setY(0);
 }
 
 void PLAYER::render() noexcept
 {
     animator.render();
+
 }
 
 
@@ -29,6 +31,7 @@ void PLAYER::render() noexcept
 #define WARRIOR nsGameObject::Warrior    //
 ///////////////////////////////////////////
 
+
 WARRIOR::Warrior(UInt16 x, UInt16 y) noexcept
         : Player(nsGameConstants::WARRIOR_HEALTH)
 {
@@ -36,12 +39,10 @@ WARRIOR::Warrior(UInt16 x, UInt16 y) noexcept
     setY(y);
     animator = PlayerAnimator(MARTINE);
     animator.setPosition(x, y);
-    std::cout << "test" << std::endl;
 }
-
 
 
 ///////////////////////////////////////////
 #undef WARRIOR                           //
-//#define WARRIOR nsGameObject::Warrior    //
+//#define bblblblb nsGameObject::blblblb    //
 ///////////////////////////////////////////

@@ -12,10 +12,6 @@ namespace nsGameObject
 {
     class GameObject
     {
-    protected:
-        //nsRessourceManager::Animator animator; //Donne erreur
-        nsRessourceManager::PlayerAnimator animator;
-
     public:
         virtual void render () noexcept = 0;
         virtual ~GameObject () {}
