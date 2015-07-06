@@ -39,7 +39,8 @@ src/nsGameObject/Decoration.h
 src/nsGameEngine/nsCollision/Collider.cpp
 src/nsGameEngine/nsCollision/Collider.h
 src/nsGameEngine/Defines/typedef.hpp
-src/UnitTest.cpp src/UnitTest.h)
+src/UnitTest.cpp
+src/UnitTest.h)
 
 
 include(configSFMLMakefileHelper.txt)
