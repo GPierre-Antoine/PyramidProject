@@ -24,8 +24,8 @@ src/nsRessourceManager/const.h
 src/nsGameObject/Interface.h
 src/nsGameEngine/Game.cpp
 src/nsGameEngine/Game.h
-#src/nsGameEngine/QuadTree.cpp
-#src/nsGameEngine/QuadTree.h
+src/nsGameEngine/QuadTree.cpp
+src/nsGameEngine/QuadTree.h
 src/nsGameObject/Player.cpp
 src/nsGameObject/Player.h
 src/nsGameObject/Entity.cpp

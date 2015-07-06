@@ -20,9 +20,9 @@ GE::~QuadTree()
         delete NW, NE, SW, SE;
 }
 
-bool GE::fits (nsGameEngine::QuadTree *Child, sICollidable & go) const noexcept
+bool GE::contains (const sICollidable & go) const noexcept
 {
-    return Child->area.fitsInto (go->getCollider ());
+    return this->area.contains(go->getCollider ());
 }
 
 
@@ -34,7 +34,7 @@ bool GE::fits (nsGameEngine::QuadTree *Child, sICollidable & go) const noexcept
  */
 void GE::add(sICollidable & go) noexcept
 {
-    if (!fits(this,go))
+    if (!this->contains(go))
     {
         if (parent != nullptr)
             parent->add (go);
@@ -49,19 +49,19 @@ void GE::prAdd(sICollidable & go) noexcept
 {
     if (splited)
     {
-        if (fits (NE,go))
+        if (NE->contains (go))
         {
             NE->prAdd (go);
         }
-        else if (fits(NW,go))
+        else if (NW->contains (go))
         {
             NW->prAdd (go);
         }
-        else if (fits(SE,go))
+        else if (SE->contains (go))
         {
             SE->prAdd (go);
         }
-        else if (fits(SW,go))
+        else if (SW->contains (go))
         {
             SW->prAdd (go);
         }
@@ -93,7 +93,7 @@ void GE::update () noexcept
 {
     for (std::vector<sICollidable>::reverse_iterator i {goList.rbegin ()} ; i != goList.rend () ; i = std::next (i))
     {
-        if (!fits (this, *i))
+        if (!this->contains(*i))// (this, *i))
         {
             sICollidable t = *i;
             goList.erase (i.base ());

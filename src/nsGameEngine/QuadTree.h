@@ -31,15 +31,8 @@ namespace nsGameEngine
         UInt16 height;
 
 
-        nsCollider::RectangleUI area;
+        nsCollider::Rectangle area;
         bool splited {false};
-        /*static enum
-        {
-            NW,
-            NE,
-            SW,
-            SE
-        };
 
         QuadTree *childs; /**/
         QuadTree *NW;
@@ -55,7 +48,7 @@ namespace nsGameEngine
 
         QuadTree (unsigned short level, UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept;
 
-        bool fits (QuadTree *Child, sICollidable & go) const noexcept;
+        bool contains (const sICollidable & go) const noexcept;
 
         void prAdd(sICollidable & go) noexcept;
 
