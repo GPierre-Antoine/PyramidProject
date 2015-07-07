@@ -1,75 +1,109 @@
 //
 // Created by Pierre-Antoine on 05/07/2015.
 //
+#include <iostream>
 
 #include "Collider.h"
+#define COLL nsGameEngine::nsCollider
 
-/* Mirrored Definition */
-bool nsGameEngine::nsCollider::Rectangle::contains (const nsGameEngine::nsCollider::Collider & col) const noexcept
+namespace
+{
+    UInt16 Uabs (int expr) { if (expr < 0) return UInt16(-expr);
+        return UInt16(expr); };
+}
+
+/* Mirrored Definitions */
+bool COLL::Rectangle::contains (const COLL::Collider & col) const noexcept
 {
     return col.isContainedByRectangle (*this);
 }
 
 /* Do Object fit in QuadTree N */
-bool nsGameEngine::nsCollider::Circle::isContainedByRectangle (const nsGameEngine::nsCollider::Rectangle & rect) const noexcept
+bool COLL::Circle::isContainedByRectangle (const COLL::Rectangle & rect) const noexcept
 {
-    return (rect.getX () <= this->x) && (this->x + (this->radius << 1) <= rect.getX () + rect.getWidth ()) &&
-           (rect.getY () <= this->y) && (this->y + (this->radius << 1) <= rect.getY () + rect.getHeight ());
+    return (rect.x <= x) && (x + (radius << 1) <= rect.x + rect.width ) &&
+           (rect.y <= y) && (y + (radius << 1) <= rect.y + rect.height);
 }
 
-bool nsGameEngine::nsCollider::Rectangle::isContainedByRectangle (const nsGameEngine::nsCollider::Rectangle & rect) const noexcept
+bool COLL::Rectangle::isContainedByRectangle (const COLL::Rectangle & rect) const noexcept
 {
-    return (rect.x <= this->x) && (this->x + this->getWidth () <= rect.x + rect.getWidth ())
-           && (rect.y <= this->y) && (this->y + this->getHeight () <= rect.y + rect.getHeight ());
+    return (rect.x <= this->x) && (this->x + this->width <= rect.x + rect.width)
+           && (rect.y <= this->y) && (this->y + this->height <= rect.y + rect.height);
 }
 
 
 /* Constructors */
-nsGameEngine::nsCollider::Rectangle::Rectangle (const UInt16 X,const UInt16 Y,const UInt16 WIDTH,const UInt16 HEIGHT) noexcept :
+COLL::Rectangle::Rectangle (const UInt16 X,const UInt16 Y,const UInt16 WIDTH,const UInt16 HEIGHT) noexcept :
         x (X), y (Y), width (WIDTH), height (HEIGHT)
 {
 
 }
 
-nsGameEngine::nsCollider::Circle::Circle (const UInt16 X, const UInt16 Y, const UInt16 RADIUS) noexcept:
+COLL::Circle::Circle (const UInt16 X, const UInt16 Y, const UInt16 RADIUS) noexcept:
         x (X), y (Y), radius (RADIUS)
 {
 
 }
-/* getters */
 
-const UInt16 nsGameEngine::nsCollider::Rectangle::getWidth () const noexcept
-{
-    return width;
-}
-
-const UInt16 nsGameEngine::nsCollider::Rectangle::getHeight () const noexcept
-{
-    return height;
-}
-
-const UInt16 nsGameEngine::nsCollider::Rectangle::getX () const noexcept
-{
-    return x;
-}
-
-const UInt16 nsGameEngine::nsCollider::Rectangle::getY () const noexcept
-{
-    return y;
-}
-
-const UInt16 nsGameEngine::nsCollider::Circle::getX () const noexcept
-{
-    return x;
-}
-
-const UInt16 nsGameEngine::nsCollider::Circle::getY () const noexcept
-{
-    return y;
-}
-
-const UInt16 nsGameEngine::nsCollider::Circle::getRad () const noexcept
-{
-    return radius;
-}
 /**/
+bool COLL::Rectangle::collidesWith (const COLL::Circle & other) const noexcept
+{
+
+    UInt16 circleDistancex = Uabs(((other.x + other.radius) << 1) - (x + width ));
+    UInt16 circleDistancey = Uabs(((other.y + other.radius) << 1) - (y + height));
+
+    if ((circleDistancex > (width + (other.radius << 1))) || (circleDistancey > (height + (other.radius << 1))))
+        return false;
+
+    if ((circleDistancex <= (width)) || (circleDistancey <= (height)))
+        return true;
+
+    UInt16 t1 = Uabs(circleDistancex - width);
+    t1 = t1 * t1;
+    UInt16 t2 = Uabs(circleDistancey - height);
+    t2 = t2 * t2;
+    t1 += t2;
+
+    return (t1 <= (other.radius * other.radius) << 1);
+}
+
+
+//centre x du cercle : x + radius
+//centre y du cercle : y + radius
+
+bool COLL::Rectangle::collidesWith (const COLL::Rectangle & other) const noexcept
+{
+    return  !((other.x >= this->x + this->width) ||
+            (other.x + other.width <= x) ||
+            (other.y >= y + height) ||
+            (other.y + other.height <= y));/**/
+}
+
+
+//signature needed functions
+bool COLL::Rectangle::collidesWith (const nsGameEngine::nsCollider::Collider & other) const noexcept
+{
+    return false;
+}
+
+bool COLL::Circle::collidesWith (const nsGameEngine::nsCollider::Collider & other) const noexcept
+{
+    return false;
+}
+
+//circle vs Circle
+bool COLL::Circle::collidesWith (const nsGameEngine::nsCollider::Circle & other) const noexcept
+{
+    UInt16 dx = (x < other.x ? other.x - x : x - other.x); //abs(x - other.x)
+    UInt16 dy = (y < other.y ? other.y - y : y - other.y); //abs(y - other.y)
+    UInt16 radii = radius + other.radius;
+    return (dx * dx + dy * dy <= radii * radii);//pythagore
+}
+
+//avoid duplicates
+bool COLL::Circle::collidesWith (const nsGameEngine::nsCollider::Rectangle & other) const noexcept
+{
+    return other.collidesWith (*this);
+}
+
+#undef COLL

@@ -10,6 +10,7 @@
 #include "nsGameObject/Player.h"
 
 using nsGameEngine::nsCollider::Rectangle;
+using nsGameEngine::nsCollider::Circle;
 using nsGameEngine::QuadTree;
 
 #define TEST nsTest::UnitTest
@@ -17,16 +18,34 @@ using nsGameEngine::QuadTree;
 
 void TEST::ColliderTest()
 {
-    Rectangle r1(0, 0, 10, 10);
-    Rectangle r2(1, 1, 1, 1);
-    Rectangle r3(11, 3, 4, 6);
-    Rectangle r4(0, 0, 11, 11);
+    Rectangle r1 (0,0,10,10);
 
-    assert ( r1.contains(r1));//r1 contient r1 : vrai
-    assert ( r1.contains(r2));//r1 contient r2 : vrai
-    assert (!r1.contains(r3));//r1 contient r3 : faux
-    assert ( r4.contains(r1));//r4 contient r1 : vrai
-    assert (!r1.contains(r4));//r1 contient r4 : faux
+    Rectangle r2 (3,4,3,2);
+
+    Rectangle r3 (3,4,3,2);
+
+    Circle c1 (10,10,1); //Cercle construit de centre 11,11, rayon 1
+
+    Circle c2 (9,9,1);   //Cercle construit de centre 10,10, rayon 1
+
+    Circle c3 (0,0,5);   //Cercle construit de centre 5,5,   rayon 5
+
+    Circle c4 (1,1,3);   //Cercle construit de centre 4,4,   rayon 3
+
+
+
+
+    assert(r1.contains (r2));
+    assert(!r1.contains (c1));
+    assert(!r1.contains (c2));
+    assert(r1.contains (c3));
+    assert(r1.contains (c4));
+
+    assert (r1.collidesWith (r1));
+    assert (!r1.collidesWith (c1));
+    assert (r1.collidesWith (c2));
+    assert (r1.collidesWith (c3));
+    assert (r1.collidesWith (c4));
 
 }
 
