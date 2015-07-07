@@ -48,9 +48,9 @@ COLL::Circle::Circle (const UInt16 X, const UInt16 Y, const UInt16 RADIUS) noexc
 /**/
 bool COLL::Rectangle::collidesWith (const COLL::Circle & other) const noexcept
 {
-
-    UInt16 circleDistancex = Uabs(((other.x + other.radius) << 1) - (x + width ));
-    UInt16 circleDistancey = Uabs(((other.y + other.radius) << 1) - (y + height));
+    //toutes les distances sont multipliées par 2 pour éviter de diviser certaines
+    UInt16 circleDistancex = Uabs(((other.x + other.radius) << 1) - ((x << 1) + width ));
+    UInt16 circleDistancey = Uabs(((other.y + other.radius) << 1) - ((y << 1) + height));
 
     if ((circleDistancex > (width + (other.radius << 1))) || (circleDistancey > (height + (other.radius << 1))))
         return false;

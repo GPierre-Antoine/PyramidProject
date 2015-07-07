@@ -8,8 +8,8 @@
 
 int main()
 {
-    TEST::PlayerAnimation1();
-    //UnitTest::ColliderTest();
+    //TEST::PlayerAnimation1();
+    TEST::ColliderTest();
 
     return 0;
 }
