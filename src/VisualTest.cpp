@@ -20,7 +20,7 @@ void TEST::PlayerAnimation1()
 
     sf::Clock clock;
 
-    //On n'aura plus à traiter le setWindow, qui est def pour tous les animator
+    //On n'aura plus Ã  traiter le setWindow, qui est def pour tous les animator
     nsRessourceManager::Animator::setWindow(window);
 
     nsGameObject::Warrior guerrier = nsGameObject::Warrior(200, 0);

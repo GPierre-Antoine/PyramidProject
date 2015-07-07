@@ -57,27 +57,3 @@ namespace nsRessourceManager
 }
 
 #endif //PYRAMIDPROJECT_CONST_H
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//vieux truc
-//Notre enumeration contenant tous les personnages
-/*enum CharTexturesIndex : unsigned
-{
-    MARTINE = 0,
-    MOMIE = 1,
-
-
-    SIZE = 2   //Size = le dernier + 1. ne pas oublier d'update à chaque ajout
-};*/
