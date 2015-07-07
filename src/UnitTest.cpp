@@ -22,11 +22,11 @@ void TEST::ColliderTest()
     Rectangle r3(11, 3, 4, 6);
     Rectangle r4(0, 0, 11, 11);
 
-    assert (r1.contains(r1));
-    assert (r1.contains(r2));
-    assert (!r1.contains(r3));
-    assert (r4.contains(r1));
-    assert (!r1.contains(r4));
+    assert ( r1.contains(r1));//r1 contient r1 : vrai
+    assert ( r1.contains(r2));//r1 contient r2 : vrai
+    assert (!r1.contains(r3));//r1 contient r3 : faux
+    assert ( r4.contains(r1));//r4 contient r1 : vrai
+    assert (!r1.contains(r4));//r1 contient r4 : faux
 
 }
 
