@@ -10,7 +10,19 @@
 
 namespace nsGameConstants
 {
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //                                  MOUVEMENT                                                //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //Le personnage prend 40 frames (~0.6 s) pour arriver a pleine vitesse
+    const Int16 MAX_MOVEMENT_SPEED = 40;
 
+    //La vitesse max/s = (MaxMvtSpeed / SpeedDivisor) * 60(fps)
+    //Dans ce cas-ci : 40/3 * 60 = 800 donc 800pixel/sec
+    const Int16 SPEED_DIVISOR = 3;
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //                                  TILESET                                                  //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     const unsigned CHARACTER_SPRITES_COUNT = 12;
     const unsigned TILESET_SPRITES_PER_ROW = 3;
 
@@ -27,6 +39,9 @@ namespace nsGameConstants
 
     const sf::Vector2i PLAYER_SRITE_SIZE = sf::Vector2<int>(148, 200);
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    //                                  PLAYER CONSTANTS                                         //
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     const UInt16 WARRIOR_HEALTH = 100;
 
 } // nsGameConstants

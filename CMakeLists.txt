@@ -9,7 +9,7 @@ set(SOURCE_FILES src/main.cpp)
 
 set(EXECUTABLE_NAME Pyramid_Project)
 
-add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCE_FILES}
+add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES}
 src/nsGameObject/GameObject.cpp
 src/nsGameObject/GameObject.h
 src/nsGameObject/Character.cpp
@@ -40,7 +40,10 @@ src/nsGameEngine/nsCollision/Collider.cpp
 src/nsGameEngine/nsCollision/Collider.h
 src/nsGameEngine/Defines/typedef.hpp
 src/UnitTest.cpp
-src/UnitTest.h)
+src/UnitTest.h
+src/VisualTest.cpp
+src/VisualTest.h
+)
 
 
 include(configSFMLMakefileHelper.txt)

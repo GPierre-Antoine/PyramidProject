@@ -15,7 +15,6 @@ namespace nsGameObject
 {
     class Character : public Entity
     {
-    protected:
 
     public:
         //Pour les tests, a refaire
