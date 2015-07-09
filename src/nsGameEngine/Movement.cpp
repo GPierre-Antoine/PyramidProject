@@ -3,28 +3,22 @@
 //
 
 #include "Movement.h"
-#include "Defines/typedef.hpp"
-#include "../nsRessourceManager/const.h"
 
 using namespace nsGameConstants;
 
 #define MOVE nsGameEngine::Movement
 
 MOVE::Movement() noexcept
-        : speedUp(0), speedDown(0), speedLeft(0), speedRight(0),
-          goingUp(false), goingDown(false), goingLeft(false), goingRight(false),
-          maxSpeedFrames(ACCELERATION_FRAMES_NUMBER), stoppingFrames(STOPPING_FRAMES_NUMBER),
-          maxSpeedPerFrame(MAX_SPEED_PIXEL_PER_FRAME)
 { }
 
 float MOVE::getHorizontalMovement() const noexcept
 {
-    return (speedRight - speedLeft) * MAX_SPEED_PIXEL_PER_FRAME;
+    return (speedRight - speedLeft) * maxSpeedPerFrame;
 }
 
 float MOVE::getVerticalMovement() const noexcept
 {
-    return (speedDown - speedUp) * MAX_SPEED_PIXEL_PER_FRAME;
+    return (speedDown - speedUp) * maxSpeedPerFrame;
 }
 
 void MOVE::update() noexcept
@@ -32,34 +26,34 @@ void MOVE::update() noexcept
     //Si va dans une direction, augmente petit a petit la vitesse
     //Si ne va pas dans cette direction, descend petit a petit
     if (goingUp && speedUp < 1.f)
-        speedUp += 1.f / ACCELERATION_FRAMES_NUMBER;
+        speedUp += 1.f / maxSpeedFrames;
     else if (speedUp > 0.f)
     {
-        speedUp -= 1.f / STOPPING_FRAMES_NUMBER;
+        speedUp -= 1.f / stoppingFrames;
         speedUp = (speedUp < 0.f ? 0.f : speedUp);
     }
 
     if (goingDown && speedDown < 1.f)
-        speedDown += 1.f / ACCELERATION_FRAMES_NUMBER;
+        speedDown += 1.f / maxSpeedFrames;
     else if (speedDown > 0.f)
     {
-        speedDown -= 1.f / STOPPING_FRAMES_NUMBER;
+        speedDown -= 1.f / stoppingFrames;
         speedDown = (speedDown < 0.f ? 0.f : speedDown);
     }
 
     if (goingLeft && speedLeft < 1.f)
-        speedLeft += 1.f / ACCELERATION_FRAMES_NUMBER;
+        speedLeft += 1.f / maxSpeedFrames;
     else if (speedLeft > 0.f)
     {
-        speedLeft -= 1.f / STOPPING_FRAMES_NUMBER;
+        speedLeft -= 1.f / stoppingFrames;
         speedLeft = (speedLeft < 0.f ? 0.f : speedLeft);
     }
 
     if (goingRight && speedRight < 1.f)
-        speedRight += 1.f / ACCELERATION_FRAMES_NUMBER;
+        speedRight += 1.f / maxSpeedFrames;
     else if (speedRight > 0.f)
     {
-        speedRight -= 1.f / STOPPING_FRAMES_NUMBER;
+        speedRight -= 1.f / stoppingFrames;
         speedRight = (speedRight < 0.f ? 0.f : speedRight);
     }
 

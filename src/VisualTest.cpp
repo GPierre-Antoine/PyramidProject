@@ -5,11 +5,8 @@
 #include "VisualTest.h"
 #include "nsRessourceManager/Animator.h"
 #include "nsGameObject/Player.h"
-#include "nsRessourceManager/const.h"
 #include "nsGameEngine/Movement.h"
-#include <SFML/Graphics.hpp>
 #include "nsRessourceManager/KBManager.h"
-#include <vector>
 
 #define TEST nsTest::VisualTest
 
@@ -90,41 +87,26 @@ void TEST::FluiditeMovement ()
                 window.close();
 
             ////////////////////////////////////////    GET INPUTS      ////////////////////////////////////
-            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Up)))                             //
-                movement.isGoingUp(true);                                                                 //
-            else                                                                                          //
-                movement.isGoingUp(false);                                                                //
-                                                                                                          //
-            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Down)))                           //
-                movement.isGoingDown(true);                                                               //
-            else                                                                                          //
-                movement.isGoingDown(false);                                                              //
-                                                                                                          //
-            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Left)))                           //
-                movement.isGoingLeft(true);                                                               //
-            else                                                                                          //
-                movement.isGoingLeft(false);                                                              //
-                                                                                                          //
-            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Right)))                          //
-                movement.isGoingRight(true);                                                              //
-            else                                                                                          //
-                movement.isGoingRight(false);                                                             //
+            movement.isGoingUp(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Up)));             //
+            movement.isGoingDown(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Down)));         //
+            movement.isGoingLeft(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Left)));         //
+            movement.isGoingRight(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Right)));       //
             ////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         movement.update();
 
         //Pour seulement les nombres pairs
-        int16_t newShapePosX = (int16_t) (shape.getPosition().x + movement.getHorizontalMovement());
-        int16_t newShapePosY = (int16_t) (shape.getPosition().y + movement.getVerticalMovement());
-        newShapePosX /= 2;
-        newShapePosY /= 2;
-        newShapePosX *= 2;
-        newShapePosY *= 2;
+        //int16_t newShapePosX = (int16_t) (shape.getPosition().x + movement.getHorizontalMovement());
+        //int16_t newShapePosY = (int16_t) (shape.getPosition().y + movement.getVerticalMovement());
+        //newShapePosX /= 2;
+        //newShapePosY /= 2;
+        //newShapePosX *= 2;
+        //newShapePosY *= 2;
 
-        //Pour tous les nombres
-        //float newShapePosX =  shape.getPosition().x + movement.getHorizontalMovement();
-        //float newShapePosY =  shape.getPosition().y + movement.getVerticalMovement();
+        //Pour tous les nombres (pairs et impairs)
+        float newShapePosX =  shape.getPosition().x + movement.getHorizontalMovement();
+        float newShapePosY =  shape.getPosition().y + movement.getVerticalMovement();
 
         shape.setPosition(newShapePosX, newShapePosY);
 

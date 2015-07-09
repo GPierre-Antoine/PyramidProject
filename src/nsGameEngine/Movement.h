@@ -14,19 +14,19 @@ namespace nsGameEngine
     {
     private:
         //Pourcentages de speed 0 < speed < 1
-        float speedUp;
-        float speedDown;
-        float speedLeft;
-        float speedRight;
+        float speedUp = 0.f;
+        float speedDown = 0.f;
+        float speedLeft = 0.f;
+        float speedRight = 0.f;
 
-        bool goingUp;
-        bool goingDown;
-        bool goingLeft;
-        bool goingRight;
+        bool goingUp = false;
+        bool goingDown = false;
+        bool goingLeft = false;
+        bool goingRight = false;
 
-        Int16 maxSpeedFrames;
-        Int16 stoppingFrames;
-        float maxSpeedPerFrame;
+        Int16 maxSpeedFrames = nsGameConstants::ACCELERATION_FRAMES_NUMBER;
+        Int16 stoppingFrames = nsGameConstants::STOPPING_FRAMES_NUMBER;
+        float maxSpeedPerFrame = nsGameConstants::MAX_SPEED_PIXEL_PER_FRAME;
 
     public:
         Movement() noexcept;
@@ -38,12 +38,17 @@ namespace nsGameEngine
         void update() noexcept;
 
         void isGoingUp(bool goingUp) noexcept;
+
         void isGoingDown(bool goingDown) noexcept;
+
         void isGoingLeft(bool goingLeft) noexcept;
+
         void isGoingRight(bool goingRight) noexcept;
 
         void setMaxSpeedFrames(Int16 maxSpeedFrames) noexcept;
+
         void setStoppingFrames(Int16 stoppingFrames) noexcept;
+
         void setMaxSpeedPerFrame(float maxSpeedPerFrame) noexcept;
 
     };
