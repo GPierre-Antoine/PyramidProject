@@ -6,12 +6,15 @@
 #include "nsRessourceManager/Animator.h"
 #include "nsGameObject/Player.h"
 #include "nsRessourceManager/const.h"
+#include "nsGameEngine/Movement.h"
 #include <SFML/Graphics.hpp>
+#include "nsRessourceManager/KBManager.h"
 #include <vector>
 
 #define TEST nsTest::VisualTest
 
 using namespace std;
+using namespace nsRessourceManager;
 
 void TEST::PlayerAnimation1()
 {
@@ -60,90 +63,6 @@ void TEST::PlayerAnimation1()
     }
 }
 
-
-class KBManager
-{
-public:
-    static vector<sf::Keyboard::Key> keyBinds;
-
-    //nbr de controls
-    static const UInt16 ACTION_KEY_COUNT = 4;
-
-    enum Action
-    {
-        Up = 0,
-        Down = 1,
-        Left = 2,
-        Right = 3,
-
-    };
-
-    static sf::Keyboard::Key getKey(Action action)
-    {
-        return keyBinds[action];
-    }
-
-    static void setKeyBind(Action action, sf::Keyboard::Key key)
-    {
-        keyBinds[action] = key;
-    }
-};
-
-vector<sf::Keyboard::Key> KBManager::keyBinds(KBManager::ACTION_KEY_COUNT);
-
-class Movement
-{
-private:
-    Int16 speedUp;
-    Int16 speedDown;
-    Int16 speedLeft;
-    Int16 speedRight;
-
-public:
-    Movement()
-            : speedUp(0), speedDown(0), speedLeft(0), speedRight(0)
-    { }
-
-    Int16 getHorizontalMovement()
-    {
-        return (speedRight - speedLeft) / nsGameConstants::SPEED_DIVISOR;
-    }
-
-    Int16 getVerticalMovement()
-    {
-        return (speedDown - speedUp) / nsGameConstants::SPEED_DIVISOR;
-    }
-
-    void update()
-    {
-        //Si on appuie sur Up, et que on est pas a max speed, on augmente, sinon on descend jusqu'a vitesse nulle
-        if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Up)) && speedUp < nsGameConstants::MAX_MOVEMENT_SPEED)
-            ++speedUp;
-        else if (speedUp > 0)
-            --speedUp;
-
-        if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Down)) &&
-            speedDown < nsGameConstants::MAX_MOVEMENT_SPEED)
-            ++speedDown;
-        else if (speedDown > 0)
-            --speedDown;
-
-        if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Left)) &&
-            speedLeft < nsGameConstants::MAX_MOVEMENT_SPEED)
-            ++speedLeft;
-        else if (speedLeft > 0)
-            --speedLeft;
-
-        if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Right)) &&
-            speedRight < nsGameConstants::MAX_MOVEMENT_SPEED)
-            ++speedRight;
-        else if (speedRight > 0)
-            --speedRight;
-
-    }
-};
-
-
 void TEST::FluiditeMovement ()
 {
     KBManager::setKeyBind(KBManager::Up, sf::Keyboard::Key::Z);
@@ -155,7 +74,7 @@ void TEST::FluiditeMovement ()
     sf::CircleShape shape = sf::CircleShape(20, 3);
     shape.setFillColor(sf::Color::Red);
 
-    Movement movement;
+    nsGameEngine::Movement movement;
 
     const sf::Time timePerFrame = sf::seconds(1.f / 60.f); //60fps
     sf::Clock clock;
@@ -165,14 +84,48 @@ void TEST::FluiditeMovement ()
         clock.restart();
 
         sf::Event event;
-        if (window.pollEvent(event))
+        while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            ////////////////////////////////////////    GET INPUTS      ////////////////////////////////////
+            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Up)))                             //
+                movement.isGoingUp(true);                                                                 //
+            else                                                                                          //
+                movement.isGoingUp(false);                                                                //
+                                                                                                          //
+            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Down)))                           //
+                movement.isGoingDown(true);                                                               //
+            else                                                                                          //
+                movement.isGoingDown(false);                                                              //
+                                                                                                          //
+            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Left)))                           //
+                movement.isGoingLeft(true);                                                               //
+            else                                                                                          //
+                movement.isGoingLeft(false);                                                              //
+                                                                                                          //
+            if (sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Right)))                          //
+                movement.isGoingRight(true);                                                              //
+            else                                                                                          //
+                movement.isGoingRight(false);                                                             //
+            ////////////////////////////////////////////////////////////////////////////////////////////////
         }
+
         movement.update();
-        Int16 newShapePosX = (Int16) shape.getPosition().x + movement.getHorizontalMovement();
-        Int16 newShapePosY = (Int16) shape.getPosition().y + movement.getVerticalMovement();
+
+        //Pour seulement les nombres pairs
+        int16_t newShapePosX = (int16_t) (shape.getPosition().x + movement.getHorizontalMovement());
+        int16_t newShapePosY = (int16_t) (shape.getPosition().y + movement.getVerticalMovement());
+        newShapePosX /= 2;
+        newShapePosY /= 2;
+        newShapePosX *= 2;
+        newShapePosY *= 2;
+
+        //Pour tous les nombres
+        //float newShapePosX =  shape.getPosition().x + movement.getHorizontalMovement();
+        //float newShapePosY =  shape.getPosition().y + movement.getVerticalMovement();
+
         shape.setPosition(newShapePosX, newShapePosY);
 
         window.clear();

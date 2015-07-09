@@ -45,6 +45,10 @@ src/UnitTest.cpp
 src/UnitTest.h
 src/VisualTest.cpp
 src/VisualTest.h
+src/nsGameEngine/Movement.h
+src/nsGameEngine/Movement.cpp
+src/nsRessourceManager/KBManager.cpp
+src/nsRessourceManager/KBManager.h
 )
 
 

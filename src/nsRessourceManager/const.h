@@ -2,11 +2,11 @@
 // Created by Theo on 30/06/2015
 //
 
+#include "../nsGameEngine/Defines/typedef.hpp"
+#include <SFML/Graphics.hpp>
+
 #ifndef PYRAMIDPROJECT_CONST_H
 #define PYRAMIDPROJECT_CONST_H
-
-//#include "RessourceManager.h"
-#include "../nsGameEngine/Defines/typedef.hpp"
 
 namespace nsGameConstants
 {
@@ -14,11 +14,12 @@ namespace nsGameConstants
     //                                  MOUVEMENT                                                //
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //Le personnage prend 40 frames (~0.6 s) pour arriver a pleine vitesse
-    const Int16 MAX_MOVEMENT_SPEED = 40;
+    const Int16 ACCELERATION_FRAMES_NUMBER = 40;
+    //Le personnage ralentit plus vite qu'il n'accelere
+    const Int16 STOPPING_FRAMES_NUMBER = 20;
 
-    //La vitesse max/s = (MaxMvtSpeed / SpeedDivisor) * 60(fps)
-    //Dans ce cas-ci : 40/3 * 60 = 800 donc 800pixel/sec
-    const Int16 SPEED_DIVISOR = 3;
+    //On est à 60 update/s donc 10*60 = 600pixel/s, float car utilisee seulement en float
+    const float MAX_SPEED_PIXEL_PER_FRAME = 10.f;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //                                  TILESET                                                  //
