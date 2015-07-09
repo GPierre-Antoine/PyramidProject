@@ -24,6 +24,10 @@ namespace nsGameEngine
         bool goingLeft;
         bool goingRight;
 
+        Int16 maxSpeedFrames;
+        Int16 stoppingFrames;
+        float maxSpeedPerFrame;
+
     public:
         Movement() noexcept;
 
@@ -37,6 +41,10 @@ namespace nsGameEngine
         void isGoingDown(bool goingDown) noexcept;
         void isGoingLeft(bool goingLeft) noexcept;
         void isGoingRight(bool goingRight) noexcept;
+
+        void setMaxSpeedFrames(Int16 maxSpeedFrames) noexcept;
+        void setStoppingFrames(Int16 stoppingFrames) noexcept;
+        void setMaxSpeedPerFrame(float maxSpeedPerFrame) noexcept;
 
     };
 }

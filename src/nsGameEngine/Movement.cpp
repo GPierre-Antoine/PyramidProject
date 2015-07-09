@@ -12,7 +12,9 @@ using namespace nsGameConstants;
 
 MOVE::Movement() noexcept
         : speedUp(0), speedDown(0), speedLeft(0), speedRight(0),
-          goingUp(false), goingDown(false), goingLeft(false), goingRight(false)
+          goingUp(false), goingDown(false), goingLeft(false), goingRight(false),
+          maxSpeedFrames(ACCELERATION_FRAMES_NUMBER), stoppingFrames(STOPPING_FRAMES_NUMBER),
+          maxSpeedPerFrame(MAX_SPEED_PIXEL_PER_FRAME)
 { }
 
 float MOVE::getHorizontalMovement() const noexcept
@@ -65,22 +67,37 @@ void MOVE::update() noexcept
 
 void MOVE::isGoingUp(bool goingUp) noexcept
 {
-    MOVE::goingUp = goingUp;
+    this->goingUp = goingUp;
 }
 
 void MOVE::isGoingDown(bool goingDown) noexcept
 {
-    MOVE::goingDown = goingDown;
+    this->goingDown = goingDown;
 }
 
 void MOVE::isGoingLeft(bool goingLeft) noexcept
 {
-    MOVE::goingLeft = goingLeft;
+    this->goingLeft = goingLeft;
 }
 
 void MOVE::isGoingRight(bool goingRight) noexcept
 {
-    MOVE::goingRight = goingRight;
+    this->goingRight = goingRight;
+}
+
+void MOVE::setMaxSpeedFrames(Int16 maxSpeedFrames) noexcept
+{
+    this->maxSpeedFrames = maxSpeedFrames;
+}
+
+void MOVE::setStoppingFrames(Int16 stoppingFrames) noexcept
+{
+    this->stoppingFrames = stoppingFrames;
+}
+
+void MOVE::setMaxSpeedPerFrame(float maxSpeedPerFrame) noexcept
+{
+    this->maxSpeedPerFrame = maxSpeedPerFrame;
 }
 
 #undef MOVE
