@@ -5,6 +5,8 @@
 #ifndef PYRAMIDPROJECT_VISUALTESTS_H
 #define PYRAMIDPROJECT_VISUALTESTS_H
 
+#include <SFML/Window/Window.hpp>
+
 namespace nsTest
 {
     class VisualTest
@@ -12,6 +14,8 @@ namespace nsTest
     public:
         static void PlayerAnimation1();
         static void FluiditeMovement();
+        static void PlayerAnimatedMovement1();
+
     };
 }
 

@@ -54,5 +54,4 @@ namespace nsGameEngine
     };
 }
 
-
 #endif //PYRAMIDPROJECT_MOVEMENT_H

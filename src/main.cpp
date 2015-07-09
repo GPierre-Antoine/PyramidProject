@@ -13,7 +13,7 @@ int main()
     UNIT::ColliderTest();
 
     //Un seul visual a la fois a choisir
-    VISUAL::FluiditeMovement();
+    VISUAL::PlayerAnimatedMovement1();
 
     return 0;
 }
