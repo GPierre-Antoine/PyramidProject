@@ -1,7 +1,6 @@
 //
 // Created by Pierre-Antoine on 05/07/2015.
 //
-#include <iostream>
 
 #include "Collider.h"
 #define COLL nsGameEngine::nsCollider
@@ -10,6 +9,11 @@ namespace
 {
     UInt16 Uabs (int expr) { if (expr < 0) return UInt16(-expr);
         return UInt16(expr); };
+}
+
+void COLL::Collider::move (nsGameEngine::Movement mv) noexcept
+{
+    move (int (mv.getHorizontalMovement ()),int (mv.getVerticalMovement ()));
 }
 
 /* Mirrored Definitions */
@@ -67,6 +71,28 @@ bool COLL::Rectangle::collidesWith (const COLL::Circle & other) const noexcept
     return (t1 <= (other.radius * other.radius) << 1);
 }
 
+void COLL::Rectangle::move(int x, int y) noexcept
+{
+    this->x+= x;
+    this->y+= y;
+}
+
+void COLL::Rectangle::resize (int width, int height) noexcept
+{
+    this->width += width;
+    this->height += height;
+}
+
+void COLL::Circle::move(int x, int y) noexcept
+{
+    this->x+= x;
+    this->y+= y;
+}
+
+void COLL::Circle::resize (int radis) noexcept
+{
+    this->radius+= radius;
+}
 
 //centre x du cercle : x + radius
 //centre y du cercle : y + radius
@@ -107,3 +133,5 @@ bool COLL::Circle::collidesWith (const nsGameEngine::nsCollider::Rectangle & oth
 }
 
 #undef COLL
+
+
