@@ -3,15 +3,45 @@
 //
 
 #include <iostream> //cerr
+
+#include "SFML/System/Vector2.hpp"
+
 #include "QuadTree.h"
 
 #define GE nsGameEngine::QuadTree
 
 
-GE::QuadTree (UInt16 pWidth,UInt16 pHeight) noexcept : level (0u), area (0,0,pWidth,pHeight), parent (nullptr) { }
+#ifndef NDEBUG
+
+sf::RenderWindow  * GE::window { nullptr };
+//fonction d'affichage du quadtree, pour le test.
+void nsGameEngine::QuadTree::render (sf::RenderWindow * renderWindow) const noexcept
+{
+    if (this->window == nullptr)
+    {
+        if (renderWindow != nullptr)
+            window = renderWindow;
+        else
+            return;
+    }
+
+    sf::RectangleShape rect (sf::Vector2f(area.Width(),area.Height ()));
+
+    rect.setOutlineColor (sf::Color::Red);
+    rect.setOutlineThickness (2u);
+
+    rect.setPosition (area.X(),area.Y());
+
+    window->draw(rect);
+}
+
+#endif
+
+GE::QuadTree (UInt16 pWidth,UInt16 pHeight) noexcept :
+        level (0u), area (0,0,pWidth,pHeight), parent (nullptr) { }
 
 GE::QuadTree (UInt16 pLevel,UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept :
-        level (pLevel),x(pX),y(pY),width{pWidth},height{pHeight}, area (pX,pY,pWidth,pHeight), parent (this)
+        level (pLevel), area (pX,pY,pWidth,pHeight), parent (this)
 { }
 
 GE::~QuadTree()
@@ -46,6 +76,7 @@ void GE::add(sICollidable & go) noexcept
 }
 
 void GE::prAdd(sICollidable & go) noexcept
+// The use of prAdd NEEDS SECURITY : THIS->CONTAINS(go) MUST HAVE BEEN TESTED BEFORE
 {
     if (splited)
     {
@@ -71,16 +102,16 @@ void GE::prAdd(sICollidable & go) noexcept
             numberOfUnfittingCollider +=1;
         }
     }
-    else
+    else //unsplitted
     {
-        if (goList.size () - numberOfUnfittingCollider >= maxCapacity)
+        if (goList.size () - numberOfUnfittingCollider >= maxCapacity) //need to split
         {
             split ();
             prAdd (go);
             update ();
             return;
         }
-        else
+        else //no need to split
         {
             goList.push_back (go);
         }
@@ -93,12 +124,41 @@ void GE::update () noexcept
 {
     for (std::vector<sICollidable>::reverse_iterator i {goList.rbegin ()} ; i != goList.rend () ; i = std::next (i))
     {
-        if (!this->contains(*i))// (this, *i))
+        //on vérifie si l'objet ne déborde pas du réctangle du quadtree
+        //s'il déborde, on le place dans le quadtree parent
+        if (!this->contains(*i))
         {
             sICollidable t = *i;
             goList.erase (i.base ());
-            parent->add (*i);
+            parent->add (t);
         }
+        else // l'objet est bien contenu dans *this
+        {
+            if (!splited) // si *this n'est splited
+            {
+
+            }
+            else // si *this est splited
+            {
+                QuadTree *target = nullptr;
+                if (NW->contains (*i))//si le gameobject rentre dans un des enfants
+                    target = NW;
+                else if (NE->contains (*i))
+                    target = NE;
+                else if (SW->contains (*i))
+                    target = SW;
+                else if (SE->contains (*i))
+                    target = SE;
+
+                if (target != nullptr) //on le met dans l'enfant en question et on le supprime de *this
+                {
+                    target->prAdd (*i);
+                    goList.erase(i.base());
+                }
+            }
+
+        }
+
 
     }
 }
@@ -119,6 +179,11 @@ void GE::split () noexcept
     this->splited = true;
     try
     {
+        UInt16 x      {area.X ()};
+        UInt16 y      {area.Y ()};
+        UInt16 width  {area.Width ()};
+        UInt16 height {area.Height ()};
+
         UInt16 __2 = 2; //to avoid comparison warning
         UInt16 __1 = 1; //to avoid comparison warning
         UInt16 ParityW = width  & __1; //to fix odd cases

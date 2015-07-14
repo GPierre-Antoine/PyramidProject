@@ -132,6 +132,24 @@ bool COLL::Circle::collidesWith (const nsGameEngine::nsCollider::Rectangle & oth
     return other.collidesWith (*this);
 }
 
+UInt16 COLL::Rectangle::X () const noexcept
+{
+    return x;
+}
+
+UInt16 COLL::Rectangle::Y () const noexcept
+{
+    return y;
+}
+UInt16 COLL::Rectangle::Width() const noexcept
+{
+    return width;
+}
+
+UInt16 COLL::Rectangle::Height () const noexcept
+{
+    return height;
+}
+
+
 #undef COLL
-
-

@@ -9,6 +9,8 @@
 #include "../nsGameObject/GameObject.h"
 #include "../nsGameObject/Interface.h"
 
+#include "SFML/Graphics/renderWindow.hpp"
+
 #include "Defines/typedef.hpp"
 
 namespace nsGameEngine
@@ -20,20 +22,16 @@ namespace nsGameEngine
     {
     private:
         UInt16 level;
-        static const unsigned short maxLevel {12}; //le quadtree aura 12 noeuds au plus.
+        static const unsigned short maxLevel {12};
+        //le quadtree aura 12 noeuds au plus.
         static const unsigned short maxCapacity  {5};
         byte_t  numberOfUnfittingCollider {0};
 
 
-        UInt16 x;
-        UInt16 y;
-        UInt16 width;
-        UInt16 height;
-
 
         nsCollider::Rectangle area;
         bool splited {false};
-
+        /** /
         QuadTree *childs; /**/
         QuadTree *NW;
         QuadTree *NE;
@@ -46,7 +44,9 @@ namespace nsGameEngine
         std::vector<sICollidable> goList;
 
 
-        QuadTree (unsigned short level, UInt16 pX, UInt16 pY,UInt16 pWidth, UInt16 pHeight, QuadTree & parent) noexcept;
+        QuadTree (unsigned short level, UInt16 pX, UInt16 pY,
+                  UInt16 pWidth, UInt16 pHeight, QuadTree & parent)
+                  noexcept;
 
         bool contains (const sICollidable & go) const noexcept;
 
@@ -54,14 +54,18 @@ namespace nsGameEngine
 
         void split () noexcept;
 
-        void update () noexcept;
-
     public:
+        #ifndef NDEBUG
+        static sf::RenderWindow *window;
+        void render (sf::RenderWindow * renderWindow = nullptr) const noexcept;
+        #endif
         QuadTree (UInt16 pWidth, UInt16 pHeight) noexcept;
         void add (sICollidable & go) noexcept;
         unsigned long long int size () const noexcept;
 
         ~QuadTree ();
+
+        void update () noexcept;
     };
 }
 
