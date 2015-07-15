@@ -69,10 +69,15 @@ namespace nsGameEngine
         bool contains (const sICollidable & go) const noexcept;
         void prAdd(sICollidable & go) noexcept;
 
+        void prGetCollidingEntities (const sICollidable & object,
+        std::vector<sICollidable> & container) const noexcept;
+
     public:
 
         QuadTree (UInt16 pWidth, UInt16 pHeight) noexcept;
         void add (sICollidable & go) noexcept;
+
+        std::vector<sICollidable> getCollidingEntities (const sICollidable & object) const noexcept;
 
 
         size_t size () const noexcept;

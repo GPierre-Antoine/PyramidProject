@@ -270,5 +270,40 @@ void GE::deAllocate () noexcept
 
 }
 
+std::vector<nsGameEngine::sICollidable> GE::getCollidingEntities(const sICollidable & object) const noexcept
+{
+    if (!object->collides (area))
+        return std::vector<nsGameEngine::sICollidable>();
+
+    std::vector<nsGameEngine::sICollidable> container;
+    prGetCollidingEntities (object,container);
+    for (std::vector<sICollidable>::reverse_iterator i {container.rbegin ()} ; i != container.rend () ; i = std::next (i))
+    {
+        if (object == *i)
+        {
+            container.erase(i.base());
+            break;
+        }
+    }
+    return std::vector<nsGameEngine::sICollidable> ();
+}
+
+void GE::prGetCollidingEntities (const sICollidable & object,std::vector<sICollidable> & container) const noexcept
+{
+    if (!object->collides (area))
+        return;
+    for (auto & go : goList)
+    {
+        if (object->collides (go->getCollider ()));
+        container.push_back (go);
+    }
+    if (splited)
+    {
+        for (auto & child : quad)
+            child->prGetCollidingEntities (object,container);
+    }
+}
+
 
 #undef  GE
+
