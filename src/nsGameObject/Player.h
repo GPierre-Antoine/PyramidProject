@@ -7,7 +7,7 @@
 
 #include "Character.h"
 #include "../nsRessourceManager/Animator.h"
-#include "../nsGameEngine/Defines/typedef.hpp"
+#include "../Utility/typedef.hpp"
 
 namespace nsGameObject
 {

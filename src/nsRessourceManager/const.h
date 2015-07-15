@@ -2,7 +2,7 @@
 // Created by Theo on 30/06/2015
 //
 
-#include "../nsGameEngine/Defines/typedef.hpp"
+#include "../Utility/typedef.hpp"
 #include <SFML/Graphics.hpp>
 
 #ifndef PYRAMIDPROJECT_CONST_H

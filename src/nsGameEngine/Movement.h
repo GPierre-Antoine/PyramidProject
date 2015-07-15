@@ -2,7 +2,7 @@
 // Created by Theo on 09/07/2015.
 //
 
-#include "Defines/typedef.hpp"
+#include "../Utility/typedef.hpp"
 #include "../nsRessourceManager/const.h"
 
 #ifndef PYRAMIDPROJECT_MOVEMENT_H

@@ -38,7 +38,7 @@ src/nsGameObject/Decoration.cpp
 src/nsGameObject/Decoration.h
 src/nsGameEngine/nsCollision/Collider.cpp
 src/nsGameEngine/nsCollision/Collider.h
-src/nsGameEngine/Defines/typedef.hpp
+src/Utility/typedef.hpp
 src/VisualTest.cpp
 src/VisualTest.h
 src/UnitTest.cpp

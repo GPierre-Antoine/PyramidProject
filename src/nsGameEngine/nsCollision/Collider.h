@@ -55,11 +55,11 @@ namespace nsGameEngine
 
             virtual ~Rectangle () { }
 
-            UInt16 X () const noexcept;
-            UInt16 Y () const noexcept;
+            UInt16 getX () const noexcept;
+            UInt16 getY () const noexcept;
 
-            UInt16 Width  () const noexcept;
-            UInt16 Height () const noexcept;
+            UInt16 getWidth  () const noexcept;
+            UInt16 getHeight () const noexcept;
         };
 
         class Circle : public Collider

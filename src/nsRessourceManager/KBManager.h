@@ -5,7 +5,7 @@
 #ifndef PYRAMIDPROJECT_KBMANAGER_H
 #define PYRAMIDPROJECT_KBMANAGER_H
 
-#include "../nsGameEngine/Defines/typedef.hpp"
+#include "../Utility/typedef.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <vector>
 

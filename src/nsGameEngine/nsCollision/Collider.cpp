@@ -132,21 +132,21 @@ bool COLL::Circle::collidesWith (const nsGameEngine::nsCollider::Rectangle & oth
     return other.collidesWith (*this);
 }
 
-UInt16 COLL::Rectangle::X () const noexcept
+UInt16 COLL::Rectangle::getX () const noexcept
 {
     return x;
 }
 
-UInt16 COLL::Rectangle::Y () const noexcept
+UInt16 COLL::Rectangle::getY () const noexcept
 {
     return y;
 }
-UInt16 COLL::Rectangle::Width() const noexcept
+UInt16 COLL::Rectangle::getWidth() const noexcept
 {
     return width;
 }
 
-UInt16 COLL::Rectangle::Height () const noexcept
+UInt16 COLL::Rectangle::getHeight () const noexcept
 {
     return height;
 }

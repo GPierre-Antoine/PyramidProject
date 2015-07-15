@@ -6,7 +6,7 @@
 #define PYRAMIDPROJECT_GAMEOBJECT_H
 
 #include "../nsRessourceManager/Animator.h"
-#include "../nsGameEngine/Defines/typedef.hpp"
+#include "../Utility/typedef.hpp"
 
 namespace nsGameObject
 {
