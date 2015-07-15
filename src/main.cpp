@@ -8,12 +8,17 @@
 #define UNIT nsTest::UnitTest
 #define VISUAL nsTest::VisualTest
 
+#define DEBUG_QUADTREE_VISUAL
+
 int main()
 {
     UNIT::ColliderTest();
 
     //Un seul visual a la fois a choisir
-    VISUAL::PlayerAnimatedMovement1();
+    VISUAL::QuadTreeRenderTest ();
 
     return 0;
 }
+
+#undef UNIT
+#undef VISUAL

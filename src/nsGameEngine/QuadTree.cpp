@@ -1,7 +1,6 @@
 //
 // Created by Pierre-Antoine on 30/06/2015.
 //
-
 #include <iostream> //cerr
 
 #include "SFML/System/Vector2.hpp"
@@ -9,14 +8,14 @@
 #include "QuadTree.h"
 
 #define GE nsGameEngine::QuadTree
-#define unsplited !splited
+
 
 
 #ifndef NDEBUG
-
+#ifdef  DEBUG_QUADTREE_VISUAL
 sf::RenderWindow  * GE::window { nullptr };
 //fonction d'affichage du quadtree, pour le test.
-void nsGameEngine::QuadTree::render (sf::RenderWindow * renderWindow) const noexcept
+void GE::render (sf::RenderWindow * renderWindow) const noexcept
 {
     if (this->window == nullptr)
     {
@@ -26,20 +25,59 @@ void nsGameEngine::QuadTree::render (sf::RenderWindow * renderWindow) const noex
             return;
     }
 
-    sf::RectangleShape rect (sf::Vector2f(area.getWidth(),area.getHeight ()));
+    sf::RectangleShape rect (sf::Vector2f(area.getWidth() - (level << 1) -1,area.getHeight () - (level << 1)-1));
+    sf::Color c;
+    switch (level)
+    {
+        case 0:
+            c = (sf::Color::Red);
 
-    rect.setOutlineColor (sf::Color::Red);
-    rect.setOutlineThickness (2u);
+            break;
+        case 1:
+            c = (sf::Color::Blue);
+            break;
+        case 2:
+            c = (sf::Color::Green);
+            break;
+        case 3:
+            c = (sf::Color::Cyan);
+            break;
+        case 4:
+            c = (sf::Color::Black);
+            break;
+        case 5:
+            c = (sf::Color::Magenta);
+            break;
+        default:
+            c = (sf::Color::Magenta);
+    }
 
-    rect.setPosition (area.getX(),area.getY());
+    rect.setFillColor (c);
+
+    rect.setOutlineThickness (0u);
+
+    rect.setPosition (area.getX()+level +1 ,area.getY()+level+1);
 
     window->draw(rect);
     if (splited)
     {
-
+        for (auto & child : quad)
+        {
+            child->render();
+        }
     }
 }
 
+void GE::forceSplit(int n /* = 1*/) noexcept
+{
+    if ((n--) && (level < maxLevel))
+    {
+        allocate ();
+        for (auto & child : quad)
+            child->forceSplit (n);
+    }
+}
+#endif
 #endif
 
 GE::QuadTree (UInt16 pWidth,UInt16 pHeight) noexcept :
@@ -107,6 +145,7 @@ void GE::update () noexcept
     /*
      * La fonction update va être appelée à chaque update de l'état du jeu.
      * A chaque étape, il est important de vérifier :
+     * - si ne contient aucun objet, détruire enfants.
      * - chaque objet de goList est il bien contenu dans *this, sinon on le met dans parent
      * - si l'objet est splited :
      * -- pour chaque enfant, l'objet entre t'il dans enfant ?
@@ -115,7 +154,23 @@ void GE::update () noexcept
      * - sinon :
      * -- faut il split ?
      * --- si oui : on alloue les enfants, on update, et on termine la fonction.
+     *
+     *
      */
+
+
+    if (splited)
+    {
+
+
+        if (this->size() - goList.size() == 0)
+            deAllocate();
+    }
+    else // if (unsplited)
+    {
+
+    }
+
     for (std::vector<sICollidable>::reverse_iterator i {goList.rbegin ()} ; i != goList.rend () ; i = std::next (i))
     {
         // on vérifie si l'objet est entre dans *this
@@ -141,10 +196,13 @@ void GE::update () noexcept
 
             }
         }
-        else // si *this n'est splited
+        else if (goList.size() >= maxCapacity)// si *this n'est splited
         {
-            if (goList.size() >= maxCapacity)
-                split();
+            if (level < maxLevel) //besoin de tester ici si peut spliter pour eviter boucle infinie
+            {
+                split (); //calls update
+                return;
+            }
         }
     }
 }
@@ -159,7 +217,7 @@ size_t GE::size () const noexcept
 }
 
 
-void GE::split () noexcept
+void GE::split () noexcept //needs test of level < levelMax BEFORE !
 {
     allocate ();
     update   ();
@@ -167,8 +225,6 @@ void GE::split () noexcept
 
 void GE::allocate () noexcept
 {
-    if (this->level == maxLevel)                            //si on est déjà aux feuilles du QuadTree, on termine.
-        return;
     this->splited = true;
     UInt16 x      {area.getX ()};
     UInt16 y      {area.getY ()};
@@ -193,5 +249,26 @@ void GE::allocate () noexcept
     quad[EQT::SE] = QTptr (new QuadTree(level + __1,x+ParityW +width/__2  , ParityH + y+height/ __2,width/ __2,height/ __2,*this));
 }
 
-#undef  unsplited
+void GE::deAllocate () noexcept
+{
+    for (auto & uptr : quad)
+        uptr.reset(nullptr);
+    this->splited = false;
+
+}
+
+
 #undef  GE
+
+size_t nsGameEngine::QuadTree::getByteCount () const noexcept
+{
+    if (splited)
+    {
+        size_t i {0};
+        for (auto & child : quad)
+            i+= child->getByteCount ();
+        return (sizeof(*this) + i);
+    }
+    else
+        return sizeof(*this);
+}

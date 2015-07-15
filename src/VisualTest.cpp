@@ -1,13 +1,20 @@
 //
 // Created by Theo on 07/07/2015.
 //
+#include <cmath>
+#include <iostream>
+#include <cassert>
+
+
 
 #include "VisualTest.h"
 #include "nsRessourceManager/Animator.h"
 #include "nsGameObject/Player.h"
 #include "nsGameEngine/Movement.h"
 #include "nsRessourceManager/KBManager.h"
-#include <cmath>
+#include "nsGameEngine/QuadTree.h"
+
+
 
 #define TEST nsTest::VisualTest
 
@@ -125,49 +132,49 @@ void TEST::FluiditeMovement()
 
 void TEST::PlayerAnimatedMovement1()
 {
-    KBManager::setKeyBind(KBManager::Up, sf::Keyboard::Key::Z);
-    KBManager::setKeyBind(KBManager::Down, sf::Keyboard::Key::S);
-    KBManager::setKeyBind(KBManager::Left, sf::Keyboard::Key::Q);
-    KBManager::setKeyBind(KBManager::Right, sf::Keyboard::Key::D);
+    KBManager::setKeyBind (KBManager::Up, sf::Keyboard::Key::Z);
+    KBManager::setKeyBind (KBManager::Down, sf::Keyboard::Key::S);
+    KBManager::setKeyBind (KBManager::Left, sf::Keyboard::Key::Q);
+    KBManager::setKeyBind (KBManager::Right, sf::Keyboard::Key::D);
 
-    sf::RenderWindow window(sf::VideoMode(1600, 900), "Test KeyBinds!");
+    sf::RenderWindow window (sf::VideoMode (1600, 900), "Test KeyBinds!");
 
-    nsRessourceManager::Animator::setWindow(window);
+    nsRessourceManager::Animator::setWindow (window);
 
     UInt16 posX = 100;
     UInt16 posY = 100;
     bool isMoving = false;
-    Warrior warrior(posX, posY);
+    Warrior warrior (posX, posY);
 
     nsGameEngine::Movement movement;
 
-    const sf::Time timePerFrame = sf::seconds(1.f / 60.f); //60fps
+    const sf::Time timePerFrame = sf::seconds (1.f / 60.f); //60fps
     sf::Clock clock;
 
-    while (window.isOpen())
+    while (window.isOpen ())
     {
-        clock.restart();
+        clock.restart ();
 
         sf::Event event;
-        while (window.pollEvent(event))
+        while (window.pollEvent (event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                window.close ();
 
             ////////////////////////////////////////    GET INPUTS      ////////////////////////////////////
-            movement.isGoingUp(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Up)));             //
-            movement.isGoingDown(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Down)));         //
-            movement.isGoingLeft(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Left)));         //
-            movement.isGoingRight(sf::Keyboard::isKeyPressed(KBManager::getKey(KBManager::Right)));       //
+            movement.isGoingUp (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Up)));             //
+            movement.isGoingDown (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Down)));         //
+            movement.isGoingLeft (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Left)));         //
+            movement.isGoingRight (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Right)));       //
             ////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
-        movement.update();
+        movement.update ();
 
-        posX += (UInt16) movement.getHorizontalMovement();
-        posY += (UInt16) movement.getVerticalMovement();
+        posX += (UInt16) movement.getHorizontalMovement ();
+        posY += (UInt16) movement.getVerticalMovement ();
 
-        warrior.testChangementMouvement(posX, posY, isMoving);
+        warrior.testChangementMouvement (posX, posY, isMoving);
 
         UInt16 animationDirection;
 
@@ -178,12 +185,13 @@ void TEST::PlayerAnimatedMovement1()
         float precisionDetectionAnimation = 1.f;
 
         //Calcul la direction, pas trouvé plus simple
-        animationDirection = movement.getHorizontalMovement() >= 0 ? PLAYER_RIGHT : PLAYER_LEFT;
-        if (abs(movement.getVerticalMovement()) >= abs(movement.getHorizontalMovement()) - precisionDetectionAnimation)
+        animationDirection = movement.getHorizontalMovement () >= 0 ? PLAYER_RIGHT : PLAYER_LEFT;
+        if (abs (movement.getVerticalMovement ()) >=
+            abs (movement.getHorizontalMovement ()) - precisionDetectionAnimation)
         {
-            animationDirection = movement.getVerticalMovement() >= 0 ? PLAYER_DOWN : PLAYER_UP;
+            animationDirection = movement.getVerticalMovement () >= 0 ? PLAYER_DOWN : PLAYER_UP;
         }
-        if (abs(movement.getHorizontalMovement()) <= 0.00001f && abs(movement.getVerticalMovement()) <= 0.00001f)
+        if (abs (movement.getHorizontalMovement ()) <= 0.00001f && abs (movement.getVerticalMovement ()) <= 0.00001f)
             isMoving = false;
         else
             isMoving = true;
@@ -214,16 +222,66 @@ void TEST::PlayerAnimatedMovement1()
             isMoving = false;
         }*/
 
-        warrior.testChangementLoop(animationDirection);
+        warrior.testChangementLoop (animationDirection);
 
-        window.clear();
-        warrior.render();
-        window.display();
+        window.clear ();
+        warrior.render ();
+        window.display ();
 
-        while (clock.getElapsedTime() < timePerFrame)
-            sf::sleep(sf::milliseconds(1));
+        while (clock.getElapsedTime () < timePerFrame)
+            sf::sleep (sf::milliseconds (1));
+    }
+}
+void TEST::QuadTreeRenderTest () noexcept
+{
+    UInt16 w {1920/2};
+    UInt16 h {1080/2};
+    sf::RenderWindow window(sf::VideoMode(w, h), "Test QuadTreevisual!");
+    nsGameEngine::QuadTree qt(w,h);
+
+    qt.render(&window);
+    qt.forceSplit (-2);
+    bool write {true};
+    sf::Font font;
+    sf::Text text;
+    if (!font.loadFromFile ("../images/pol.ttf"))
+    {
+        write = false;
+    }
+    else
+        text.setFont (font);
+    text.setCharacterSize (60);
+
+    text.setColor (sf::Color::Magenta);
+    text.setString (std::to_string (qt.getByteCount ()));
+
+    const sf::Time timePerFrame = sf::seconds(1.f / 60.f); //60fps
+    sf::Clock clock;
+
+    while (window.isOpen())
+    {
+        clock.restart();
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            window.clear();
+            qt.render();
+            if (write)
+            {
+                window.draw(text);
+            }
+            window.display();
+
+            while (clock.getElapsedTime() < timePerFrame)
+                sf::sleep(sf::milliseconds(1));
+        }
     }
 }
 
 
 #undef TEST
+

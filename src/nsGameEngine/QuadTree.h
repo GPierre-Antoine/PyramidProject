@@ -5,6 +5,9 @@
 #ifndef PYRAMIDPROJECT_QUADTREE_H
 #define PYRAMIDPROJECT_QUADTREE_H
 
+#define  DEBUG_QUADTREE_VISUAL
+
+
 #include <memory> //shared pointer, unique ptr
 #include <array>  //array
 
@@ -37,8 +40,8 @@ namespace nsGameEngine
     class QuadTree : sf::NonCopyable
     {
     private:
-        static const unsigned short maxLevel {12};
-        //le quadtree aura 12 niveaux au plus.
+        static const UInt16 maxLevel {4};
+        //le quadtree aura 4 niveaux au plus.
         static const size_t maxCapacity  {5};
 
 
@@ -51,15 +54,9 @@ namespace nsGameEngine
 
         QuadTree *parent;
 
-        /** /
-        QuadTree *NW;
-        QuadTree *NE;
-        QuadTree *SW;
-        QuadTree *SE;
-        /**/
-
         //Allocate method, tells a Quadtree to generate subnodes
-        void allocate () noexcept;
+        void allocate   () noexcept;
+        void deAllocate () noexcept;
         void split () noexcept;
         //I have to rethink about the predefined size.
         std::vector<sICollidable> goList;
@@ -68,6 +65,7 @@ namespace nsGameEngine
         QuadTree (unsigned short level, UInt16 pX, UInt16 pY,
                   UInt16 pWidth, UInt16 pHeight, QuadTree & parent)
                   noexcept;
+
         bool contains (const sICollidable & go) const noexcept;
         void prAdd(sICollidable & go) noexcept;
 
@@ -85,10 +83,13 @@ namespace nsGameEngine
 
 
 
+
 //if in debug mode, function exists.
 #ifndef NDEBUG
         static sf::RenderWindow *window;
         void render (sf::RenderWindow * renderWindow = nullptr) const noexcept;
+        void forceSplit(int n = 1) noexcept;
+        size_t getByteCount () const noexcept;
 #endif
 
     };

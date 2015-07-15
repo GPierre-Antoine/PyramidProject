@@ -15,6 +15,7 @@ namespace nsTest
         static void PlayerAnimation1();
         static void FluiditeMovement();
         static void PlayerAnimatedMovement1();
+        static void QuadTreeRenderTest () noexcept;
 
     };
 }
