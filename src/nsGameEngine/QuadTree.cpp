@@ -77,6 +77,19 @@ void GE::forceSplit(int n /* = 1*/) noexcept
             child->forceSplit (n);
     }
 }
+size_t nsGameEngine::QuadTree::getByteCount () const noexcept
+{
+    if (splited)
+    {
+        size_t i {0};
+        for (auto & child : quad)
+            i+= child->getByteCount ();
+        return (sizeof(*this) + i);
+    }
+    else
+        return sizeof(*this);
+}
+
 #endif
 #endif
 
@@ -259,16 +272,3 @@ void GE::deAllocate () noexcept
 
 
 #undef  GE
-
-size_t nsGameEngine::QuadTree::getByteCount () const noexcept
-{
-    if (splited)
-    {
-        size_t i {0};
-        for (auto & child : quad)
-            i+= child->getByteCount ();
-        return (sizeof(*this) + i);
-    }
-    else
-        return sizeof(*this);
-}
