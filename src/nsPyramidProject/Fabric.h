@@ -41,9 +41,9 @@ namespace nsPyramidProject
          *
          *
          * */
-        std::vector<nsGameObject::InteractiveDecoration>    interactiveObjects;
+        //std::vector<nsGameObject::InteractiveDecoration>    interactiveObjects;
         std::vector<nsGameObject::Player>                   players;
-        std::vector<nsGameObject::Attack>                   attacks;
+        //std::vector<nsGameObject::Attack>                   attacks;
 
 
     public:
