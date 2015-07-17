@@ -39,6 +39,7 @@ namespace nsGameEngine
 
     class QuadTree : sf::NonCopyable
     {
+    protected:
     private:
         static const UInt16 maxLevel {4};
         //le quadtree aura 4 niveaux au plus.
@@ -49,7 +50,7 @@ namespace nsGameEngine
         bool splited {false};
 
 
-        nsCollider::Rectangle area;
+        const nsCollider::Rectangle area;
         std::array<QTptr,EQT::size> quad;
 
         QuadTree *parent;

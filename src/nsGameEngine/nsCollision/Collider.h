@@ -5,6 +5,8 @@
 #ifndef PYRAMIDPROJECT_COLLIDER_H
 #define PYRAMIDPROJECT_COLLIDER_H
 
+#include <memory>
+
 #include "../Movement.h"
 
 typedef unsigned short int UInt16;
@@ -51,7 +53,6 @@ namespace nsGameEngine
 
             virtual void move (int x, int y) noexcept;
             void resize (int width, int height) noexcept;
-
 
             virtual ~Rectangle () { }
 

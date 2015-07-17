@@ -30,8 +30,8 @@ src/nsGameObject/Player.cpp
 src/nsGameObject/Player.h
 src/nsGameObject/Entity.cpp
 src/nsGameObject/Entity.h
-src/nsGameEngine/Fabric.h
-src/nsGameEngine/Fabric.cpp
+src/nsPyramidProject/Fabric.h
+src/nsPyramidProject/Fabric.cpp
 src/nsGameObject/Foreground.cpp
 src/nsGameObject/Foreground.h
 src/nsGameObject/Decoration.cpp
@@ -49,7 +49,7 @@ src/nsGameEngine/Movement.h
 src/nsGameEngine/Movement.cpp
 src/nsRessourceManager/KBManager.cpp
 src/nsRessourceManager/KBManager.h
-)
+src/nsPyramidProject/Stair.cpp src/nsPyramidProject/Stair.h src/nsPyramidProject/Map.cpp src/nsPyramidProject/Map.h)
 
 
 include(configSFMLMakefileHelper.txt)

@@ -151,5 +151,5 @@ UInt16 COLL::Rectangle::getHeight () const noexcept
     return height;
 }
 
-
 #undef COLL
+
