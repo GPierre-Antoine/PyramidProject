@@ -20,7 +20,7 @@ namespace nsGameObject
         Player(UInt16 health = 100) noexcept;
 
     public:
-        virtual void render() noexcept;
+        virtual void render() const noexcept;
 
     }; //class Player
 
@@ -44,6 +44,15 @@ namespace nsGameObject
             animator.changeLoop(loop);
         }
 
+        virtual std::shared_ptr<GameObject> clone () const noexcept
+        {
+            return std::shared_ptr<GameObject>(new Warrior (*this));
+        }
+
+        virtual void render () const noexcept
+        {
+
+        }
     }; //class Warrior
 }
 

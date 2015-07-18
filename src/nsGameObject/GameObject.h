@@ -5,6 +5,8 @@
 #ifndef PYRAMIDPROJECT_GAMEOBJECT_H
 #define PYRAMIDPROJECT_GAMEOBJECT_H
 
+#include <memory>
+
 #include "../nsRessourceManager/Animator.h"
 #include "../Utility/typedef.hpp"
 
@@ -13,7 +15,8 @@ namespace nsGameObject
     class GameObject
     {
     public:
-        virtual void render () noexcept = 0;
+        virtual std::shared_ptr<GameObject> clone () const noexcept = 0;
+        virtual void render () const noexcept = 0;
         virtual ~GameObject () {}
 
     };

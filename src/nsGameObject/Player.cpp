@@ -19,7 +19,7 @@ PLAYER::Player(UInt16 health /* = 100 */) noexcept
     this->health = health;
 }
 
-void PLAYER::render() noexcept
+void PLAYER::render() const noexcept
 {
     animator.render();
 
