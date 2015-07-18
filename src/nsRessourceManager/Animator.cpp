@@ -27,7 +27,7 @@ void ANIM::setPosition(UInt16 x, UInt16 y)
     position.y = (float) y;
 }
 
-bool ANIM::isMoving() noexcept
+bool ANIM::isMoving() const noexcept
 {
     return moving;
 }
@@ -56,7 +56,7 @@ PANIM::PlayerAnimator(const PlayerAnimator & animator)
     ANIM::setMoving(isMoving());
 }
 
-void PANIM::render() noexcept
+void PANIM::render() const noexcept
 {
     sf::Sprite sprite;
 
