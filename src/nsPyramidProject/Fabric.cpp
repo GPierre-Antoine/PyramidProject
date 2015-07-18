@@ -3,5 +3,24 @@
 //
 
 #include "Fabric.h"
-#define GE nsGameEngine::Fabric
-#undef GE
+#define PF nsPyramidProject::Fabric
+
+
+PF PF::m_instance=Fabric ();
+
+PF & PF::Instance ()
+{
+    return m_instance;
+}
+
+PF::Fabric()
+{
+
+}
+
+PF::~Fabric ()
+{
+
+}
+
+#undef PF

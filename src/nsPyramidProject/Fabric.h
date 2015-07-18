@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <list>
+#include <memory>
 
 
 #include "../nsGameObject/GameObject.h"
@@ -25,28 +26,27 @@ namespace nsPyramidProject
         //singleton
 
     private:
-/*
- * Fore & Back ground => Maps
- * Map => stair
- *
- * Seed détermine stairs,
- */
-        /**/long long int                                       seed;
-        std::list<std::shared_ptr<nsPyramidProject::Stair>>    stairs;
+        long long int                                           seed;
 
+        static Fabric m_instance;
+        Fabric & operator= (const Fabric &) {}
+        Fabric (const Fabric &) {}
+        Fabric ();
+        ~Fabric ();
+
+        std::list<std::shared_ptr<nsPyramidProject::Stair>>     stairs;
         std::shared_ptr<nsPyramidProject::Stair>                actualStair;
 
-        /**/std::vector<nsPyramidProject::Map>                 maps;
-        /*
-         *
-         *
-         * */
+        std::vector<nsPyramidProject::Map>                      maps;
+
+
         //std::vector<nsGameObject::InteractiveDecoration>    interactiveObjects;
-        std::vector<nsGameObject::Player>                   players;
+        std::vector<nsGameObject::Player>                       players;
         //std::vector<nsGameObject::Attack>                   attacks;
 
 
     public:
+        static Fabric & Instance ();
 
         //fabrique
 
