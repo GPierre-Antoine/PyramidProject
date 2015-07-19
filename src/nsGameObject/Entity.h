@@ -17,7 +17,7 @@ namespace nsGameObject
         UInt16 y;
 
     protected:
-        nsRessourceManager::PlayerAnimator animator;
+        mutable nsRessourceManager::PlayerAnimator animator;
 
         void setX(UInt16 x);
 

@@ -5,11 +5,12 @@
 #ifndef PYRAMIDPROJECT_FABRIC_H
 #define PYRAMIDPROJECT_FABRIC_H
 
-#include <vector>
-#include <list>
+#include <vector> //container of entity
 #include <memory>
+#include <stack>
 
 
+#include "../Utility/typedef.hpp"
 #include "../nsGameObject/GameObject.h"
 #include "../nsGameObject/Player.h"
 #include "../nsGameObject/Foreground.h"
@@ -20,7 +21,7 @@
 namespace nsPyramidProject
 {
 
-    class Fabric
+    class Fabric final
     {
     //La durée de vie de la fabrique est celle du programme.
         //singleton
@@ -30,12 +31,12 @@ namespace nsPyramidProject
 
         static Fabric m_instance;
         Fabric & operator= (const Fabric &) {}
+
         Fabric (const Fabric &) {}
         Fabric ();
         ~Fabric ();
 
-        std::list<std::shared_ptr<nsPyramidProject::Stair>>     stairs;
-        std::shared_ptr<nsPyramidProject::Stair>                actualStair;
+        std::stack<std::shared_ptr<nsPyramidProject::Stair>>    stairs;
 
         std::vector<nsPyramidProject::Map>                      maps;
 
@@ -47,6 +48,8 @@ namespace nsPyramidProject
 
     public:
         static Fabric & Instance ();
+
+        void reach_Stair (byte_t );
 
         //fabrique
 

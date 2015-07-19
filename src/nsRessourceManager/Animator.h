@@ -28,7 +28,7 @@ namespace nsRessourceManager
 
         virtual void update() noexcept = 0;
 
-        virtual void render() const noexcept = 0;
+        virtual void render() noexcept = 0;
 
         virtual ~Animator()
         { }
@@ -39,9 +39,9 @@ namespace nsRessourceManager
     {
     private:
         const std::vector<sf::Texture>* textures;
-        mutable UInt16 currentLoop;
+        UInt16 currentLoop;
         //Compteur de tours de boucle
-        mutable UInt16 loopsCounter;
+        UInt16 loopsCounter;
 
     public:
         PlayerAnimator(const std::string & characterName = BASIC);
@@ -52,7 +52,7 @@ namespace nsRessourceManager
 
         virtual void update() noexcept;
 
-        virtual void render() const noexcept;
+        virtual void render() noexcept;
 
         virtual ~PlayerAnimator()
         { }

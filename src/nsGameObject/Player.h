@@ -44,12 +44,12 @@ namespace nsGameObject
             animator.changeLoop(loop);
         }
 
-        virtual std::shared_ptr<GameObject> clone () const noexcept
+        virtual std::shared_ptr<GameObject> clone () const noexcept override
         {
             return std::shared_ptr<GameObject>(new Warrior (*this));
         }
 
-        virtual void render () const noexcept
+        virtual void render () const noexcept override
         {
 
         }

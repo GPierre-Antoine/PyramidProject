@@ -23,4 +23,9 @@ PF::~Fabric ()
 
 }
 
+void PF::reach_Stair (byte_t)
+{
+
+}
+
 #undef PF

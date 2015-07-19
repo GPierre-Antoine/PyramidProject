@@ -3,3 +3,8 @@
 //
 
 #include "Stair.h"
+
+byte_t nsPyramidProject::Stair::getFloor () const noexcept
+{
+ return floor;
+}

@@ -56,7 +56,7 @@ PANIM::PlayerAnimator(const PlayerAnimator & animator)
     ANIM::setMoving(isMoving());
 }
 
-void PANIM::render() const noexcept
+void PANIM::render() noexcept
 {
     sf::Sprite sprite;
 
