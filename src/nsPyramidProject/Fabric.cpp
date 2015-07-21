@@ -3,27 +3,27 @@
 //
 
 #include "Fabric.h"
-#define PF nsPyramidProject::Fabric
+#define PF nsPyramidProject
 
 
-PF PF::m_instance=Fabric ();
+PF::Fabric PF::Fabric::m_instance=Fabric ();
 
-PF & PF::Instance ()
+PF::Fabric & PF::Fabric::Instance ()
 {
     return m_instance;
 }
 
-PF::Fabric()
+PF::Fabric::Fabric()
 {
 
 }
 
-PF::~Fabric ()
+PF::Fabric::~Fabric ()
 {
 
 }
 
-void PF::reach_Stair (byte_t)
+void PF::Fabric::reach_Stair (byte_t)
 {
 
 }
