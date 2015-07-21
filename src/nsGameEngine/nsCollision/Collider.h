@@ -26,6 +26,7 @@ namespace nsGameEngine
         public:
             virtual bool isContainedByRectangle (const Rectangle & rect) const noexcept = 0;
             virtual bool collidesWith (const Collider & other) const noexcept = 0;
+            virtual Rectangle getCenter () const noexcept = 0;
             //virtual void resize (int width, int height) noexcept = 0;
             // resize can't be generic
             virtual void move (int x, int y) noexcept = 0;
@@ -48,6 +49,7 @@ namespace nsGameEngine
             virtual bool collidesWith (const Rectangle & other) const noexcept;
             bool contains (const Collider & col) const noexcept;
             virtual bool isContainedByRectangle (const Rectangle & rect) const noexcept;
+            virtual Rectangle getCenter () const noexcept;
 
             Rectangle (const UInt16 X, const UInt16 Y, const UInt16 WIDTH, const UInt16 HEIGHT) noexcept;
 
@@ -75,6 +77,7 @@ namespace nsGameEngine
             virtual bool collidesWith (const Circle & other) const noexcept;
             virtual bool collidesWith (const Rectangle & other) const noexcept;
             virtual bool isContainedByRectangle (const Rectangle & rect) const noexcept;
+            virtual Rectangle getCenter () const noexcept;
 
             virtual void move (int x, int y) noexcept;
             void resize (int radius) noexcept;
@@ -84,6 +87,7 @@ namespace nsGameEngine
 
 
         };
+
     }//nsCollider
 }//nsGameEngine
 

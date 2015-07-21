@@ -151,5 +151,16 @@ UInt16 COLL::Rectangle::getHeight () const noexcept
     return height;
 }
 
+
+COLL::Rectangle COLL::Rectangle::getCenter () const noexcept
+{
+    return Rectangle (UInt16 (x + width /2u),UInt16(y + height/2u),0,0);
+}
+
+COLL::Rectangle COLL::Circle::getCenter () const noexcept
+{
+    return Rectangle (x + radius,y+radius,0,0);
+}
+
 #undef COLL
 

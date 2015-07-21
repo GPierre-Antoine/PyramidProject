@@ -120,8 +120,12 @@ void GE::add(sICollidable & go) noexcept
     {
         if (parent != nullptr)
             parent->add (go);
-        //else
-            //throw tu_fais_de_la_merde
+        else if (area.contains (go->getCollider().getCenter()))
+            prAdd (go);
+        else
+        {
+            //Creer un systeme d'exception ici.
+        }
     }
     else
         prAdd (go);
@@ -171,17 +175,26 @@ void GE::update () noexcept
      *
      */
 
-
-    if (splited)
+    if (size () < maxCapacity) //no need to split.
     {
-
-
-        if (this->size() - goList.size() == 0)
-            deAllocate();
+        if (this->size () - goList.size () == 0)
+        {
+            prGetCollidingEntities (area,goList,true);
+            deAllocate ();
+            update ();
+            return;
+        }
     }
-    else // if (unsplited)
+    else
     {
-
+        if (!splited && goList.size () >= maxCapacity)// si *this n'est splited et
+        {
+            if (level < maxLevel) //besoin de tester ici si peut spliter pour eviter boucle infinie
+            {
+                split (); //calls update
+                return;
+            }
+        }
     }
 
     for (std::vector<sICollidable>::reverse_iterator i {goList.rbegin ()} ; i != goList.rend () ; i = std::next (i))
@@ -207,14 +220,6 @@ void GE::update () noexcept
                 this->goList.erase(i.base()); // on efface l'objet du vecteur ce *this
                 break;//on casse la boucle
 
-            }
-        }
-        else if (goList.size() >= maxCapacity)// si *this n'est splited
-        {
-            if (level < maxLevel) //besoin de tester ici si peut spliter pour eviter boucle infinie
-            {
-                split (); //calls update
-                return;
             }
         }
     }
@@ -288,21 +293,44 @@ std::vector<nsGameEngine::sICollidable> GE::getCollidingEntities(const sICollida
     return std::vector<nsGameEngine::sICollidable> ();
 }
 
-void GE::prGetCollidingEntities (const sICollidable & object,std::vector<sICollidable> & container) const noexcept
+void GE::prGetCollidingEntities (const sICollidable & object,
+                                 std::vector<sICollidable> & container,
+                                 const bool excludethis /*= false*/) const noexcept
 {
     if (!object->collides (area))
         return;
-    for (auto & go : goList)
-    {
-        if (object->collides (go->getCollider ()));
-        container.push_back (go);
-    }
+    if (!excludethis)
+        for (auto & go : goList)
+        {
+            if (object->collides (go->getCollider ()));
+            container.push_back (go);
+        }
     if (splited)
     {
         for (auto & child : quad)
             child->prGetCollidingEntities (object,container);
     }
 }
+
+void GE::prGetCollidingEntities (const nsGameEngine::nsCollider::Collider & object,
+                                 std::vector<nsGameEngine::sICollidable> & container,
+                                 const bool excludethis /* = false*/) const noexcept
+{
+    if (!object.collidesWith (area))
+        return;
+    if (!excludethis)
+        for (auto & go : goList)
+        {
+            if (object.collidesWith (go->getCollider ()));
+            container.push_back (go);
+        }
+    if (splited)
+    {
+        for (auto & child : quad)
+            child->prGetCollidingEntities (object,container);
+    }
+}
+
 
 
 #undef  GE
