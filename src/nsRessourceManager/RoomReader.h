@@ -9,6 +9,7 @@
 #define ROOMREADER_H_
 #include <vector>
 #include <SFML/Graphics.hpp>
+
 namespace nsRessourceManager
 {
     typedef std::vector<sf::Sprite> VSprite;
