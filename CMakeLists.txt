@@ -12,7 +12,7 @@ file (GLOB Includes src/*.h* src/*/*.h* src/*/*/*.h*)
 add_executable(${EXECUTABLE_NAME} ${SrcFiles} ${Includes})
 
 
-set(EXECUTABLE_NAME Pyramid_Project)
+#set(EXECUTABLE_NAME Pyramid_Project)
 
 #add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES}
 #src/nsGameObject/GameObject.cpp
