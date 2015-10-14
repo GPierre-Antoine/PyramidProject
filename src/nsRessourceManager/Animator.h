@@ -2,10 +2,11 @@
 // Created by Pierre-Antoine on 29/06/2015.
 //
 
-#ifndef PYRAMIDPROJECT_ANIMATOR_H
-#define PYRAMIDPROJECT_ANIMATOR_H
+#pragma once
 
 #include <SFML/Graphics/Sprite.hpp>
+
+#include "../Utility/ListeCircu.hpp"
 #include "RessourceManager.h"
 
 namespace nsRessourceManager
@@ -38,17 +39,19 @@ namespace nsRessourceManager
     class PlayerAnimator : public Animator
     {
     private:
-        const std::vector<sf::Texture>* textures;
-        UInt16 currentLoop;
+        const MTextures_t *textures;
+        byte_t direction;
         //Compteur de tours de boucle
         UInt16 loopsCounter;
 
+        nsUtility::ListeCircu<byte_t> * loopList;
+
     public:
-        PlayerAnimator(const std::string & characterName = BASIC);
+        PlayerAnimator(KPair_t & character = BASIC);
 
         PlayerAnimator(const PlayerAnimator & animator);
 
-        void changeLoop(UInt16 loopConstant) noexcept;
+        void changeLoop(byte_t newDirection) noexcept;
 
         virtual void update() noexcept;
 
@@ -59,4 +62,3 @@ namespace nsRessourceManager
     };
 
 }
-#endif //PYRAMIDPROJECT_ANIMATOR_H

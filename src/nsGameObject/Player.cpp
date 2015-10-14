@@ -3,9 +3,6 @@
 //
 
 #include "Player.h"
-#include <iostream>
-#include "../nsRessourceManager/const.h"
-#include "../nsRessourceManager/Animator.h"
 
 using namespace nsRessourceManager;
 
@@ -28,20 +25,20 @@ void PLAYER::render() const noexcept
 
 ///////////////////////////////////////////
 #undef PLAYER                            //
-#define WARRIOR nsGameObject::Warrior    //
+#define WARR nsGameObject::Warrior    //
 ///////////////////////////////////////////
 
 
-WARRIOR::Warrior(UInt16 x, UInt16 y) noexcept
+WARR::Warrior(UInt16 x, UInt16 y) noexcept
         : Player(nsGameConstants::WARRIOR_HEALTH)
 {
     setX(x);
     setY(y);
-    animator = PlayerAnimator(MARTINE);
+    animator = PlayerAnimator(nsRessourceManager::WARRIOR);
     animator.setPosition(x, y);
 }
 
 ///////////////////////////////////////////
-#undef WARRIOR                           //
-//#define bblblblb nsGameObject::blblblb    //
+#undef WARR                              //
+//#define bblblblb nsGameObject::blblblb //
 ///////////////////////////////////////////

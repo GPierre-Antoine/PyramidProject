@@ -3,7 +3,6 @@
 //
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Animator.h"
 
 using namespace nsGameConstants;
@@ -35,67 +34,83 @@ bool ANIM::isMoving() const noexcept
 void ANIM::setMoving(bool moving) noexcept
 {
     this->moving = moving;
+    //todo : if isnt moving change loop to idle
 }
 
 ////////////////////////////////////        PLAYERANIMATOR         ////////////////////////////////////////////
 
-PANIM::PlayerAnimator(const std::string & characterName)
-        : currentLoop(PLAYER_DOWN), loopsCounter(0)
+PANIM::PlayerAnimator(KPair_t & character /*= BASIC*/)
+        : direction(PLAYER_DOWN), loopsCounter(0)
 {
     ANIM::setMoving(false);
     //S'occupe de charger la texture de notre joueur (ex guerrier)
-    RessourceManager::loadCharacterTextures(characterName, PLAYER_SRITE_SIZE, CHARACTER_SPRITES_COUNT);
+    RessourceManager::loadCharacterTextures(character, nsGameConstants::CHARACTER_SPRITE_SIZE);
 
     //On sauvegarde cette texture (pointeur)
-    textures = &RessourceManager::getTexture(characterName);
+    textures = &RessourceManager::getTexture(character.first);
+
+    //On charge la loop
+    loopList = new nsUtility::ListeCircu<byte_t>(CHARACTER_RIGHT_LEG_FORWARD);
+    nsUtility::ListeCircu<byte_t>* elemCourant = loopList;
+    elemCourant = insertValue(elemCourant, CHARACTER_RIGHT_LEG_MID);
+    elemCourant = insertValue(elemCourant, CHARACTER_LEFT_LEG_MID);
+    elemCourant = insertValue(elemCourant, CHARACTER_LEFT_LEG_FORWARD);
+    elemCourant = insertValue(elemCourant, CHARACTER_LEFT_LEG_MID);
+    insertValue(elemCourant, CHARACTER_RIGHT_LEG_MID);
 }
 
 PANIM::PlayerAnimator(const PlayerAnimator & animator)
-        : currentLoop(animator.currentLoop), loopsCounter(animator.loopsCounter)
+        : direction(animator.direction), loopsCounter(animator.loopsCounter)
 {
-    ANIM::setMoving(isMoving());
+    ANIM::setMoving(animator.isMoving());
 }
 
 void PANIM::render() noexcept
 {
-    sf::Sprite sprite;
+    sf::Sprite legSprite;
+
 
     if (this->isMoving())
     {
-        if (loopsCounter < PLAYER_STEPPING_FRAMES)
-        {   //Premier pas
-            sprite.setTexture(textures->at(currentLoop * 3 + 0));
-        }
-        else if (loopsCounter < PLAYER_STEPPING_FRAMES + PLAYER_STOP_STEP_FRAMES)
-        {   //Ramene le pied
-            sprite.setTexture(textures->at(currentLoop * 3 + 1));
-        }
-        else if (loopsCounter < PLAYER_STEPPING_FRAMES * 2 + PLAYER_STOP_STEP_FRAMES)
-        {   //Avance l'autre pied
-            sprite.setTexture(textures->at(currentLoop * 3 + 2));
-        }
-        else
-        {   //Ramene encore
-            sprite.setTexture(textures->at(currentLoop * 3 + 1));
-        }
-        ++loopsCounter;
-        //Revient au debut de mon animation, si on a fait les 4 differents
-        if (loopsCounter > PLAYER_STEPPING_FRAMES * 2 + PLAYER_STOP_STEP_FRAMES * 2)
+        if (loopsCounter > PLAYER_MID_STEPPING_FRAMES + PLAYER_FORWARD_STEPPING_FRAMES)
+        {
+            loopList = loopList->getSuivant();
             loopsCounter = 0;
+        }
+        else if (loopsCounter == PLAYER_MID_STEPPING_FRAMES)
+            loopList = loopList->getSuivant();
+
+        legSprite.setTexture(textures->at(direction).at(loopList->getInfo()));
+
+        ++loopsCounter;
     }
     else
     {
-        //L'image du milieu est toujours celle sans mouvement d'ou le +1
-        sprite.setTexture(textures->at(currentLoop * TILESET_SPRITES_PER_ROW + 1));
+        //todo : faire idle loop
+        legSprite.setTexture(textures->at(direction).at(CHARACTER_IDLE));
     }
-    sprite.setPosition(position);
 
-    window->draw(sprite);
+    legSprite.setPosition(position);
+
+
+    window->draw(legSprite);
+
+    /*test
+    for (unsigned i = 0; i < 13; ++i)
+    {
+        legSprite.setTexture(textures->at(0).at(i));
+        window->clear(sf::Color::White);
+        window->draw(legSprite);
+        window->display();
+        sf::sleep(sf::milliseconds(200));
+    }
+
+    /*fin test*/
 }
 
-void PANIM::changeLoop(UInt16 loopConstant) noexcept
+void PANIM::changeLoop(byte_t newDirection) noexcept
 {
-    currentLoop = loopConstant;
+    direction = newDirection;
 }
 
 void PANIM::update() noexcept

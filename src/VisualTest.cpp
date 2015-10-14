@@ -1,16 +1,14 @@
 //
 // Created by Theo on 07/07/2015.
 //
+
 #include <cmath>
 #include <iostream>
-#include <cassert>
-
 
 
 #include "VisualTest.h"
 #include "nsRessourceManager/Animator.h"
 #include "nsGameObject/Player.h"
-#include "nsGameEngine/Movement.h"
 #include "nsRessourceManager/KBManager.h"
 #include "nsGameEngine/QuadTree.h"
 
@@ -137,12 +135,12 @@ void TEST::PlayerAnimatedMovement1()
     KBManager::setKeyBind (KBManager::Left, sf::Keyboard::Key::Q);
     KBManager::setKeyBind (KBManager::Right, sf::Keyboard::Key::D);
 
-    sf::RenderWindow window (sf::VideoMode (1600, 900), "Test KeyBinds!");
+    sf::RenderWindow window (sf::VideoMode (1600, 900), "Test PlayerAnimatedMovement1 !");
 
     nsRessourceManager::Animator::setWindow (window);
 
     UInt16 posX = 100;
-    UInt16 posY = 100;
+    UInt16 posY = 600;
     bool isMoving = false;
     Warrior warrior (posX, posY);
 
@@ -162,10 +160,10 @@ void TEST::PlayerAnimatedMovement1()
                 window.close ();
 
             ////////////////////////////////////////    GET INPUTS      ////////////////////////////////////
-            movement.isGoingUp (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Up)));             //
-            movement.isGoingDown (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Down)));         //
-            movement.isGoingLeft (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Left)));         //
-            movement.isGoingRight (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Right)));       //
+            movement.isGoingUp (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Up)));           //
+            movement.isGoingDown (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Down)));       //
+            movement.isGoingLeft (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Left)));       //
+            movement.isGoingRight (sf::Keyboard::isKeyPressed (KBManager::getKey (KBManager::Right)));     //
             ////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
@@ -186,8 +184,7 @@ void TEST::PlayerAnimatedMovement1()
 
         //Calcul la direction, pas trouvé plus simple
         animationDirection = movement.getHorizontalMovement () >= 0 ? PLAYER_RIGHT : PLAYER_LEFT;
-        if (abs (movement.getVerticalMovement ()) >=
-            abs (movement.getHorizontalMovement ()) - precisionDetectionAnimation)
+        if (abs (movement.getHorizontalMovement ()) - precisionDetectionAnimation <= abs (movement.getVerticalMovement ()))
         {
             animationDirection = movement.getVerticalMovement () >= 0 ? PLAYER_DOWN : PLAYER_UP;
         }
@@ -224,7 +221,7 @@ void TEST::PlayerAnimatedMovement1()
 
         warrior.testChangementLoop (animationDirection);
 
-        window.clear ();
+        window.clear (sf::Color::White);
         warrior.render ();
         window.display ();
 

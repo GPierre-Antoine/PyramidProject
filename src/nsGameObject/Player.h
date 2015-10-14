@@ -33,25 +33,25 @@ namespace nsGameObject
     public:
         Warrior(UInt16 x, UInt16 y) noexcept;
 
-        void testChangementMouvement (UInt16 x, UInt16 y, bool moving)
+        void testChangementMouvement(UInt16 x, UInt16 y, bool moving)
         {
             animator.setPosition(x, y);
             animator.setMoving(moving);
         }
 
-        void testChangementLoop (UInt16 loop)
+        void testChangementLoop(byte_t loop)
         {
             animator.changeLoop(loop);
         }
 
-        virtual std::shared_ptr<GameObject> clone () const noexcept override
+        virtual std::shared_ptr<GameObject> clone() const noexcept override
         {
-            return std::shared_ptr<GameObject>(new Warrior (*this));
+            return std::shared_ptr<GameObject>(new Warrior(*this));
         }
 
-        virtual void render () const noexcept override
+        virtual void render() const noexcept override
         {
-
+            animator.render();
         }
     }; //class Warrior
 }

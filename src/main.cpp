@@ -12,11 +12,9 @@
 
 int main()
 {
-    UNIT::ColliderTest();
+     /** / UNIT::ColliderTest(); /**/
 
-    //Un seul visual a la fois a choisir
-    VISUAL::QuadTreeRenderTest ();
-
+     /**/ VISUAL::PlayerAnimatedMovement1(); /**/
     return 0;
 }
 
